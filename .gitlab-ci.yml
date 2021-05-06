@@ -1,17 +1,21 @@
-image: node:12
+image: node:12.14.1
 
-pages:
-  cache:
-    paths:
+cache:
+  paths:
     - node_modules/
-
+pages:
+  stage: deploy
   script:
-  - yarn install
-  - yarn run build
-
+  - npm install
+  - npx quasar build
+  - mkdir .public
+  - cp -r dist/spa/* .public
+  - cp .htaccess .public
+  - cp dist/spa/index.html .public/404.html
+  - mv .public public
+  - find public -type f -regex '.*\.\(htm\|html\|txt\|text\|js\|css\)$' -exec gzip -f -k {} \;
   artifacts:
     paths:
-    - dist/spa
-  
+    - public
   only:
   - master
