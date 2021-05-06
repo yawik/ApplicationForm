@@ -10,7 +10,6 @@ pages:
   - npx quasar build
   - mkdir .public
   - cp -r dist/spa/* .public
-  - cp .htaccess .public
   - cp dist/spa/index.html .public/404.html
   - mv .public public
   - find public -type f -regex '.*\.\(htm\|html\|txt\|text\|js\|css\)$' -exec gzip -f -k {} \;
