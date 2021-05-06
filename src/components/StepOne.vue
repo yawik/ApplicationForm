@@ -1,0 +1,111 @@
+<template>
+  <div>
+    <div class="q-pb-xs">{{ $t('stepOne.salutation') }}</div>
+    <q-select v-model.trim="form.salutation" :options="$t('stepOne.salutationTypes')" outlined dense options-dense style="max-width: 160px;" />
+
+    <div class="q-col-gutter-sm row">
+      <div class="col-6 column">
+        <div class="q-pt-md q-pb-xs">{{ $t('stepOne.firstName') }}</div>
+        <q-input v-model.trim="form.firstName" outlined dense lazy-rules :rules="[ruleRequired]" />
+      </div>
+      <div class="col-6 column">
+        <div class="q-pt-md q-pb-xs">{{ $t('stepOne.lastName') }}</div>
+        <q-input v-model.trim="form.lastName" outlined dense lazy-rules :rules="[ruleRequired]" />
+      </div>
+    </div>
+
+    <div class="q-col-gutter-sm row">
+      <div class="col-grow column">
+        <div class="q-pt-md q-pb-xs">{{ $t('stepOne.street') }}</div>
+        <q-input v-model.trim="form.street" outlined dense lazy-rules :rules="[ruleRequired]" />
+      </div>
+      <div class="column">
+        <div class="q-pt-md q-pb-xs">{{ $t('stepOne.houseNumber') }}</div>
+        <q-input v-model.trim="form.houseNumber" outlined dense lazy-rules :rules="[ruleRequired]" style="min-width: 120px;" />
+      </div>
+    </div>
+
+    <div class="q-col-gutter-sm row">
+      <div class="column">
+        <div class="q-pt-md q-pb-xs">{{ $t('stepOne.zipCode') }}</div>
+        <q-input v-model.trim="form.zipCode" outlined dense lazy-rules :rules="[ruleRequired]" style="min-width: 160px;" />
+      </div>
+      <div class="col-grow column">
+        <div class="q-pt-md q-pb-xs">{{ $t('stepOne.city') }}</div>
+        <q-input v-model.trim="form.city" outlined dense lazy-rules :rules="[ruleRequired]" />
+      </div>
+    </div>
+
+    <div class="q-pt-md q-pb-xs">{{ $t('stepOne.country') }}</div>
+    <q-input v-model.trim="form.country" outlined dense lazy-rules :rules="[ruleRequired]" />
+
+    <div class="q-pt-md q-pb-xs">{{ $t('stepOne.phone') }}</div>
+    <q-input v-model.trim="form.phone" outlined dense lazy-rules :rules="[ruleContact]" />
+
+    <div class="q-pt-md q-pb-xs">{{ $t('stepOne.email') }}</div>
+    <q-input v-model.trim="form.email" outlined dense lazy-rules :rules="[ruleContact]" />
+  </div>
+</template>
+
+<script>
+import validations from 'src/lib/validations';
+
+export default
+{
+  name: 'StepOne',
+  mixins: [validations],
+  props:
+    {
+      value:
+        {
+          type: Object,
+          required: true
+        }
+    },
+  data()
+  {
+    return {
+      form:
+        {
+          salutation: '',
+          firstName: '',
+          lastName: '',
+          street: '',
+          houseNumber: '',
+          zipCode: '',
+          city: '',
+          country: '',
+          phone: '',
+          email: '',
+          photo: null,
+        }
+    };
+  },
+  watch:
+    {
+      value:
+        {
+          immediate: true,
+          handler(newVal)
+          {
+            this.form = newVal;
+          }
+        },
+      form:
+        {
+          deep: true,
+          handler(newVal)
+          {
+            this.$emit('input', newVal);
+          }
+        }
+    },
+  methods:
+    {
+      ruleContact()
+      {
+        return !!this.form.phone || !!this.form.email ? true : this.$t('rules.phoneOrEmail');
+      }
+    }
+};
+</script>
