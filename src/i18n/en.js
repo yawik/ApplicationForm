@@ -61,4 +61,4 @@ export default
       carbonCopy: 'Send me a copy of this application by e-mail.',
       privacyPolicy: 'I have read the <a href="https://yawik.org/demo/en/content/applications-privacy-policy" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation(); return true;">Privacy policy</a> and I accept it.', // the link won't work without the onClick handler
     }
-}
+};
