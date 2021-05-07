@@ -1,6 +1,9 @@
 <template>
   <q-page class="flex" padding>
     <q-form ref="frm" class="q-mx-auto" @submit="submitForm" @validation-error="hasErrors">
+      <div class="row q-pb-lg">
+        <SwitchLanguage class="q-mx-auto" />
+      </div>
       <q-stepper ref="stepper" v-model="currentStep" color="primary" animated header-nav all-panels>
         <q-step v-for="(stepData,stepName) in form" :key="stepName" :name="stepName" :prefix="steps.indexOf(stepName)+1" :title="$t(stepName+'.title')"
                 :done="steps.indexOf(currentStep) > steps.indexOf(stepName)" :error="validationErrors(stepName)"
@@ -28,6 +31,7 @@ import StepThree from 'src/components/StepThree';
 import StepFour from 'src/components/StepFour';
 import StepFive from 'src/components/StepFive';
 import FormSubmit from 'src/components/FormSubmit';
+import SwitchLanguage from 'src/components/SwitchLanguage';
 
 export default
 {
@@ -40,6 +44,7 @@ export default
       StepFour,
       StepFive,
       FormSubmit,
+      SwitchLanguage,
     },
   data()
   {
