@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="q-pb-xs">{{ $t('stepTwo.title') }}</div>
-    <q-editor v-model="form.coverLetter" min-height="500px" :placeholder="$t('stepTwo.placeholder')" />
+    <div class="q-pb-xs">{{ $t('stepTwo.description') }}</div>
+    <q-editor ref="editor" v-model="form.coverLetter" min-height="500px" :content-style="{'max-width': width ? width - 50 + 'px' : 'none'}" />
   </div>
 </template>
 
@@ -9,13 +9,22 @@
 export default
 {
   name: 'StepTwo',
-  inheritAttrs: false,
   props:
     {
       value:
         {
           type: Object,
           required: true
+        },
+      width:
+        {
+          type: Number,
+          default: null
+        },
+      active:
+        {
+          type: Boolean,
+          default: false
         }
     },
   data()
@@ -44,7 +53,14 @@ export default
           {
             this.$emit('input', newVal);
           }
+        },
+      active(newVal)
+      {
+        if (newVal)
+        {
+          this.$refs.editor.focus();
         }
+      }
     },
 };
 </script>

@@ -6,10 +6,12 @@ const routes = [
     children: [
       {
         path: '',
+        name: 'applicationForm',
         component: () => import('pages/PageApply.vue')
       },
       {
         path: 'success',
+        name: 'submitSuccessful',
         component: () => import('pages/SubmitSuccessful.vue')
       },
     ]

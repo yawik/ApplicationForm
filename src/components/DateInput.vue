@@ -1,5 +1,5 @@
 <template>
-  <q-input :value="value" mask="XX-XX-XXXX" :rules="(rules || []).concat([validDMY])" outlined dense v-bind="$attrs" @input="updateValue">
+  <q-input ref="date" :value="value" mask="XX-XX-XXXX" :rules="(rules || []).concat([validDMY])" outlined dense v-bind="$attrs" @input="updateValue">
     <q-icon slot="append" name="mdi-calendar-month" class="cursor-pointer">
       <q-popup-proxy ref="qStartDate" transition-show="scale" transition-hide="scale">
         <q-date :value="value" first-day-of-week="1" mask="DD-MM-YYYY" minimal @input="hideCalendar" />
@@ -39,6 +39,10 @@ export default
       {
         this.$emit('input', value);
         this.$refs.qStartDate.hide();
+      },
+      focus()
+      {
+        this.$refs.date && this.$refs.date.focus();
       }
     }
 };

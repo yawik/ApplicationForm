@@ -1,21 +1,23 @@
 <template>
   <q-page class="flex" padding>
-    <q-form ref="frm" class="q-mx-auto q-gutter-md" @submit="submitForm">
-      <q-stepper ref="stepper" v-model="currentStep" color="primary" animated header-nav>
-        <q-step v-for="(stepData,stepName) in form" :key="stepName" :name="stepName" :prefix="steps.indexOf(stepName)+1" :title="$t(stepName+'.title')" :done="steps.indexOf(currentStep) > steps.indexOf(stepName)">
-          <component :is="stepName" v-model="form[stepName]" />
+    <q-form ref="frm" class="q-mx-auto" @submit="submitForm" @validation-error="hasErrors">
+      <q-stepper ref="stepper" v-model="currentStep" color="primary" animated header-nav all-panels>
+        <q-step v-for="(stepData,stepName) in form" :key="stepName" :name="stepName" :prefix="steps.indexOf(stepName)+1" :title="$t(stepName+'.title')"
+                :done="steps.indexOf(currentStep) > steps.indexOf(stepName)" :error="validationErrors(stepName)"
+        >
+          <component :is="stepName" v-model="form[stepName]" :active="currentStep === stepName" :stepper="stepper" :width="maxWidth" @uploader="setUploader" />
         </q-step>
-        <template #navigation>
-          <q-stepper-navigation class="row justify-end">
-            <q-btn v-if="steps.indexOf(currentStep) > 0" outline color="primary" :label="$t('buttons.back')" class="q-mr-md" @click="$refs.stepper.previous()" />
-            <q-btn color="primary" :label="$t(currentStep === steps[steps.length-1] ? 'buttons.finish' : 'buttons.continue')" @click="$refs.stepper.next()" />
-          </q-stepper-navigation>
-        </template>
+        <div slot="navigation" class="row justify-end q-px-lg q-pb-lg">
+          <q-btn v-if="steps.indexOf(currentStep) > 0" outline color="primary" :label="$t('buttons.back')" class="q-mr-md" @click="$refs.stepper.previous()" />
+          <q-btn v-if="lastStep" color="primary" :label="$t('buttons.finish')" type="submit" />
+          <q-btn v-else color="primary" :label="$t('buttons.continue')" @click="$refs.stepper.next()" />
+        </div>
       </q-stepper>
       <div class="flex q-py-md justify-center">
         <q-btn color="primary" class="q-px-md" outlined>{{ $t('previewForm') }}</q-btn>
       </div>
     </q-form>
+    <FormSubmit v-model="dlgSubmit" :info="jsonData" :uploader="uploader" :url="uploadURL" />
   </q-page>
 </template>
 
@@ -25,6 +27,7 @@ import StepTwo from 'src/components/StepTwo';
 import StepThree from 'src/components/StepThree';
 import StepFour from 'src/components/StepFour';
 import StepFive from 'src/components/StepFive';
+import FormSubmit from 'src/components/FormSubmit';
 
 export default
 {
@@ -36,11 +39,17 @@ export default
       StepThree,
       StepFour,
       StepFive,
+      FormSubmit,
     },
   data()
   {
     return {
       currentStep: 'stepOne',
+      dlgSubmit: false,
+      lastStep: false,
+      uploader: null, // used by FormSubmit.vue
+      stepper: null, // used by StepOne.vue to navigate to step 2 on ENTER key in any input field
+      maxWidth: 1e4, // used to limit the width of QEditor on step 2, otherwise it grows too much when you type text
       form:
         {
           stepOne:
@@ -66,6 +75,7 @@ export default
               facebook: null,
               xing: null,
               linkedin: null,
+              google: null,
             },
           stepFour:
             {
@@ -78,7 +88,6 @@ export default
               acceptTerms: false,
             },
         },
-      //loading: false,
     };
   },
   computed:
@@ -86,38 +95,132 @@ export default
       steps()
       {
         return Object.keys(this.form);
+      },
+      jsonData()
+      {
+        return Object.assign({}, this.form.stepOne, this.form.stepTwo, this.form.stepThree, this.form.stepFive);
+      },
+      uploadURL()
+      {
+        return 'http://test.ivogelov.com/appform.php';
       }
     },
+  watch:
+    {
+      currentStep()
+      {
+        this.$nextTick(() =>
+        {
+          // Quasar is too fast - as soon as it detects MouseDown event on the CONTINUE button, it goes to the next step
+          // And on the last step the button becomes a SUBMIT type too fast, even before MouseUp - which then leads to speculative form submit
+          this.lastStep = this.currentStep === this.steps[this.steps.length - 1];
+        });
+      }
+    },
+  mounted()
+  {
+    this.stepper = this.$refs.stepper; // used by StepOne.vue to navigate to step 2 by ENTER key inside any input field
+    this.onResize();
+  },
+  created()
+  {
+    // we have to update maxWidth on window resize
+    window.addEventListener('resize', this.onResize, false);
+  },
+  beforeDestroy()
+  {
+    window.removeEventListener('resize', this.onResize, false);
+  },
   methods:
     {
+      onResize()
+      {
+        // limit the width of QEditor on StepTwo - otherwise it grows too much on typing
+        this.maxWidth = this.$refs.frm.$el.clientWidth;
+      },
+      setUploader(component)
+      {
+        // since $refs are not reactive - we wait StepFour.vue to be mounted and to give us the instance of q-uploader
+        // which is then provided to FormSubmit.vue to clone the list of attachments
+        // The only purpose of FormSubmit's existence is to show the progress of uploading attachments - otherwise we could've used a simple spinner in the FINISH button
+        this.uploader = component;
+      },
+      hasErrors(ref)
+      {
+        this.focusFailed(ref);
+      },
+      focusFailed(ref, tabVariable = 'currentStep')
+      {
+        // ensure the first invalid field is focused when it is on a different panel/q-step
+        let node = ref;
+        do
+        {
+          node = node.$parent;
+          if (node.$options._componentTag === 'q-step')
+          {
+            if (node.name !== this[tabVariable])
+            {
+              this[tabVariable] = node.name;
+              this.$nextTick(() =>
+              {
+                ref.focus();
+              });
+            }
+            break;
+          }
+        } while (node !== this.$root);
+      },
+      findStep(component)
+      {
+        let node = component;
+        do
+        {
+          node = node.$parent;
+          if (node.$options._componentTag === 'q-step') return node.name;
+        } while (node !== this.$root);
+      },
+      validationErrors(step)
+      {
+        if (!this.$refs.frm) return false;
+        // get all components in the form and check if they have an existing validation error - without triggering a new validation
+        const components = this.$refs.frm.getValidationComponents().filter(ref => !!ref.innerError);
+        // check if the failing components are on the requested step
+        return components.map(ref => this.findStep(ref)).includes(step);
+      },
       submitForm()
       {
-        /*
-        this.loading = true;
-        this.$axios.post('https://old.cross-solution.de/contact/conduent.php', this.form).then(response =>
+        if (this.uploader && this.uploader.files && this.uploader.files.length > 0) this.dlgSubmit = true;
+        else
         {
-          this.loading = false;
-          if (!response.data.ok)
+          // without attachments there is no point in using FormSubmit.vue
+          this.$q.loading.show({ delay: 100 });
+          const data = new FormData();
+          data.append('application', JSON.stringify(this.jsonData));
+          this.$axios.post(this.uploadURL, data).then(response =>
           {
+            this.$q.loading.hide();
+            console.log(response.data);
+            if (!response.data.ok)
+            {
+              this.$q.notify({
+                color: 'negative',
+                position: 'top',
+                icon: 'mdi-alert',
+                message: response.data.message || this.$t('submitFailed'),
+              });
+            }
+            //else this.$router.push({ name: 'submitSuccessful' });
+          }).catch(err =>
+          {
+            this.$q.loading.hide();
             this.$q.notify({
               color: 'negative',
               position: 'top',
               icon: 'mdi-alert',
-              message: response.data.message || 'Submit failed',
+              message: err.message || err,
             });
-          }
-          else this.$router.push('/success');
-        }).catch(err =>
-        {
-          this.loading = false;
-          this.$q.notify({
-            color: 'negative',
-            position: 'top',
-            icon: 'mdi-alert',
-            message: err.message || err,
           });
-        });
-        */
+        }
       }
     }
 };

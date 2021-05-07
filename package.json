@@ -1,6 +1,6 @@
 {
   "name": "cross-apply",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "CROSS application form",
   "productName": "Application Form",
   "author": "Ivaylo Gelov",
@@ -12,6 +12,7 @@
     "lintfix": "node --preserve-symlinks --preserve-symlinks-main ./node_modules/eslint/bin/eslint --ext .js,.vue src --fix",
     "lint-css": "node --preserve-symlinks --preserve-symlinks-main ./node_modules/stylelint/bin/stylelint src/**/*.{vue,css,scss}",
     "lintfix-css": "node --preserve-symlinks --preserve-symlinks-main ./node_modules/stylelint/bin/stylelint src/**/*.{vue,css,scss} --fix",
+    "prepare": "custompatch",
     "test": "echo \"No test specified\" && exit 0"
   },
   "dependencies": {
@@ -25,6 +26,8 @@
     "@kazupon/vue-i18n-loader": "^0.3.0",
     "@quasar/app": "^2.0.0",
     "babel-eslint": "^10.0.1",
+    "custompatch": "^1.0.17",
+    "dotenv-flow": "^3.2.0",
     "eslint": "^7.21.0",
     "eslint-config-standard": "^16.0.2",
     "eslint-plugin-import": "^2.14.0",

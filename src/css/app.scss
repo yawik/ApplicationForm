@@ -10,3 +10,16 @@ body
   background-color: #FFF;
   margin: 0;
 }
+
+#q-app
+{
+  .q-field
+  {
+    font-size: 1rem;
+  }
+
+  .q-field__control .q-field__native
+  {
+    padding: 0;
+  }
+}

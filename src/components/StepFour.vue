@@ -1,11 +1,7 @@
 <template>
   <div>
     <div class="q-pb-sm">{{ $t('stepFour.help') }}</div>
-    <q-uploader ref="uploader" class="q-mr-lg uploader shadow-1" multiple batch :url="uploadURL"
-                :headers="[{name: 'X-Requested-With', value: 'XmlHttpRequest'}]" :max-total-size="2*1024*1024"
-                field-name="upload[]" :factory="updateConfig" hide-upload-btn style="min-height: 500px;"
-                @uploaded="success" @failed="failure"
-    >
+    <q-uploader ref="uploader" class="uploader shadow-1" multiple hide-upload-btn accept=".pdf,.doc,.docx,.xls,.xlsx,image/*" :max-total-size="2.5e6" style="min-height: 500px;">
       <template #list="scope">
         <q-list separator>
           <q-item v-for="file in scope.files" :key="file.name">
@@ -41,72 +37,10 @@
 export default
 {
   name: 'StepFour',
-  inheritAttrs: false,
-  props:
-    {
-      value:
-        {
-          // the whole application form
-          type: Object,
-          required: true
-        },
-    },
-  /*
-  data()
+  mounted()
   {
-    return {
-      form:
-        {
-          attachments: [],
-        }
-    };
+    this.$emit('uploader', this.$refs.uploader);
   },
-  */
-  computed:
-    {
-      uploadURL()
-      {
-        return '/upload';
-      },
-    },
-  /*
-  watch:
-    {
-      value:
-        {
-          immediate: true,
-          handler(newVal)
-          {
-            this.form = newVal;
-          }
-        },
-      form:
-        {
-          deep: true,
-          handler(newVal)
-          {
-            this.$emit('input', newVal);
-          }
-        }
-    },
-    */
-  methods:
-    {
-      updateConfig(files)
-      {
-        return {
-          formFields: Object.assign({}, this.value.stepOne, this.value.stepTwo, this.value.stepThree, this.value.stepFive),
-        };
-      },
-      success(info)
-      {
-        this.$emit('success', info.xhr);
-      },
-      failure(info)
-      {
-        this.$emit('fail', info.xhr);
-      }
-    }
 };
 </script>
 

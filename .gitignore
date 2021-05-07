@@ -37,3 +37,5 @@ yarn-error.log*
 package-lock.json
 yarn.lock
 /vendor/
+.env
+.env.*

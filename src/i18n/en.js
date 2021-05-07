@@ -2,11 +2,17 @@ export default
 {
   previewForm: 'Preview application',
   abortForm: 'Abort application',
+  submitting: 'Submit your application',
+  submitFailed: 'Submit failed',
+  success: 'Success',
+  applicationWasSent: 'Application was received.',
   buttons:
     {
       finish: 'Finish',
       continue: 'Continue',
       back: 'Back',
+      send: 'Send',
+      cancel: 'Cancel',
     },
   rules:
     {
@@ -37,7 +43,7 @@ export default
   stepTwo:
     {
       title: 'Cover letter',
-      placeholder: 'This is meant as a generic free text area. You can write something about you that you think will help the recruiter to pick you for the job.'
+      description: 'You can write something about you that you think will help the recruiter to pick you for the job.'
     },
   stepThree:
     {

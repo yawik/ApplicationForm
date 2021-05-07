@@ -6,12 +6,13 @@
 // Configuration for your app
 // https://v1.quasar.dev/quasar-cli/quasar-conf-js
 /* eslint-env node */
-const ESLintPlugin = require('eslint-webpack-plugin');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const path = require('path');
 
-module.exports = function(/* ctx */)
+module.exports = function(ctx)
 {
+  const variables = require('dotenv-flow').config().parsed;
+
   return {
     // https://v1.quasar.dev/quasar-cli/supporting-ts
     supportTS: false,
@@ -48,8 +49,13 @@ module.exports = function(/* ctx */)
 
     // Full list of options: https://v1.quasar.dev/quasar-cli/quasar-conf-js#Property%3A-build
     build: {
+      publicPath: variables.ROUTER_BASE || '/',
       vueRouterMode: 'hash', // available values: 'hash', 'history'
-
+      devtool: ctx.dev ? 'inline-source-map' : false,
+      env:
+        {
+          ...variables,
+        },
       // transpile: false,
 
       // Add dependencies for transpiling with Babel (Array of string/regex)
@@ -70,8 +76,6 @@ module.exports = function(/* ctx */)
       // "chain" is a webpack-chain object https://github.com/neutrinojs/webpack-chain
       chainWebpack(chain)
       {
-        chain.plugin('eslint-webpack-plugin')
-          .use(ESLintPlugin, [{ extensions: ['js', 'vue'] }]);
         chain.plugin('stylelintVue')
           .use(StyleLintPlugin, [
             {
@@ -91,6 +95,12 @@ module.exports = function(/* ctx */)
           use: [
             { loader: '@kazupon/vue-i18n-loader' },
           ]
+        });
+        cfg.module.rules.push({
+          enforce: 'pre',
+          test: /\.(js|vue)$/,
+          loader: 'eslint-loader',
+          exclude: /[\\/]node_modules[\\/]/
         });
       }
     },
@@ -121,7 +131,7 @@ module.exports = function(/* ctx */)
       // directives: [],
 
       // Quasar plugins
-      plugins: ['Notify']
+      plugins: ['Notify', 'Loading']
     },
 
     // animations: 'all', // --- includes all animations

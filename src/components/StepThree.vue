@@ -2,9 +2,9 @@
   <div>
     <div class="q-pb-sm">{{ $t('stepThree.import') }}</div>
     <div class="row q-gutter-md">
-      <q-btn-dropdown v-for="social in listSocial" :key="social.title" color="primary" :icon="social.icon" :label="social.title">
+      <q-btn-dropdown v-for="social in listSocial" :key="social.title" color="primary" :icon="social.icon" :label="social.title" glossy push>
         <q-list>
-          <q-item v-close-popup clickable>
+          <q-item v-close-popup clickable @click="importProfile(social.network)">
             <q-item-section>
               <q-item-label>{{ $t('stepThree.attach') }}</q-item-label>
             </q-item-section>
@@ -26,10 +26,11 @@
 </template>
 
 <script>
+import hello from 'hellojs';
+
 export default
 {
   name: 'StepThree',
-  inheritAttrs: false,
   props:
     {
       value:
@@ -46,6 +47,7 @@ export default
           facebook: null,
           xing: null,
           linkedin: null,
+          google: null,
         }
     };
   },
@@ -57,6 +59,7 @@ export default
           {
             icon: 'mdi-facebook',
             title: 'Facebook',
+            network: 'facebook',
           },
           {
             icon: 'mdi-xing',
@@ -65,6 +68,12 @@ export default
           {
             icon: 'mdi-linkedin',
             title: 'LinkedIn',
+            network: 'linkedin'
+          },
+          {
+            icon: 'mdi-google',
+            title: 'Google',
+            network: 'google'
           },
         ];
       },
@@ -88,5 +97,43 @@ export default
           }
         }
     },
+  created()
+  {
+    // XING - https://stackoverflow.com/a/27372946/5962802
+    // https://dev.xing.com/plugins/login_with/docs
+    // https://github.com/MrSwitch/hello.js/blob/master/modules.md
+    hello.init({
+      facebook: process.env.APP_ID_FACEBOOK,
+      google: process.env.APP_ID_GOOGLE,
+      linkedin: process.env.APP_ID_LINKEDIN,
+      github: process.env.APP_ID_GITHUB,
+      dropbox: process.env.APP_ID_DROPBOX
+    }, {
+      display: 'popup',
+    });
+  },
+  mounted()
+  {
+    hello.on('auth.login', this.onLogin);
+  },
+  beforeDestroy()
+  {
+    hello.off('auth.login', this.onLogin);
+  },
+  methods:
+    {
+      importProfile(network)
+      {
+        if (network) hello(network).login();
+      },
+      onLogin(auth)
+      {
+        // Call user information, for the given network
+        hello(auth.network).api('me').then(profile =>
+        {
+          console.log(profile);
+        });
+      }
+    }
 };
 </script>
