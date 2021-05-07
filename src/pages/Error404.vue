@@ -14,7 +14,7 @@
         color="white"
         text-color="blue"
         unelevated
-        to="/apply"
+        to="/en"
         label="Go Home"
         no-caps
       />
