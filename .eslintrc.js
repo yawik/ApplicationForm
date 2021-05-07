@@ -34,15 +34,15 @@ module.exports = {
     // 'plugin:vue/strongly-recommended', // Priority B: Strongly Recommended (Improving Readability)
     'plugin:vue/recommended', // Priority C: Recommended (Minimizing Arbitrary Choices and Cognitive Overhead)
 
-    'standard'
-
+    'standard',
+    "plugin:quasar/standard"
   ],
 
   plugins: [
     // https://eslint.vuejs.org/user-guide/#why-doesn-t-it-work-on-vue-file
     // required to lint *.vue files
     'vue',
-
+    'quasar',
   ],
 
   globals: {
@@ -294,6 +294,13 @@ module.exports = {
     'vue/key-spacing': 'error',
 
     // allow debugger during development only
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    'quasar/no-legacy-components': "error",
+    'quasar/no-legacy-css': "error",
+    'quasar/no-legacy-directives': "error",
+    'quasar/no-legacy-properties': "error",
+    'quasar/no-legacy-plugins': "error",
+    'quasar/no-invalid-props': "error",
+    'quasar/no-invalid-qfield-usage': "error"
   }
 }

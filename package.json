@@ -1,6 +1,6 @@
 {
   "name": "cross-apply",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "CROSS application form",
   "productName": "Application Form",
   "author": "Ivaylo Gelov",
@@ -36,6 +36,7 @@
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-node": "^11.0.0",
     "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-quasar": "^1.0.0",
     "eslint-plugin-vue": "^7.8.0",
     "stylelint": "^13.9.0",
     "stylelint-config-standard": "^20.0.0",

@@ -4,9 +4,11 @@
       <div class="row q-pb-lg">
         <SwitchLanguage class="q-mx-auto" />
       </div>
-      <q-stepper ref="stepper" v-model="currentStep" color="primary" animated header-nav all-panels>
+      <!-- eslint-disable quasar/no-invalid-props -->
+      <q-stepper ref="stepper" v-model="currentStep" animated header-nav all-panels>
+        <!-- eslint-enable quasar/no-invalid-props -->
         <q-step v-for="(stepData,stepName) in form" :key="stepName" :name="stepName" :prefix="steps.indexOf(stepName)+1" :title="$t(stepName+'.title')"
-                :done="steps.indexOf(currentStep) > steps.indexOf(stepName)" :error="validationErrors(stepName)"
+                color="primary" :done="steps.indexOf(currentStep) > steps.indexOf(stepName)" :error="validationErrors(stepName)"
         >
           <component :is="stepName" v-model="form[stepName]" :active="currentStep === stepName" :stepper="stepper" :width="maxWidth" @uploader="setUploader" />
         </q-step>
@@ -17,7 +19,8 @@
         </div>
       </q-stepper>
       <div class="flex q-py-md justify-center">
-        <q-btn color="primary" class="q-px-md" outlined>{{ $t('previewForm') }}</q-btn>
+        <q-btn color="primary" class="q-mr-md" outline>{{ $t('previewForm') }}</q-btn>
+        <q-btn color="negative" class="q-ml-md">{{ $t('abortForm') }}</q-btn>
       </div>
     </q-form>
     <FormSubmit v-model="dlgSubmit" :info="jsonData" :uploader="uploader" />
