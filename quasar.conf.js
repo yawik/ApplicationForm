@@ -96,12 +96,15 @@ module.exports = function(ctx)
             { loader: '@kazupon/vue-i18n-loader' },
           ]
         });
-        cfg.module.rules.push({
-          enforce: 'pre',
-          test: /\.(js|vue)$/,
-          loader: 'eslint-loader',
-          exclude: /[\\/]node_modules[\\/]/
-        });
+        if (ctx.dev)
+        {
+          cfg.module.rules.push({
+            enforce: 'pre',
+            test: /\.(js|vue)$/,
+            loader: 'eslint-loader',
+            exclude: /[\\/]node_modules[\\/]/
+          });
+        }
       }
     },
 
