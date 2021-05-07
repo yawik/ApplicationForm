@@ -19,6 +19,8 @@
     "@quasar/extras": "^1.0.0",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
+    "eslint-loader": "^4.0.2",
+    "hellojs": "^1.19.3",
     "quasar": "^1.0.0",
     "vue-i18n": "^8.22.4"
   },
