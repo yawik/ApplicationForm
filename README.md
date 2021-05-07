@@ -8,4 +8,4 @@ https://gitlab.cross-solution.de/CROSS/strategy/results/applicationform/-/issues
 
 ## Demo
 
-https://cross-solution.de/apply
+https://cross-solution.gitlab.io/applicationform/#/apply
