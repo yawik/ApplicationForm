@@ -17,7 +17,7 @@
         <q-btn color="primary" class="q-px-md" outlined>{{ $t('previewForm') }}</q-btn>
       </div>
     </q-form>
-    <FormSubmit v-model="dlgSubmit" :info="jsonData" :uploader="uploader" :url="uploadURL" />
+    <FormSubmit v-model="dlgSubmit" :info="jsonData" :uploader="uploader" />
   </q-page>
 </template>
 
@@ -100,10 +100,6 @@ export default
       {
         return Object.assign({}, this.form.stepOne, this.form.stepTwo, this.form.stepThree, this.form.stepFive);
       },
-      uploadURL()
-      {
-        return 'http://test.ivogelov.com/appform.php';
-      }
     },
   watch:
     {
