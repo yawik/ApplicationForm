@@ -6,6 +6,7 @@ cache:
 pages:
   stage: deploy
   script:
+  - env
   - env | grep YAWIK > .env
   - npm install
   - npx quasar build
