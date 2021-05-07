@@ -86,7 +86,7 @@ export default
       },
       uploadURL()
       {
-        return process.env.API_URL;
+        return process.env.YAWIK_APPLICATION_FORM_ACTION;
       }
     },
   watch:

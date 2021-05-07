@@ -103,11 +103,11 @@ export default
     // https://dev.xing.com/plugins/login_with/docs
     // https://github.com/MrSwitch/hello.js/blob/master/modules.md
     hello.init({
-      facebook: process.env.APP_ID_FACEBOOK,
-      google: process.env.APP_ID_GOOGLE,
-      linkedin: process.env.APP_ID_LINKEDIN,
-      github: process.env.APP_ID_GITHUB,
-      dropbox: process.env.APP_ID_DROPBOX
+      facebook: process.env.YAWIK_OAUTH_FACEBOOK,
+      google: process.env.YAWIK_OAUTH_GOOGLE,
+      linkedin: process.env.YAWIK_OAUTH_LINKEDIN,
+      github: process.env.YAWIK_OAUTH_GITHUB,
+      dropbox: process.env.YAWIK_OAUTH_DROPBOX
     }, {
       display: 'popup',
     });
