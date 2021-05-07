@@ -1,6 +1,6 @@
 # Application Form
 
-Quasar based application form for Yawik.
+Quasar based application form for [Yawik](https://yawik.org).
 
 ## Task description
 
@@ -8,4 +8,4 @@ https://gitlab.cross-solution.de/CROSS/strategy/results/applicationform/-/issues
 
 ## Demo
 
-https://cross-solution.gitlab.io/applicationform/#/apply
+https://form.yawik.org/#/en
