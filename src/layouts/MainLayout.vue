@@ -1,6 +1,7 @@
 <template>
   <q-layout view="lHh Lpr lFf">
     <q-page-container style="overflow-x: hidden;">
+      <img class="logo" src="yawik-logo.png">
       <transition name="fade" appear mode="out-in">
         <router-view />
       </transition>
