@@ -7,6 +7,8 @@ export default
   submitFailed: 'Versand fehlgeschlagen',
   success: 'Success',
   applicationWasSent: 'Bewerbung wurde versendet.',
+  goHome: 'Gehe zur Homepage',
+  fileNotFound: 'Seite nicht gefunden',
   buttons:
     {
       finish: 'Beenden',
@@ -27,9 +29,9 @@ export default
       salutation: 'Anrede',
       salutationTypes:
       [
-        'Mr.',
-        'Mrs.',
-        'Ms.'
+        'Herr',
+        'Frau',
+        'Froilain'
       ],
       firstName: 'Vorname',
       lastName: 'Name',

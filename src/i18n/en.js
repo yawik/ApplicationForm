@@ -7,6 +7,8 @@ export default
   submitFailed: 'Submit failed',
   success: 'Success',
   applicationWasSent: 'Application was received.',
+  goHome: 'Go to homepage',
+  fileNotFound: 'Page not found',
   buttons:
     {
       finish: 'Finish',

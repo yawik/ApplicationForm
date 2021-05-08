@@ -1,9 +1,7 @@
 <template>
   <div class="fullscreen bg-blue text-white text-center q-pa-md flex flex-center">
     <div>
-      <div style="font-size: 30vh;">
-        {{ $t('404') }}
-      </div>
+      <div style="font-size: 30vh;">404</div>
 
       <div class="text-h2" style="opacity: 0.4;">
         {{ $t('fileNotFound') }}
@@ -15,7 +13,7 @@
         text-color="blue"
         unelevated
         to="/en"
-        label="Go Home"
+        :label="$t('goHome')"
         no-caps
       />
     </div>
@@ -23,7 +21,8 @@
 </template>
 
 <script>
-export default {
+export default 
+{
   name: 'Error404'
 };
 </script>
