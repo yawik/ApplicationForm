@@ -64,7 +64,7 @@ export default
     },
   stepFive:
     {
-      title: 'Datenschutzbestimmung',
+      title: 'Datenschutz',
       startDate: 'frühester Eintrittstermin?',
       ccTitle: 'CC',
       carbonCopy: 'Senden sie mir eine Kopie meiner Datein an meine E-Mail.',
