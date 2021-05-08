@@ -1,5 +1,5 @@
 <template>
-  <q-dialog :value="value" persistent @input="close">
+  <q-dialog :value="value" :persistent="saving" @input="close">
     <q-card>
       <q-card-section class="text-h6 bg-primary text-white">{{ $t('submitting') }}</q-card-section>
       <q-card-section>
@@ -30,7 +30,7 @@
                 </q-item-section>
 
                 <q-item-section side>
-                  <q-btn color="negative" flat dense round icon="mdi-close-circle" :disabled="loading" @click="scope.removeFile(file)" />
+                  <q-btn color="negative" flat dense round icon="mdi-close-circle" :disabled="saving" @click="scope.removeFile(file)" />
                 </q-item-section>
               </q-item>
             </q-list>
@@ -38,7 +38,7 @@
         </q-uploader>
       </q-card-section>
       <q-card-actions align="center" class="q-py-md">
-        <q-btn class="q-mr-md" color="primary" :loading="loading" @click="startUpload">{{ $t('buttons.send') }}</q-btn>
+        <q-btn class="q-mr-md" color="primary" :loading="saving" @click="startUpload">{{ $t('buttons.send') }}</q-btn>
         <q-btn class="q-ml-md" color="primary" outline @click="stopUpload">{{ $t('buttons.cancel') }}</q-btn>
       </q-card-actions>
     </q-card>
@@ -70,7 +70,7 @@ export default
   data()
   {
     return {
-      loading: false,
+      saving: false,
     };
   },
   computed:
@@ -111,24 +111,24 @@ export default
       },
       startUpload()
       {
-        this.loading = true;
+        this.saving = true;
         this.$refs.uploader.upload();
       },
       stopUpload()
       {
         this.$refs.uploader.abort();
-        this.loading = false;
+        this.saving = false;
         this.close();
       },
       success(info)
       {
-        this.loading = false;
+        this.saving = false;
         this.$router.push({ name: 'submitSuccessful' });
       },
       failure(info)
       {
         console.log(info.xhr);
-        this.loading = false;
+        this.saving = false;
         this.$q.notify({
           color: 'negative',
           position: 'top',

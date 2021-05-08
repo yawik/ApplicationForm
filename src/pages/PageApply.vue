@@ -200,7 +200,7 @@ export default
           this.$q.loading.show({ delay: 100 });
           const data = new FormData();
           data.append('application', JSON.stringify(this.jsonData));
-          this.$axios.post(this.uploadURL, data).then(response =>
+          this.$axios.post(process.env.YAWIK_APPLICATION_FORM_ACTION, data).then(response =>
           {
             this.$q.loading.hide();
             console.log(response.data);
