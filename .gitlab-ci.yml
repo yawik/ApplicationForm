@@ -6,8 +6,8 @@ cache:
 pages:
   stage: deploy
   script:
-  - env
   - env | grep YAWIK > .env
+  - env | grep YAWIK | cut -f1 -d\= | while read x; do unset $x; done
   - npm install
   - npx quasar build
   - mkdir .public
