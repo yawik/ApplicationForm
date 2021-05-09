@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="q-pb-sm">{{ $t('stepThree.import') }}</div>
-    <div class="row q-gutter-md">
+    <div class="row items-start q-gutter-md">
       <q-btn-dropdown v-for="social in listSocial" :key="social.title" color="primary" :icon="social.icon" :label="social.title" glossy push>
         <q-list>
           <q-item v-close-popup clickable @click="importProfile(social.network)">

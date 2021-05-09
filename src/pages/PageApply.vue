@@ -8,22 +8,24 @@
       <q-stepper ref="stepper" v-model="currentStep" animated header-nav all-panels>
         <!-- eslint-enable quasar/no-invalid-props -->
         <q-step v-for="(stepData,stepName) in form" :key="stepName" :name="stepName" :prefix="steps.indexOf(stepName)+1" :title="$t(stepName+'.title')"
-                color="primary" :done="steps.indexOf(currentStep) > steps.indexOf(stepName)" :error="validationErrors(stepName)"
+                done-color="positive" active-color="primary" error-color="negative"
+                :done="isCompleted(stepName)" :error="validationErrors(stepName)"
         >
-          <component :is="stepName" v-model="form[stepName]" :active="currentStep === stepName" :stepper="stepper" :width="maxWidth" @uploader="setUploader" />
+          <component :is="stepName" v-model="form[stepName]" :active="currentStep === stepName" :stepper="stepper" :width="maxWidth" style="min-height: 500px;" @uploader="setUploader" />
         </q-step>
         <div slot="navigation" class="row justify-end q-px-lg q-pb-lg">
-          <q-btn v-if="steps.indexOf(currentStep) > 0" outline color="primary" :label="$t('buttons.back')" class="q-mr-md" @click="$refs.stepper.previous()" />
-          <q-btn v-if="lastStep" color="primary" :label="$t('buttons.finish')" type="submit" />
-          <q-btn v-else color="primary" :label="$t('buttons.continue')" @click="$refs.stepper.next()" />
+          <q-btn v-if="steps.indexOf(currentStep) > 0" outline color="primary" :label="$t('buttons.back')" class="q-mr-md" @click.stop="navigate('previous')" />
+          <q-btn v-if="lastStep" color="primary" :label="$t('buttons.finish')" @click.stop="trySubmit" />
+          <q-btn v-else color="primary" :label="$t('buttons.continue')" @click.stop="navigate('next')" />
         </div>
       </q-stepper>
       <div class="flex q-py-md justify-center">
-        <q-btn color="primary" class="q-mr-md" outline>{{ $t('previewForm') }}</q-btn>
+        <q-btn color="primary" class="q-mr-md" outline @click="dlgPreview = true">{{ $t('previewForm') }}</q-btn>
         <q-btn color="negative" class="q-ml-md">{{ $t('abortForm') }}</q-btn>
       </div>
     </q-form>
-    <FormSubmit v-model="dlgSubmit" :info="jsonData" :uploader="uploader" />
+    <FormSubmit v-model="dlgSubmit" :info="jsonData" :files="fileList" />
+    <DialogPreview v-model="dlgPreview" :form="form" :files="uploader ? uploader.files : []" />
   </q-page>
 </template>
 
@@ -35,6 +37,7 @@ import StepFour from 'src/components/StepFour';
 import StepFive from 'src/components/StepFive';
 import FormSubmit from 'src/components/FormSubmit';
 import SwitchLanguage from 'src/components/SwitchLanguage';
+import DialogPreview from 'src/components/DialogPreview';
 
 export default
 {
@@ -48,6 +51,7 @@ export default
       StepFive,
       FormSubmit,
       SwitchLanguage,
+      DialogPreview,
     },
   data()
   {
@@ -58,6 +62,7 @@ export default
       uploader: null, // used by FormSubmit.vue
       stepper: null, // used by StepOne.vue to navigate to step 2 on ENTER key in any input field
       maxWidth: 1e4, // used to limit the width of QEditor on step 2, otherwise it grows too much when you type text
+      dlgPreview: false,
       form:
         {
           stepOne:
@@ -72,7 +77,6 @@ export default
               country: '',
               phone: '',
               email: '',
-              photo: null,
             },
           stepTwo:
             {
@@ -87,7 +91,7 @@ export default
             },
           stepFour:
             {
-              attachments: [],
+              photo: null,
             },
           stepFive:
             {
@@ -108,6 +112,10 @@ export default
       {
         return Object.assign({}, this.form.stepOne, this.form.stepTwo, this.form.stepThree, this.form.stepFive);
       },
+      fileList()
+      {
+        return [this.form.stepOne.photo].concat(this.uploader ? this.uploader.files : []);
+      }
     },
   watch:
     {
@@ -148,6 +156,17 @@ export default
         // which is then provided to FormSubmit.vue to clone the list of attachments
         // The only purpose of FormSubmit's existence is to show the progress of uploading attachments - otherwise we could've used a simple spinner in the FINISH button
         this.uploader = component;
+      },
+      navigate(direction)
+      {
+        this.$nextTick(() =>
+        {
+          this.$refs.stepper[direction]();
+        });
+      },
+      trySubmit()
+      {
+        this.$refs.frm.submit();
       },
       hasErrors(ref)
       {
@@ -190,6 +209,13 @@ export default
         const components = this.$refs.frm.getValidationComponents().filter(ref => !!ref.innerError);
         // check if the failing components are on the requested step
         return components.map(ref => this.findStep(ref)).includes(step);
+      },
+      isCompleted(step)
+      {
+        if (this.steps.indexOf(this.currentStep) <= this.steps.indexOf(step)) return false;
+        if (step === 'stepTwo' && !this.form.stepTwo.coverLetter) return false;
+        if (step === 'stepFour' && this.uploader.files.length === 0 && !this.form.stepOne.photo) return false;
+        return true;
       },
       submitForm()
       {

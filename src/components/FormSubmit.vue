@@ -61,10 +61,10 @@ export default
           type: Object,
           required: true
         },
-      uploader:
+      files:
         {
-          type: Object,
-          default: null
+          type: Array,
+          default: () => []
         },
     },
   data()
@@ -98,7 +98,7 @@ export default
         this.$nextTick(() =>
         {
           this.$refs.uploader.reset();
-          this.$refs.uploader.addFiles(this.uploader.files);
+          this.$refs.uploader.addFiles(this.files);
         });
       }
     }

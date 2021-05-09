@@ -23,3 +23,10 @@ body
     padding: 0;
   }
 }
+
+.clear_float::after
+{
+  content: "";
+  display: table;
+  clear: both;
+}

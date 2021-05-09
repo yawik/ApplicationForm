@@ -43,7 +43,7 @@
     <q-input v-model.trim="form.phone" outlined dense lazy-rules :rules="[ruleContact]" @keypress.enter="gotoNext" />
 
     <div class="q-pt-md q-pb-xs">{{ $t('stepOne.email') }}</div>
-    <q-input v-model.trim="form.email" outlined dense lazy-rules :rules="[ruleContact]" @keypress.enter="gotoNext" />
+    <q-input v-model.trim="form.email" outlined dense lazy-rules :rules="[ruleContact,validEmail]" @keypress.enter="gotoNext" />
   </div>
 </template>
 

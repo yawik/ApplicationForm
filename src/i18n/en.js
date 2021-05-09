@@ -16,12 +16,15 @@ export default
       back: 'Back',
       send: 'Send',
       cancel: 'Cancel',
+      close: 'Close',
+      remove: 'Remove',
     },
   rules:
     {
       required: 'Required field',
       phoneOrEmail: 'Provide at least one of the 2 - phone or e-mail',
-      invalidDate: 'Invalid date'
+      invalidDate: 'Invalid date',
+      invalidEmail: 'Invalid e-mail',
     },
   stepOne:
     {
@@ -59,7 +62,8 @@ export default
   stepFour:
     {
       title: 'Attachments',
-      help: 'Attach images or PDF documents - up to 2 MB (Drag & Drop supported)',
+      help: 'Attach images or PDF, DOC(x), XLS(x) documents - up to 2 MB',
+      photo: 'You can provide a photo of yourself',
       status: 'Status: {status}',
     },
   stepFive:
@@ -69,5 +73,20 @@ export default
       ccTitle: 'Carbon copy',
       carbonCopy: 'Send me a copy of this application by e-mail.',
       privacyPolicy: 'I have read the <a href="https://yawik.org/demo/en/content/applications-privacy-policy" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation(); return true;">Privacy policy</a> and I accept it.', // the link won't work without the onClick handler
+    },
+  dropZone:
+    {
+      dragDrop: 'Drag and drop files, or',
+      clickHere: 'click here',
+      chooseManually: 'to choose manually'
+    },
+  preview:
+    {
+      title: 'Application Form',
+      email: 'E-mail',
+      phone: 'Tel',
+      address: 'Address',
+      canStart: 'Can start on',
+      acceptTerms: 'I have read and accept the Privacy Policy.'
     }
 };
