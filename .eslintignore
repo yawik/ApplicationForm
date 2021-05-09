@@ -5,6 +5,4 @@
 /.quasar
 /node_modules
 
-/src/pages/Error404.vue
-
 .eslintrc.js
