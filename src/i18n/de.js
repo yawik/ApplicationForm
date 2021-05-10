@@ -28,11 +28,10 @@ export default
       title: 'Persönliche Angaben',
       salutation: 'Anrede',
       salutationTypes:
-      [
-        'Herr',
-        'Frau',
-        'Froilain'
-      ],
+        [
+          'Herr',
+          'Frau'
+        ],
       firstName: 'Vorname',
       lastName: 'Name',
       street: 'Strasse',
@@ -69,5 +68,20 @@ export default
       ccTitle: 'CC',
       carbonCopy: 'Senden sie mir eine Kopie meiner Datein an meine E-Mail.',
       privacyPolicy: 'Ich habe die <a href="https://yawik.org/demo/en/content/applications-privacy-policy" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation(); return true;">Datenschutzbestimmungen</a> gelesen und akzeptiere sie.', // the link won't work without the onClick handler
+    },
+  dropZone:
+    {
+      dragDrop: 'Sie können Dokumente reinziehen-',
+      clickHere: 'click here',
+      chooseManually: 'to choose manually'
+    },
+  preview:
+    {
+      title: 'Voransicht Berwerbung',
+      email: 'E-Mail',
+      phone: 'Tel.',
+      address: 'Anschrift',
+      canStart: 'frühester Eintrittstermin.',
+      acceptTerms: 'Ich habe die Datenschutzbestimmungen gelesen und akzeptiere sie.'
     }
 };
