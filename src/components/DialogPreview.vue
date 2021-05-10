@@ -14,7 +14,7 @@
               <img v-else src="~src/images/avatar.svg" width="200" height="200">
             </div>
             <div class="col-6 q-pa-md">
-              <h5 class="q-my-md">{{ `${form.stepOne.salutation || 'Mr.'} ${form.stepOne.firstName || 'John'} ${form.stepOne.lastName || 'Doe'}` }}</h5>
+              <h5 class="q-my-md">{{ `${salutationsMap[form.stepOne.salutation] || ''} ${form.stepOne.firstName || 'John'} ${form.stepOne.lastName || 'Doe'}` }}</h5>
               <div>
                 <strong>{{ $t('preview.email') }}:</strong> &nbsp; {{ form.stepOne.email || 'n/a' }}
               </div>
@@ -26,7 +26,7 @@
               </div>
               <div class="q-mt-md">
                 <strong>{{ $t('preview.address') }}:</strong> &nbsp;
-                {{ `${form.stepOne.country || $t('stepOne.country')}, ${form.stepOne.zipCode || '12345'} ${form.stepOne.city || $t('stepOne.city')}` }}
+                {{ `${form.stepOne.country || $t('stepOne.country')}, ${form.stepOne.postalCode || '12345'} ${form.stepOne.city || $t('stepOne.city')}` }}
                 <br>
                 {{ `${form.stepOne.street || $t('stepOne.street')} ${form.stepOne.houseNumber}` }}
               </div>
@@ -103,6 +103,18 @@ export default
       imageList: [],
     };
   },
+  computed:
+    {
+      salutationsMap()
+      {
+        const result = {};
+        this.$t('stepOne.salutationTypes').forEach(salutation =>
+        {
+          result[salutation.value] = salutation.label;
+        });
+        return result;
+      }
+    },
   watch:
     {
       files(newVal)

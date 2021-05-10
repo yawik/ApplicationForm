@@ -1,0 +1,15 @@
+Index: \@quasar\app\lib\generator.js
+===================================================================
+--- \@quasar\app\lib\generator.js
++++ \@quasar\app\lib\generator.js
+@@ -64,9 +64,9 @@
+     // ensure .quasar folder
+     if (!fs.existsSync(quasarFolder)) {
+       fs.mkdirSync(quasarFolder)
+     }
+-    else if (!fs.lstatSync(quasarFolder).isDirectory()) {
++    else if (!(fs.lstatSync(quasarFolder).isDirectory() || fs.lstatSync(quasarFolder).isSymbolicLink())) { // IVO GELOV - don't destroy the symlink
+       const { removeSync } = require('fs-extra')
+       removeSync(quasarFolder)
+       fs.mkdirSync(quasarFolder)
+     }

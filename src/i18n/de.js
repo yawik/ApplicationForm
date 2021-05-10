@@ -29,8 +29,14 @@ export default
       salutation: 'Anrede',
       salutationTypes:
         [
-          'Herr',
-          'Frau'
+          {
+            value: 1,
+            label: 'Herr',
+          },
+          {
+            value: 2,
+            label: 'Frau',
+          },
         ],
       firstName: 'Vorname',
       lastName: 'Name',
