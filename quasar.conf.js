@@ -151,9 +151,9 @@ module.exports = function(ctx)
       workboxPluginMode: 'GenerateSW', // 'GenerateSW' or 'InjectManifest'
       workboxOptions: {}, // only for GenerateSW
       manifest: {
-        name: 'Quasar App',
-        short_name: 'Quasar App',
-        description: 'A Quasar Framework app',
+        name: 'Yawik Apprication Form',
+        short_name: 'Yawik Apply',
+        description: 'application form with file upload and preview based on quasar framework',
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#ffffff',
