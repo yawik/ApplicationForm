@@ -35,7 +35,9 @@
           <!-- Cover letter -->
           <div class="q-pt-md">
             <div class="text-bold q-pb-xs">{{ $t('stepTwo.title') }}</div>
-            <div class="q-pa-sm bg-grey-1 rounded-borders">{{ form.stepTwo.coverLetter || 'n/a' }}</div>
+            <!-- eslint-disable vue/no-v-html -->
+            <div class="q-pa-sm bg-grey-1 rounded-borders" v-html="form.stepTwo.coverLetter || 'n/a'" />
+            <!-- eslint-enable vue/no-v-html -->
           </div>
           <!-- Attachments -->
           <div v-if="files.length > 0" class="q-pt-lg row">
