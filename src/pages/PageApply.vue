@@ -210,10 +210,9 @@ export default
       validationErrors(step)
       {
         if (!this.$refs.frm) return false;
-        // get all components in the form and check if they have an existing validation error - without triggering a new validation
-        const components = this.$refs.frm.getValidationComponents().filter(ref => !!ref.innerError);
-        // check if the failing components are on the requested step
-        return components.map(ref => this.findStep(ref)).includes(step);
+        // get all components for the given step and check if they have a validation error
+        const components = this.$refs.frm.getValidationComponents().filter(ref => this.findStep(ref) === step);
+        return step !== this.currentStep ? components.some(item => !item.validate()) : components.some(item => !!item.innerError);
       },
       isCompleted(step)
       {

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="q-pb-xs">{{ $t('stepOne.salutation') }}</div>
-    <q-select v-model.trim="form.salutation" :options="$t('stepOne.salutationTypes')" outlined dense options-dense style="max-width: 160px;" />
+    <q-option-group v-model="form.salutation" :options="salutationTypes" color="primary" inline />
 
     <div class="q-col-gutter-sm row">
       <div class="col-6 column">
@@ -86,6 +86,16 @@ export default
         }
     };
   },
+  computed:
+    {
+      salutationTypes()
+      {
+        return this.$t('stepOne.salutationTypes').map(salutation => ({
+          value: salutation,
+          label: salutation,
+        }));
+      }
+    },
   watch:
     {
       value:
