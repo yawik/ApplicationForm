@@ -29,9 +29,8 @@ pages:
   stage: deploy
   script:
   - env | grep YAWIK > .env
-  - env | grep YAWIK | cut -f1 -d\= | while read x; do unset $x; done
-  - npm install
-  - npx quasar build
+  - yarn
+  - yarn build
   - mkdir .public
   - cp -r dist/spa/* .public
   - cp dist/spa/index.html .public/404.html
