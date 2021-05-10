@@ -32,8 +32,14 @@ export default
       salutation: 'Salutation',
       salutationTypes:
       [
-        'Mr.',
-        'Mrs.'
+        {
+          value: 1,
+          label: 'Mr.',
+        },
+        {
+          value: 2,
+          label: 'Mrs.',
+        },
       ],
       firstName: 'First name',
       lastName: 'Last name',

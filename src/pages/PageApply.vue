@@ -72,7 +72,7 @@ export default
               lastName: '',
               street: '',
               houseNumber: '',
-              zipCode: '',
+              postalCode: '',
               city: '',
               country: '',
               phone: '',
@@ -111,8 +111,18 @@ export default
       jsonData()
       {
         return Object.assign({
-          job: this.$route.params.jobid,
-          org: process.env.YAWIK_ORGANIZATION,
+          user:
+            {
+              ...this.form.stepOne,
+              gender: this.form.stepOne.salutation === 1 ? 'male' : this.form.stepOne.salutation === 2 ? 'female' : '',
+            },
+          summary: this.form.stepTwo.coverLetter,
+          extras:
+            {
+              job: this.$route.params.jobid,
+              org: process.env.YAWIK_ORGANIZATION,
+              exampleSocialProfiles: this.form.stepThree,
+            }
         }, this.form.stepOne, this.form.stepTwo, this.form.stepThree, this.form.stepFive);
       },
       fileList()

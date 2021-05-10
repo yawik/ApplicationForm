@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="q-pb-xs">{{ $t('stepOne.salutation') }}</div>
-    <q-option-group v-model="form.salutation" :options="salutationTypes" color="primary" inline />
+    <q-option-group v-model="form.salutation" :options="$t('stepOne.salutationTypes')" color="primary" inline />
 
     <div class="q-col-gutter-sm row">
       <div class="col-6 column">
@@ -28,7 +28,7 @@
     <div class="q-col-gutter-sm row">
       <div class="column">
         <div class="q-pt-md q-pb-xs">{{ $t('stepOne.zipCode') }}</div>
-        <q-input v-model.trim="form.zipCode" outlined dense lazy-rules :rules="[ruleRequired]" style="min-width: 160px;" @keypress.enter="gotoNext" />
+        <q-input v-model.trim="form.postalCode" outlined dense lazy-rules :rules="[ruleRequired]" style="min-width: 160px;" @keypress.enter="gotoNext" />
       </div>
       <div class="col-grow column">
         <div class="q-pt-md q-pb-xs">{{ $t('stepOne.city') }}</div>
@@ -77,7 +77,7 @@ export default
           lastName: '',
           street: '',
           houseNumber: '',
-          zipCode: '',
+          postalCode: '',
           city: '',
           country: '',
           phone: '',
@@ -86,16 +86,6 @@ export default
         }
     };
   },
-  computed:
-    {
-      salutationTypes()
-      {
-        return this.$t('stepOne.salutationTypes').map(salutation => ({
-          value: salutation,
-          label: salutation,
-        }));
-      }
-    },
   watch:
     {
       value:
