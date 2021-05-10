@@ -28,7 +28,6 @@ publish:
 pages:
   stage: deploy
   script:
-    - env | grep YAWIK > .env
     - yarn
     - yarn build
     - mkdir .public
