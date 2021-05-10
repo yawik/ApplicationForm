@@ -110,7 +110,10 @@ export default
       },
       jsonData()
       {
-        return Object.assign({}, this.form.stepOne, this.form.stepTwo, this.form.stepThree, this.form.stepFive);
+        return Object.assign({
+          job: this.$route.params.jobid,
+          org: process.env.YAWIK_ORGANIZATION,
+        }, this.form.stepOne, this.form.stepTwo, this.form.stepThree, this.form.stepFive);
       },
       fileList()
       {

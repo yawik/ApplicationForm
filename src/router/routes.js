@@ -5,14 +5,15 @@ const routes = [
     component: () => import('layouts/MainLayout.vue'),
     children: [
       {
-        path: '',
-        name: 'applicationForm',
-        component: () => import('pages/PageApply.vue')
-      },
-      {
         path: 'success',
         name: 'submitSuccessful',
         component: () => import('pages/SubmitSuccessful.vue')
+      },
+      {
+        // must be after /success - otherwise :jobid will match "success"
+        path: ':jobid?',
+        name: 'applicationForm',
+        component: () => import('pages/PageApply.vue')
       },
     ]
   },
