@@ -12,7 +12,8 @@
     "lintfix": "node --preserve-symlinks --preserve-symlinks-main ./node_modules/eslint/bin/eslint --ext .js,.vue src --fix",
     "lint-css": "node --preserve-symlinks --preserve-symlinks-main ./node_modules/stylelint/bin/stylelint src/**/*.{vue,css,scss}",
     "lintfix-css": "node --preserve-symlinks --preserve-symlinks-main ./node_modules/stylelint/bin/stylelint src/**/*.{vue,css,scss} --fix",
-    "test": "echo \"No test specified\" && exit 0"
+    "test": "echo \"No test specified\" && exit 0",
+    "semantic-release": "semantic-release"
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",
@@ -45,6 +46,27 @@
     "@semantic-release/gitlab": "^6.0.5",
     "@semantic-release/npm": "^7.0.8",
     "semantic-release": "^17.3.0"
+  },
+  "release": {
+    "branches": [
+      "master",
+      "next"
+    ],
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      [
+        "@semantic-release/gitlab",
+        {
+          "gitlabUrl": "https://gitlab.com/cross-solution1/applicationform.git",
+          "assets": [
+            { "path": "index.js", "label": "Module" },
+            { "path": "README.md", "label": "Documentation" },
+            { "path": "LICENSE", "label": "License" }
+          ]
+        }
+      ]
+    ]
   },
   "browserslist": [
     "last 2 years, >3%, not dead"
