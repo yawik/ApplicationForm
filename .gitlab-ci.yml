@@ -29,7 +29,6 @@ pages:
   stage: deploy
   script:
     - env | grep YAWIK > .env
-    - ls -l
     - yarn
     - yarn build
     - mkdir .public
