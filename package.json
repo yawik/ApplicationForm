@@ -12,7 +12,6 @@
     "lintfix": "node --preserve-symlinks --preserve-symlinks-main ./node_modules/eslint/bin/eslint --ext .js,.vue src --fix",
     "lint-css": "node --preserve-symlinks --preserve-symlinks-main ./node_modules/stylelint/bin/stylelint src/**/*.{vue,css,scss}",
     "lintfix-css": "node --preserve-symlinks --preserve-symlinks-main ./node_modules/stylelint/bin/stylelint src/**/*.{vue,css,scss} --fix",
-    "prepare": "custompatch",
     "test": "echo \"No test specified\" && exit 0",
     "semantic-release": "semantic-release"
   },
