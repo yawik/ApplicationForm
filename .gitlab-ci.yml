@@ -1,23 +1,43 @@
-image: node:12.14.1
+image: node:latest
 
 cache:
+  key: ${CI_COMMIT_REF_SLUG}
   paths:
+    - .npm/
     - node_modules/
+
+workflow:
+  rules:
+    - if: $CI_COMMIT_BRANCH
+
+variables:
+  NPM_TOKEN: ${CI_JOB_TOKEN}
+
+stages:
+  - release
+  - deploy
+
+publish:
+  stage: release
+  script:
+    - yarn
+    - yarn semantic-release
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
 pages:
   stage: deploy
   script:
-  - env | grep YAWIK > .env
-  - env | grep YAWIK | cut -f1 -d\= | while read x; do unset $x; done
-  - npm install
-  - npx quasar build
-  - mkdir .public
-  - cp -r dist/spa/* .public
-  - cp dist/spa/index.html .public/404.html
-  - rm -Rf public
-  - mv .public public
-  - find public -type f -regex '.*\.\(htm\|html\|txt\|text\|js\|css\)$' -exec gzip -f -k {} \;
+    - yarn
+    - yarn build
+    - mkdir .public
+    - cp -r dist/spa/* .public
+    - cp dist/spa/index.html .public/404.html
+    - rm -Rf public
+    - mv .public public
+    - find public -type f -regex '.*\.\(htm\|html\|txt\|text\|js\|css\)$' -exec gzip -f -k {} \;
   artifacts:
     paths:
-    - public
+      - public
   only:
-  - master
+    - master

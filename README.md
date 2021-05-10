@@ -32,6 +32,7 @@ The form is .env-aware.
 | Name                         | Value                               | 
 |------------------------------|-------------------------------------|
 | YAWIK_APPLICATION_FORM_ACTON | URL to which form data is sent      |
+| YAWIK_ORGANIZATION           | **TODO** Organizaion ID             |
 | YAWIK_OAUTH_FACEBOOK         | App Identifier                      |
 | YAWIK_OAUTH_GOOGLE           | App Identifier                      |
 | YAWIK_OAUTH_LINKEDIN         | **not working**                     |

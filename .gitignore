@@ -35,7 +35,6 @@ yarn-error.log*
 
 *.cmd
 package-lock.json
-yarn.lock
 /vendor/
 .env
 .env.*
