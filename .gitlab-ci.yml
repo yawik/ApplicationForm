@@ -28,18 +28,18 @@ publish:
 pages:
   stage: deploy
   script:
-  - env | grep YAWIK > .env
-  - ls -l
-  - yarn
-  - yarn build
-  - mkdir .public
-  - cp -r dist/spa/* .public
-  - cp dist/spa/index.html .public/404.html
-  - rm -Rf public
-  - mv .public public
-  - find public -type f -regex '.*\.\(htm\|html\|txt\|text\|js\|css\)$' -exec gzip -f -k {} \;
+    - env | grep YAWIK > .env
+    - ls -l
+    - yarn
+    - yarn build
+    - mkdir .public
+    - cp -r dist/spa/* .public
+    - cp dist/spa/index.html .public/404.html
+    - rm -Rf public
+    - mv .public public
+    - find public -type f -regex '.*\.\(htm\|html\|txt\|text\|js\|css\)$' -exec gzip -f -k {} \;
   artifacts:
     paths:
-    - public
+      - public
   only:
-  - master
+    - master
