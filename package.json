@@ -1,8 +1,7 @@
 {
-  "name": "cross-apply",
-  "version": "0.0.18",
-  "description": "CROSS application form",
-  "productName": "Application Form",
+  "name": "yawik-application-form",
+  "description": "application form with file upload and preview based on quasar framework",
+  "productName": "Yawik Application Form",
   "author": "Ivaylo Gelov",
   "private": true,
   "scripts": {
