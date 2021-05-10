@@ -5,7 +5,7 @@
         <q-btn color="secondary" @click="close">{{ $t('buttons.close') }}</q-btn>
       </q-card-actions>
       <q-card-section class="row">
-        <div class="q-mx-auto q-card--bordered rounded-borders q-px-lg q-pb-lg" style="min-width: 40%; max-width: 1024px;">
+        <div class="q-mx-auto q-card--bordered rounded-borders q-px-lg q-pb-lg" style="min-width: 40%; max-width: 1024px; border-style: double; border-width: 3px;">
           <h4 align="center" class="q-my-sm">{{ $t('preview.title') }}</h4>
           <!-- Personal details -->
           <div class="row">
@@ -48,11 +48,23 @@
             </div>
           </div>
           <div class="q-mt-lg q-pb-md row items-center">
+            <!--
             <q-icon name="mdi-checkbox-marked-outline" class="q-mr-sm" size="24px" color="grey-7" />
             {{ $t('preview.acceptTerms') }}
+            -->
+            <!-- eslint-disable vue/no-mutating-props -->
+            <q-checkbox v-model="form.stepFive.acceptTerms">
+              <!-- eslint-disable vue/no-v-html -->
+              <div class="terms" v-html="$t('stepFive.privacyPolicy')" />
+              <!-- eslint-enable vue/no-v-html -->
+            </q-checkbox>
+            <!-- eslint-enable vue/no-mutating-props -->
           </div>
           <!-- Signature -->
-          <div class="q-pr-md row justify-end">
+          <div class="q-pr-md row">
+            <div class="col-grow row">
+              <q-btn color="positive" class="q-mx-auto" @click="$emit('send')">{{ $t('buttons.send') }}</q-btn>
+            </div>
             <div class="user_signature">{{ `${form.stepOne.firstName || 'John'} ${form.stepOne.lastName || 'Doe'}` }}</div>
           </div>
         </div>
@@ -153,4 +165,10 @@ export default
     max-width: 64px;
     max-height: 64px;
   }
+
+  .terms a
+  {
+    color: $primary;
+  }
+
 </style>

@@ -25,7 +25,7 @@
       </div>
     </q-form>
     <FormSubmit v-model="dlgSubmit" :info="jsonData" :files="fileList" />
-    <DialogPreview v-model="dlgPreview" :form="form" :files="uploader ? uploader.files : []" />
+    <DialogPreview v-model="dlgPreview" :form="form" :files="uploader ? uploader.files : []" @send="dlgPreview = false, trySubmit()" />
   </q-page>
 </template>
 
@@ -170,10 +170,6 @@ export default
       },
       hasErrors(ref)
       {
-        this.focusFailed(ref);
-      },
-      focusFailed(ref, tabVariable = 'currentStep')
-      {
         // ensure the first invalid field is focused when it is on a different panel/q-step
         let node = ref;
         do
@@ -181,9 +177,18 @@ export default
           node = node.$parent;
           if (node.$options._componentTag === 'q-step')
           {
-            if (node.name !== this[tabVariable])
+            if (node.name !== node.$parent.value)
             {
-              this[tabVariable] = node.name;
+              const newName = node.name;
+              do
+              {
+                node = node.$parent;
+                if (node.$options._componentTag === 'q-stepper')
+                {
+                  node.$emit('input', newName);
+                  break;
+                }
+              } while (node !== this.$root);
               this.$nextTick(() =>
               {
                 ref.focus();
