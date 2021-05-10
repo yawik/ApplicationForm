@@ -33,8 +33,7 @@ export default
       salutationTypes:
       [
         'Mr.',
-        'Mrs.',
-        'Ms.'
+        'Mrs.'
       ],
       firstName: 'First name',
       lastName: 'Last name',
