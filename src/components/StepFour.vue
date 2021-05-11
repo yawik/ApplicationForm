@@ -38,7 +38,7 @@
       <div class="column">
         <div class="q-pb-sm">{{ $t('stepFour.photo') }}</div>
         <DropZone @change="choosePhoto" />
-        <UserPhoto :image="form.photo" :width="maxSize" :height="maxSize" class="q-mx-auto q-mt-md" @remove="form.photo = ''" />
+        <UserPhoto :image="image" :width="maxSize" :height="maxSize" class="q-mx-auto q-mt-md" @remove="form.photo = null,image = ''" />
       </div>
     </div>
   </div>
@@ -68,9 +68,10 @@ export default
   {
     return {
       maxSize: 300, // max width/height in pixels for user's photo
+      image: '',
       form:
         {
-          photo: '',
+          photo: null,
         }
     };
   },
@@ -108,6 +109,7 @@ export default
           };
           img.onload = () =>
           {
+            // limit dimensions of the picture to maxSize * maxSize, keeping the aspect ratio
             canvas.width = img.naturalWidth;
             canvas.height = img.naturalHeight;
             // preserve aspect ratio
@@ -122,11 +124,12 @@ export default
               canvas.width = this.maxSize * img.naturalWidth / img.naturalHeight;
             }
             canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height); // implicit width and height in order to stretch the image to canvas
-            this.form.photo = canvas.toDataURL('image/jpeg', 0.85);
+            this.image = canvas.toDataURL('image/jpeg', 0.85);
           };
           reader.readAsDataURL(list[0]);
+          this.form.photo = list[0];
         }
-        else this.form.photo = '';
+        else this.form.photo = null;
       },
     }
 };
