@@ -110,7 +110,7 @@ export default
       },
       jsonData()
       {
-        return Object.assign({
+        return {
           user:
             {
               ...this.form.stepOne,
@@ -122,8 +122,9 @@ export default
               job: this.$route.params.jobid,
               org: process.env.YAWIK_ORGANIZATION,
               exampleSocialProfiles: this.form.stepThree,
+              ...this.form.stepFive,
             }
-        }, this.form.stepOne, this.form.stepTwo, this.form.stepThree, this.form.stepFive);
+        };
       },
       fileList()
       {
