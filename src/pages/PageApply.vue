@@ -128,6 +128,8 @@ export default
       jsonData()
       {
         return {
+          job: this.jobID,
+          org: process.env.YAWIK_ORGANIZATION,
           user:
             {
               ...this.form.stepOne,
@@ -136,8 +138,6 @@ export default
           summary: this.form.stepTwo.coverLetter,
           extras:
             {
-              job: this.jobID,
-              org: process.env.YAWIK_ORGANIZATION,
               exampleSocialProfiles: this.form.stepThree,
               ...this.form.stepFive,
             }
