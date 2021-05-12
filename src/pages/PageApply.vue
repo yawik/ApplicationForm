@@ -145,7 +145,7 @@ export default
       },
       fileList()
       {
-        return [this.form.stepOne.photo].concat(this.uploader ? this.uploader.files : []);
+        return (this.form.stepOne.photo ? [this.form.stepOne.photo] : []).concat(this.uploader ? this.uploader.files : []);
       }
     },
   watch:
