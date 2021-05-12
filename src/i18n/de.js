@@ -16,6 +16,8 @@ export default
       back: 'Zurück',
       send: 'Absenden',
       cancel: 'Abbrechen',
+      close: 'Schließen',
+      remove: 'Löschen',
     },
   rules:
     {

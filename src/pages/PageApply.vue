@@ -15,7 +15,7 @@
         </q-step>
         <div slot="navigation" class="row justify-end q-px-lg q-pb-lg">
           <q-btn v-if="steps.indexOf(currentStep) > 0" outline color="primary" :label="$t('buttons.back')" class="q-mr-md" @click.stop="navigate('previous')" />
-          <q-btn v-if="lastStep" color="primary" :label="$t('buttons.finish')" @click.stop="trySubmit" />
+          <q-btn v-if="lastStep" color="primary" :label="$t('buttons.send')" @click.stop="trySubmit" />
           <q-btn v-else color="primary" :label="$t('buttons.continue')" @click.stop="navigate('next')" />
         </div>
       </q-stepper>
