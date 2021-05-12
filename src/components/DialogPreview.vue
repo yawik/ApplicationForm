@@ -7,6 +7,7 @@
       <q-card-section class="row">
         <div class="q-mx-auto q-card--bordered rounded-borders q-px-lg q-pb-lg" style="min-width: 40%; max-width: 1024px; border-style: double; border-width: 3px;">
           <h4 align="center" class="q-my-sm">{{ $t('preview.title') }}</h4>
+          <h6 v-if="job || org" align="center" class="q-my-sm">{{ org }} &nbsp;&mdash;&nbsp; {{ job }}</h6>
           <!-- Personal details -->
           <div class="row">
             <div class="col-6 row justify-center items-center q-pa-md">
@@ -95,6 +96,16 @@ export default
         {
           type: Array,
           default: () => []
+        },
+      job:
+        {
+          type: String,
+          default: ''
+        },
+      org:
+        {
+          type: String,
+          default: ''
         }
     },
   data()

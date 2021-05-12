@@ -25,7 +25,7 @@
       </div>
     </q-form>
     <FormSubmit v-model="dlgSubmit" :info="jsonData" :files="fileList" />
-    <DialogPreview v-model="dlgPreview" :form="form" :files="uploader ? uploader.files : []" @send="dlgPreview = false, trySubmit()" />
+    <DialogPreview v-model="dlgPreview" :form="form" :job="jobName" :org="orgName" :files="uploader ? uploader.files : []" @send="dlgPreview = false, trySubmit()" />
   </q-page>
 </template>
 
@@ -52,6 +52,19 @@ export default
       FormSubmit,
       SwitchLanguage,
       DialogPreview,
+    },
+  props:
+    {
+      jobName:
+        {
+          type: String,
+          default: ''
+        },
+      orgName:
+        {
+          type: String,
+          default: ''
+        }
     },
   data()
   {
@@ -108,6 +121,10 @@ export default
       {
         return Object.keys(this.form);
       },
+      jobID()
+      {
+        return this.$route.query.job;
+      },
       jsonData()
       {
         return {
@@ -119,7 +136,7 @@ export default
           summary: this.form.stepTwo.coverLetter,
           extras:
             {
-              job: this.$route.params.jobid,
+              job: this.jobID,
               org: process.env.YAWIK_ORGANIZATION,
               exampleSocialProfiles: this.form.stepThree,
               ...this.form.stepFive,
