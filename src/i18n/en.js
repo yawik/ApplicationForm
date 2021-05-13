@@ -9,6 +9,11 @@ export default
   applicationWasSent: 'Application was received.',
   goHome: 'Go to homepage',
   fileNotFound: 'Page not found',
+  files:
+    {
+      photoRejected: 'File is larger than 2 MB',
+      attachmentsRejected: '{count} file(s) were rejected as they are larger than 2 MB'
+    },
   buttons:
     {
       finish: 'Finish',

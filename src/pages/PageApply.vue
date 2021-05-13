@@ -24,8 +24,17 @@
         <q-btn color="negative" class="q-ml-md">{{ $t('abortForm') }}</q-btn>
       </div>
     </q-form>
-    <FormSubmit v-model="dlgSubmit" :info="jsonData" :files="fileList" />
     <DialogPreview v-model="dlgPreview" :form="form" :job="jobName" :org="orgName" :files="uploader ? uploader.files : []" @send="dlgPreview = false, trySubmit()" />
+    <q-overlay v-model="sending" no-scroll :z-index="5" background-color="rgba(0, 0, 0, 0.5)">
+      <div slot="body" class="fullscreen column justify-center items-center">
+        <q-spinner color="primary" size="3em" class="q-mb-lg" />
+        <q-linear-progress :value="progress" size="32px" color="secondary" track-color="white" rounded instant-feedback style="max-width: 260px;">
+          <div class="absolute-full flex flex-center">
+            <q-badge color="white" text-color="secondary" :label="(progress * 100).toFixed(1) + ' %'" />
+          </div>
+        </q-linear-progress>
+      </div>
+    </q-overlay>
   </q-page>
 </template>
 
@@ -35,9 +44,9 @@ import StepTwo from 'src/components/StepTwo';
 import StepThree from 'src/components/StepThree';
 import StepFour from 'src/components/StepFour';
 import StepFive from 'src/components/StepFive';
-import FormSubmit from 'src/components/FormSubmit';
 import SwitchLanguage from 'src/components/SwitchLanguage';
 import DialogPreview from 'src/components/DialogPreview';
+import { QOverlay } from '@quasar/quasar-ui-qoverlay';
 
 export default
 {
@@ -49,9 +58,9 @@ export default
       StepThree,
       StepFour,
       StepFive,
-      FormSubmit,
       SwitchLanguage,
       DialogPreview,
+      QOverlay,
     },
   props:
     {
@@ -70,12 +79,13 @@ export default
   {
     return {
       currentStep: 'stepOne',
-      dlgSubmit: false,
       lastStep: false,
-      uploader: null, // used by FormSubmit.vue
+      uploader: null, // used to get the list of attachments
       stepper: null, // used by StepOne.vue to navigate to step 2 on ENTER key in any input field
       maxWidth: 1e4, // used to limit the width of QEditor on step 2, otherwise it grows too much when you type text
       dlgPreview: false,
+      sending: false,
+      progress: 0,
       form:
         {
           stepOne:
@@ -143,10 +153,6 @@ export default
             }
         };
       },
-      fileList()
-      {
-        return (this.form.stepOne.photo ? [this.form.stepOne.photo] : []).concat(this.uploader ? this.uploader.files : []);
-      }
     },
   watch:
     {
@@ -254,39 +260,50 @@ export default
       },
       submitForm()
       {
-        if (this.uploader && this.uploader.files && this.uploader.files.length > 0) this.dlgSubmit = true;
-        else
+        const data = new FormData();
+        data.append('application', JSON.stringify(this.jsonData));
+        if (this.form.stepFour.photo) data.append('photo', this.form.stepFour.photo);
+        if (this.uploader)
         {
-          // without attachments there is no point in using FormSubmit.vue
-          this.$q.loading.show({ delay: 100 });
-          const data = new FormData();
-          data.append('application', JSON.stringify(this.jsonData));
-          this.$axios.post(process.env.YAWIK_APPLICATION_FORM_ACTION, data).then(response =>
+          this.uploader.files.forEach(file =>
           {
-            this.$q.loading.hide();
-            console.log(response.data);
-            if (!response.data.ok)
-            {
-              this.$q.notify({
-                color: 'negative',
-                position: 'top',
-                icon: 'mdi-alert',
-                message: response.data.message || this.$t('submitFailed'),
-              });
-            }
-            //else this.$router.push({ name: 'submitSuccessful' });
-          }).catch(err =>
+            data.append('attached[]', file);
+          });
+        }
+        this.progress = 0;
+        this.sending = true;
+        this.$axios.post(process.env.YAWIK_APPLICATION_FORM_ACTION, data, {
+          onUploadProgress: (event) =>
           {
-            this.$q.loading.hide();
+            this.progress = event.loaded / event.total;
+          }
+        }).then(response =>
+        {
+          if (!response.data.ok)
+          {
             this.$q.notify({
               color: 'negative',
               position: 'top',
               icon: 'mdi-alert',
-              message: err.message || err,
+              message: response.data.message || this.$t('submitFailed'),
             });
+          }
+          else this.$router.push({ name: 'submitSuccessful' });
+        }).catch(err =>
+        {
+          this.$q.notify({
+            color: 'negative',
+            position: 'top',
+            icon: 'mdi-alert',
+            message: err.message || err,
           });
-        }
+        }).finally(() =>
+        {
+          this.sending = false;
+        });
       }
     }
 };
 </script>
+
+<style src="@quasar/quasar-ui-qoverlay/dist/index.css"></style>

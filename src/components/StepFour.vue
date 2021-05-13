@@ -3,7 +3,7 @@
     <!-- Attachments -->
     <div class="col-7 column" style="border-right: 1px solid #DDD;">
       <div class="q-pb-sm">{{ $t('stepFour.help') }}</div>
-      <q-uploader ref="uploader" class="uploader col-grow shadow-1" style="max-height: none;" multiple hide-upload-btn accept=".pdf,.doc,.docx,.xls,.xlsx,image/*" :max-total-size="2.5e6">
+      <q-uploader ref="uploader" class="uploader col-grow shadow-1" style="max-height: none;" multiple hide-upload-btn accept=".pdf,.doc,.docx,.xls,.xlsx,image/*" :max-total-size="maxFileSize" @rejected="rejectedFiles">
         <template #list="scope">
           <q-list separator>
             <q-item v-for="file in scope.files" :key="file.name">
@@ -38,7 +38,7 @@
       <div class="column">
         <div class="q-pb-sm">{{ $t('stepFour.photo') }}</div>
         <DropZone @change="choosePhoto" />
-        <UserPhoto :image="image" :width="maxSize" :height="maxSize" class="q-mx-auto q-mt-md" @remove="form.photo = null,image = ''" />
+        <UserPhoto :image="image" :width="maxImageSize" :height="maxImageSize" class="q-mx-auto q-mt-md" @remove="form.photo = null,image = ''" />
       </div>
     </div>
   </div>
@@ -67,7 +67,8 @@ export default
   data()
   {
     return {
-      maxSize: 300, // max width/height in pixels for user's photo
+      maxFileSize: 2e6, // in bytes
+      maxImageSize: 300, // max width/height in pixels for user's photo
       image: '',
       form:
         {
@@ -98,39 +99,36 @@ export default
     {
       choosePhoto(list)
       {
-        if (list.length && list[0].size)
+        if (list[0].size)
         {
+          if (list[0].size > this.maxFileSize)
+          {
+            this.$q.notify({
+              color: 'negative',
+              position: 'top',
+              icon: 'mdi-alert',
+              message: this.$t('files.photoRejected'),
+            });
+            return;
+          }
           const reader = new FileReader();
-          const img = new Image();
-          const canvas = document.createElement('canvas');
           reader.onload = (e) =>
           {
-            img.src = e.target.result;
-          };
-          img.onload = () =>
-          {
-            // limit dimensions of the picture to maxSize * maxSize, keeping the aspect ratio
-            canvas.width = img.naturalWidth;
-            canvas.height = img.naturalHeight;
-            // preserve aspect ratio
-            if (canvas.width > this.maxSize)
-            {
-              canvas.width = this.maxSize;
-              canvas.height = this.maxSize * img.naturalHeight / img.naturalWidth;
-            }
-            if (canvas.height > this.maxSize)
-            {
-              canvas.height = this.maxSize;
-              canvas.width = this.maxSize * img.naturalWidth / img.naturalHeight;
-            }
-            canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height); // implicit width and height in order to stretch the image to canvas
-            this.image = canvas.toDataURL('image/jpeg', 0.85);
+            this.image = e.target.result;
           };
           reader.readAsDataURL(list[0]);
           this.form.photo = list[0];
         }
-        else this.form.photo = null;
       },
+      rejectedFiles(files)
+      {
+        this.$q.notify({
+          color: 'negative',
+          position: 'top',
+          icon: 'mdi-alert',
+          message: this.$t('files.attachmentsRejected', { count: files.length }),
+        });
+      }
     }
 };
 </script>
