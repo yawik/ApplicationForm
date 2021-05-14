@@ -1,0 +1,23 @@
+site_name: ApplicationForm
+site_description: Documentation quasar based application form
+site_url: https://form.yawik.org
+copyright: 'Copyright &copy; 2021'
+repo_name: yawik/application-form
+repo_url: https://gitlab.com/yawik/applicationform.git
+site_dir: build/site
+theme: material
+markdown_extensions:
+  - codehilite:
+      guess_lang: true
+  - toc:
+      permalink: true
+  - admonition
+  - pymdownx.magiclink
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.mark
+  - pymdownx.tilde
+  - pymdownx.extra
+  - footnotes
+plugins:
+  - search

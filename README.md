@@ -44,3 +44,9 @@ The form is .env-aware.
 The demo is hosted as a Gitlab Page. The form checks users locale and redirects ...
 
 https://form.yawik.org/
+
+
+## Documentation
+
+we use [mkdocs](https://www.mkdocs.org/) to document. Each repo contains it's documentation in a
+`docs/` directory.
