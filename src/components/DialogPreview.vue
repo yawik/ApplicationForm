@@ -11,7 +11,7 @@
           <!-- Personal details -->
           <div class="row">
             <div class="col-6 row justify-center items-center q-pa-md">
-              <img v-if="form.stepFour.photo" :src="form.stepFour.photo" class="user_photo rounded-borders">
+              <img v-if="form.stepFour.photo" :src="photoURL" class="user_photo rounded-borders">
               <img v-else src="~src/images/avatar.svg" width="200" height="200">
             </div>
             <div class="col-6 q-pa-md">
@@ -112,6 +112,7 @@ export default
   {
     return {
       imageList: [],
+      photoURL: '',
     };
   },
   computed:
@@ -124,7 +125,7 @@ export default
           result[salutation.value] = salutation.label;
         });
         return result;
-      }
+      },
     },
   watch:
     {
@@ -140,6 +141,19 @@ export default
           };
           reader.readAsDataURL(file);
         });
+      },
+      'form.stepFour.photo'(newVal)
+      {
+        if (newVal)
+        {
+          const reader = new FileReader();
+          reader.onload = (e) =>
+          {
+            this.photoURL = e.target.result;
+          };
+          reader.readAsDataURL(newVal);
+        }
+        else this.photoURL = '';
       }
     },
   methods:

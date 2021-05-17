@@ -279,7 +279,7 @@ export default
           }
         }).then(response =>
         {
-          if (!response.data.ok)
+          if (!response.data.success)
           {
             this.$q.notify({
               color: 'negative',
