@@ -44,15 +44,22 @@
 
     <div class="q-pt-md q-pb-xs">{{ $t('stepOne.email') }}</div>
     <q-input v-model.trim="form.email" outlined dense lazy-rules :rules="[ruleContact,validEmail]" @keypress.enter="gotoNext" />
+
+    <SocialData v-if="socialAllowed" v-model="form.social" />
   </div>
 </template>
 
 <script>
 import validations from 'src/lib/validations';
+import SocialData from 'src/components/SocialData';
 
 export default
 {
   name: 'StepOne',
+  components:
+    {
+      SocialData,
+    },
   mixins: [validations],
   props:
     {
@@ -83,9 +90,23 @@ export default
           phone: '',
           email: '',
           photo: null,
+          social:
+            {
+              facebook: null,
+              xing: null,
+              linkedin: null,
+              google: null,
+            },
         }
     };
   },
+  computed:
+    {
+      socialAllowed()
+      {
+        return !!process.env.YAWIK_OAUTH_FACEBOOK || !!process.env.YAWIK_OAUTH_GOOGLE || !!process.env.YAWIK_OAUTH_LINKEDIN || !!process.env.YAWIK_OAUTH_GITHUB || !!process.env.YAWIK_OAUTH_DROPBOX;
+      }
+    },
   watch:
     {
       value:

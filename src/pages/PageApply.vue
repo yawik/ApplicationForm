@@ -100,6 +100,13 @@ export default
               country: '',
               phone: '',
               email: '',
+              social:
+                {
+                  facebook: null,
+                  xing: null,
+                  linkedin: null,
+                  google: null,
+                },
             },
           stepTwo:
             {
@@ -107,10 +114,7 @@ export default
             },
           stepThree:
             {
-              facebook: null,
-              xing: null,
-              linkedin: null,
-              google: null,
+              startDate: '',
             },
           stepFour:
             {
@@ -118,7 +122,6 @@ export default
             },
           stepFive:
             {
-              startDate: '',
               carbonCopy: false,
               acceptTerms: false,
             },

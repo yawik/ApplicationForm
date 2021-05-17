@@ -48,7 +48,15 @@ export default
       city: 'Ort',
       country: 'Land',
       phone: 'Telefon',
-      email: 'E-Mail'
+      email: 'E-Mail',
+      social:
+        {
+          title: 'Soziale Profile',
+          import: 'Daten aus sozialen Profilen importieren',
+          attach: 'Profil hinzufügen',
+          detach: 'Profil entfernen',
+          view: 'Profil ansehen',
+        }
     },
   stepTwo:
     {
@@ -57,11 +65,8 @@ export default
     },
   stepThree:
     {
-      title: 'Soziale Profile',
-      import: 'Daten aus sozialen Profilen importieren',
-      attach: 'Profil hinzufügen',
-      detach: 'Profil entfernen',
-      view: 'Profil ansehen',
+      title: 'Fragen',
+      startDate: 'frühester Eintrittstermin?',
     },
   stepFour:
     {
@@ -72,7 +77,6 @@ export default
   stepFive:
     {
       title: 'Datenschutz',
-      startDate: 'frühester Eintrittstermin?',
       ccTitle: 'CC',
       carbonCopy: 'Senden sie mir eine Kopie meiner Datein an meine E-Mail.',
       privacyPolicy: 'Ich habe die <a href="https://yawik.org/demo/en/content/applications-privacy-policy" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation(); return true;">Datenschutzbestimmungen</a> gelesen und akzeptiere sie.', // the link won't work without the onClick handler
