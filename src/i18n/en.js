@@ -73,6 +73,7 @@ export default
     {
       title: 'Questions',
       startDate: 'When can you start?',
+      expectedSalary: 'What is your salary expectation?',
     },
   stepFour:
     {
@@ -101,6 +102,19 @@ export default
       phone: 'Tel',
       address: 'Address',
       canStart: 'Can start on',
+      expectedSalary: 'Expected salary',
       acceptTerms: 'I have read and accept the Privacy Policy.'
+    },
+  salary:
+    {
+      periodTitle: 'Period',
+      period:
+        {
+          1: 'annually',
+          2: 'monthly',
+          3: 'hourly',
+        },
+      amount: 'Expected amount',
+      currency: 'Currency',
     }
 };

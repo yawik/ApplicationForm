@@ -23,7 +23,10 @@
                 <strong>{{ $t('preview.phone') }}:</strong> &nbsp; {{ form.stepOne.phone || 'n/a' }}
               </div>
               <div>
-                <strong>{{ $t('preview.canStart') }}:</strong> &nbsp; {{ form.stepFive.startDate ? dateLocale(form.stepFive.startDate) : 'n/a' }}
+                <strong>{{ $t('preview.canStart') }}:</strong> &nbsp; {{ form.stepThree.startDate ? dateLocale(form.stepThree.startDate) : 'n/a' }}
+              </div>
+              <div v-if="form.stepThree.salary.value">
+                <strong>{{ $t('preview.expectedSalary') }}:</strong> &nbsp; {{ `${thousand(form.stepThree.salary.value,' ',form.stepThree.salary.period === 3 ? 2 : 0)} ${form.stepThree.salary.currency}/${salaryPeriodMap[form.stepThree.salary.period]}` }}
               </div>
               <div class="q-mt-md">
                 <strong>{{ $t('preview.address') }}:</strong> &nbsp;
@@ -126,6 +129,10 @@ export default
         });
         return result;
       },
+      salaryPeriodMap()
+      {
+        return this.$root.$i18n.messages[this.$root.$i18n.locale].salary.period;
+      }
     },
   watch:
     {
@@ -169,7 +176,7 @@ export default
         if (typeof value === 'string')
         {
           const tmp = value.split('-');
-          d = new Date(tmp[0], tmp[1] - 1, tmp[2], 0, 0, 0, 0);
+          d = new Date(tmp[2], tmp[1] - 1, tmp[0], 0, 0, 0, 0);
         }
         else d = value;
         return d.toLocaleDateString(this.$root.$i18n.locale === 'en' ? 'en-GB' : this.$root.$i18n.locale, {
@@ -178,6 +185,10 @@ export default
           day: 'numeric',
         });
       },
+      thousand(value, separator = ',', decimal = 0, point = '.')
+      {
+        return Number(value).toFixed(decimal).replace(/([^-])(?=(\d{3})+(\.\d+)?$)/g, '$1' + separator).replace('.', point);
+      }
     }
 };
 </script>

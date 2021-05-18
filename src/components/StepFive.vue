@@ -5,7 +5,7 @@
     </div>
 
     <div class="row">
-      <q-field :value="form.acceptTerms" lazy-rules :rules="[ruleRequired]" borderless dense>
+      <q-field :value="form.acceptTerms" class="field" lazy-rules :rules="[ruleRequired]" borderless dense>
         <template #control>
           <q-checkbox v-model="form.acceptTerms">
             <!-- eslint-disable vue/no-v-html -->
@@ -71,8 +71,17 @@ export default
     color: $primary;
   }
 
-  #q-app .q-field--borderless .q-field__bottom
+  #q-app
   {
-    padding: 0 12px 8px;
+    .q-field--borderless .q-field__bottom
+    {
+      padding: 0 12px 8px;
+    }
+
+    .field .q-field__control .q-field__native
+    {
+      padding: 0;
+    }
   }
+
 </style>

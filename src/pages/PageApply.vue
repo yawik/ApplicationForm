@@ -115,6 +115,12 @@ export default
           stepThree:
             {
               startDate: '',
+              salary:
+                {
+                  value: 0,
+                  currency: 'EUR',
+                  period: null,
+                }
             },
           stepFour:
             {
