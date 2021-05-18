@@ -30,9 +30,12 @@
               </div>
               <div class="q-mt-md">
                 <strong>{{ $t('preview.address') }}:</strong> &nbsp;
-                {{ `${form.stepOne.country || $t('stepOne.country')}, ${form.stepOne.postalCode || '12345'} ${form.stepOne.city || $t('stepOne.city')}` }}
                 <br>
                 {{ `${form.stepOne.street || $t('stepOne.street')} ${form.stepOne.houseNumber}` }}
+                <br>
+                {{ `${form.stepOne.postalCode || '12345'} ${form.stepOne.city || $t('stepOne.city')}` }}
+                <br>
+                {{ `${form.stepOne.country || $t('stepOne.country')}` }}
               </div>
             </div>
           </div>

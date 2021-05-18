@@ -6,17 +6,17 @@
         <q-list>
           <q-item v-close-popup clickable @click="importProfile(social.network)">
             <q-item-section>
-              <q-item-label>{{ $t('stepThree.attach') }}</q-item-label>
+              <q-item-label>{{ $t('stepOne.social.attach') }}</q-item-label>
             </q-item-section>
           </q-item>
           <q-item v-close-popup clickable :disable="!form[social.title.toLowerCase()]">
             <q-item-section>
-              <q-item-label>{{ $t('stepThree.detach') }}</q-item-label>
+              <q-item-label>{{ $t('stepOne.social.detach') }}</q-item-label>
             </q-item-section>
           </q-item>
           <q-item v-close-popup clickable :disable="!form[social.title.toLowerCase()]">
             <q-item-section>
-              <q-item-label>{{ $t('stepThree.view') }}</q-item-label>
+              <q-item-label>{{ $t('stepOne.social.view') }}</q-item-label>
             </q-item-section>
           </q-item>
         </q-list>
