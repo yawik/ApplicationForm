@@ -38,13 +38,14 @@ The form is .env-aware.
 | YAWIK_OAUTH_LINKEDIN         | **not working**                     |
 | YAWIK_OAUTH_XING             | **not working**                     |
 
+If an **YAWIK_OAUTH_\*** variable is not shown, the feature is not used within the form.
+Linkedin and Xing are currently not working because of: https://github.com/MrSwitch/hello.js/issues/585
 
 ## Demo
 
 The demo is hosted as a Gitlab Page. The form checks users locale and redirects ...
 
 https://form.yawik.org/
-
 
 ## Documentation
 
