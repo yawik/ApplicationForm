@@ -115,6 +115,7 @@ export default
           stepThree:
             {
               startDate: '',
+              immediate: false,
               salary:
                 {
                   value: 0,
@@ -151,14 +152,24 @@ export default
           org: process.env.YAWIK_ORGANIZATION,
           user:
             {
-              ...this.form.stepOne,
+              // we do not use ES6 spread operator to avoid the "social" data
+              firstName: this.form.stepOne.firstName,
+              lastName: this.form.stepOne.lastName,
+              street: this.form.stepOne.street,
+              houseNumber: this.form.stepOne.houseNumber,
+              postalCode: this.form.stepOne.postalCode,
+              city: this.form.stepOne.city,
+              country: this.form.stepOne.country,
+              phone: this.form.stepOne.phone,
+              email: this.form.stepOne.email,
               gender: this.form.stepOne.salutation === 1 ? 'male' : this.form.stepOne.salutation === 2 ? 'female' : '',
             },
           summary: this.form.stepTwo.coverLetter,
           extras:
             {
-              exampleSocialProfiles: this.form.stepThree,
+              exampleSocialProfiles: this.form.stepOne.social,
               ...this.form.stepFive,
+              ...this.form.stepThree,
             }
         };
       },

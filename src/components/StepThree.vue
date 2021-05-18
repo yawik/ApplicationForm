@@ -1,7 +1,10 @@
 <template>
   <div>
     <div class="q-pb-xs">{{ $t('stepThree.startDate') }}</div>
-    <DateInput ref="start" v-model.trim="form.startDate" placeholder="DD-MM-YYYY" lazy-rules :rules="[ruleRequired]" style="max-width: 180px;" />
+    <div class="row items-start">
+      <DateInput ref="start" v-model.trim="form.startDate" placeholder="DD-MM-YYYY" lazy-rules :rules="[ruleRequired]" :disable="form.immediate" style="max-width: 180px;" />
+      <q-checkbox v-model="form.immediate" :label="$t('stepThree.immediately')" class="q-ml-md" />
+    </div>
 
     <div class="q-pt-md q-pb-xs">{{ $t('stepThree.expectedSalary') }}</div>
     <SalaryInput v-model="form.salary" />
@@ -41,6 +44,7 @@ export default
       form:
         {
           startDate: '',
+          immediate: false,
           salary:
             {
               value: 0,

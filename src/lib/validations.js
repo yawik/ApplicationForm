@@ -8,7 +8,9 @@ export default
       },
       validDMY(value)
       {
-        return value ? !isNaN((new Date(value.split('-').reverse().join('-') + 'T00:00:00Z')).getTime()) || this.$t('rules.invalidDate') : true;
+        if (!value) return true;
+        const time = (new Date(value.split(/[.-]/).reverse().join('-') + 'T00:00:00Z')).getTime();
+        return (!isNaN(time) && time < 4102444800000) || this.$t('rules.invalidDate');
       },
       validEmail(value)
       {

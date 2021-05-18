@@ -73,6 +73,7 @@ export default
     {
       title: 'Questions',
       startDate: 'When can you start?',
+      immediately: 'Immediately',
       expectedSalary: 'What is your salary expectation?',
     },
   stepFour:

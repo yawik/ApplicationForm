@@ -178,7 +178,7 @@ export default
         let d;
         if (typeof value === 'string')
         {
-          const tmp = value.split('-');
+          const tmp = value.split(/[.-]/);
           d = new Date(tmp[2], tmp[1] - 1, tmp[0], 0, 0, 0, 0);
         }
         else d = value;
