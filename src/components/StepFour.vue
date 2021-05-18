@@ -1,9 +1,9 @@
 <template>
   <div class="row q-col-gutter-md">
     <!-- Attachments -->
-    <div class="col-7 column" style="border-right: 1px solid #DDD;">
+    <div class="col-6 column" style="border-right: 16px solid transparent;">
       <div class="q-pb-sm">{{ $t('stepFour.help') }}</div>
-      <q-uploader ref="uploader" class="uploader col-grow shadow-1" style="max-height: none;" multiple hide-upload-btn accept=".pdf,.doc,.docx,.xls,.xlsx,image/*" :max-total-size="maxFileSize" @rejected="rejectedFiles">
+      <q-uploader ref="uploader" class="uploader col-grow shadow-1" style="width: 100%; max-height: none;" multiple hide-upload-btn accept=".pdf,.doc,.docx,.xls,.xlsx,image/*" :max-total-size="maxFileSize" @rejected="rejectedFiles">
         <template #list="scope">
           <q-list separator>
             <q-item v-for="file in scope.files" :key="file.name">
@@ -34,7 +34,7 @@
       </q-uploader>
     </div>
     <!-- User photo -->
-    <div class="col-5">
+    <div class="col-6" style="border-left: 1px solid #DDD;">
       <div class="column">
         <div class="q-pb-sm">{{ $t('stepFour.photo') }}</div>
         <DropZone @change="choosePhoto" />
@@ -67,7 +67,7 @@ export default
   data()
   {
     return {
-      maxFileSize: 2e6, // in bytes
+      maxFileSize: 2e7, // in bytes
       maxImageSize: 300, // max width/height in pixels for user's photo
       image: '',
       form:
