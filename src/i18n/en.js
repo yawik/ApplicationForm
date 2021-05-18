@@ -111,9 +111,9 @@ export default
       periodTitle: 'Period',
       period:
         {
-          1: 'annually',
-          2: 'monthly',
-          3: 'hourly',
+          1: 'Year',
+          2: 'Month',
+          3: 'Hour',
         },
       amount: 'Expected amount',
       currency: 'Currency',

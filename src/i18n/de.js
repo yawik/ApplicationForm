@@ -67,6 +67,8 @@ export default
     {
       title: 'Fragen',
       startDate: 'frühester Eintrittstermin?',
+      immediately: 'sofort',
+      expectedSalary: 'Wie hoch ist ihre Gehaltsvorstellung?',
     },
   stepFour:
     {
@@ -89,11 +91,23 @@ export default
     },
   preview:
     {
-      title: 'Voransicht Berwerbung',
+      title: 'Voransicht Bewerbung',
       email: 'E-Mail',
       phone: 'Tel.',
       address: 'Anschrift',
       canStart: 'frühester Eintrittstermin.',
       acceptTerms: 'Ich habe die Datenschutzbestimmungen gelesen und akzeptiere sie.'
+    },
+  salary:
+    {
+      periodTitle: 'Zeitraum',
+      period:
+        {
+          1: 'Jahr',
+          2: 'Monat',
+          3: 'Stunde',
+        },
+      amount: 'Gehaltsvorstellung',
+      currency: 'Währung',
     }
 };
