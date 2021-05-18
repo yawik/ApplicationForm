@@ -27,6 +27,7 @@
 
 <script>
 import hello from 'hellojs';
+import linkedin2 from 'src/lib/LinkedIn2';
 
 export default
 {
@@ -105,7 +106,9 @@ export default
     // XING - https://stackoverflow.com/a/27372946/5962802
     // https://dev.xing.com/plugins/login_with/docs
     // https://github.com/MrSwitch/hello.js/blob/master/modules.md
-    const oauth = {};
+    const oauth = {
+      linkedin2
+    };
     this.listSocial.forEach(social =>
     {
       if (social.configured) oauth[social.network] = social.configured;
