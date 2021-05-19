@@ -79,7 +79,7 @@ export default
     {
       value(newVal, oldVal)
       {
-        if (newVal !== oldVal)
+        if (JSON.stringify(newVal) !== JSON.stringify(oldVal))
         {
           this.salary = {
             value: newVal.value,
