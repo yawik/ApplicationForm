@@ -20,6 +20,7 @@ import {
   GET_COPY,
   GET_TERMS,
   GET_FILES,
+  GET_STEP,
   CLEAR_FORM,
   SET_SALUTATION,
   SET_FIRST_NAME,
@@ -40,10 +41,12 @@ import {
   SET_PHOTO,
   SET_COPY,
   SET_TERMS,
-  SET_FILES
+  SET_FILES,
+  SET_STEP
 } from '../names';
 
 const emptyForm = {
+  step: 'stepOne',
   salutation: null,
   firstName: '',
   lastName: '',
@@ -73,6 +76,7 @@ export default
       photo: null,
       form:
         {
+          step: 'stepOne',
           salutation: null,
           firstName: '',
           lastName: '',
@@ -179,7 +183,11 @@ export default
       [GET_FILES](state)
       {
         return state.attachments;
-      }
+      },
+      [GET_STEP](state)
+      {
+        return state.form.step;
+      },
     },
   mutations:
     {
@@ -268,6 +276,10 @@ export default
       [SET_FILES](state, value)
       {
         state.attachments = value;
+      },
+      [SET_STEP](state, value)
+      {
+        state.form.step = value;
       }
     }
 };

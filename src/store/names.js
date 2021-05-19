@@ -27,6 +27,7 @@ export const GET_PHOTO = 'GET_PHOTO';
 export const GET_COPY = 'GET_COPY';
 export const GET_TERMS = 'GET_TERMS';
 export const GET_FILES = 'GET_FILES';
+export const GET_STEP = 'GET_STEP';
 
 // mutations
 export const CLEAR_FORM = 'CLEAR_FORM';
@@ -50,3 +51,4 @@ export const SET_PHOTO = 'SET_PHOTO';
 export const SET_COPY = 'SET_COPY';
 export const SET_TERMS = 'SET_TERMS';
 export const SET_FILES = 'SET_FILES';
+export const SET_STEP = 'SET_STEP';

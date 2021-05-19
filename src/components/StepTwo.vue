@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { GET_COVER_LETTER, SET_COVER_LETTER } from '../store/names';
+import { GET_COVER_LETTER, SET_COVER_LETTER, GET_STEP } from '../store/names';
 import { mapGetters, mapMutations } from 'vuex';
 
 export default
@@ -27,7 +27,7 @@ export default
     },
   computed:
     {
-      ...mapGetters([GET_COVER_LETTER]),
+      ...mapGetters([GET_COVER_LETTER, GET_STEP]),
       coverLetter:
       {
         get()
@@ -44,15 +44,20 @@ export default
     {
       active(newVal)
       {
-        if (newVal)
-        {
-          this.$refs.editor.focus();
-        }
+        if (newVal) this.setFocus();
       }
     },
+  mounted()
+  {
+    if (this[GET_STEP] === 'stepTwo') this.setFocus();
+  },
   methods:
     {
       ...mapMutations([SET_COVER_LETTER]),
+      setFocus()
+      {
+        this.$refs.editor.focus();
+      }
     }
 };
 </script>
