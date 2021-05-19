@@ -61,7 +61,7 @@ export default
   stepTwo:
     {
       title: 'Anschreiben',
-      description: 'You can write something about you that you think will help the recruiter to pick you for the job.'
+      description: 'Sie können etwas über sich schreiben, von dem Sie glauben, dass es dem Personalverantwortlichen helfen wird, Sie für die Stelle auszuwählen.'
     },
   stepThree:
     {
