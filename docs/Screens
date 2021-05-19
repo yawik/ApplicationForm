@@ -1,0 +1,43 @@
+<mxfile host="app.diagrams.net" modified="2021-05-19T16:34:36.411Z" agent="5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36" etag="UMUZrThLwQH82paGeQRo" version="14.6.13" type="gitlab">
+  <diagram name="Page-1" id="5348f1db-0dfa-24cf-5d06-2057accb5106">
+    <mxGraphModel dx="2021" dy="730" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1.5" pageWidth="826" pageHeight="1169" background="#ffffff" math="0" shadow="0">
+      <root>
+        <mxCell id="0" style=";html=1;" />
+        <mxCell id="1" style=";html=1;" parent="0" />
+        <mxCell id="LtjbSMwdjiCwW_tdUmAE-48" value="" style="dashed=0;shape=rect;fillColor=#ffffff;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="-770" y="1050" width="758" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="LtjbSMwdjiCwW_tdUmAE-53" value="YAWIK" style="dashed=0;shape=rect;strokeColor=none;fillColor=#00BCD4;resizeWidth=1;resizeHeight=1;fontSize=20;fontColor=#FFFFFF;spacingTop=9;verticalAlign=top;align=left;spacingLeft=72;" vertex="1" parent="LtjbSMwdjiCwW_tdUmAE-48">
+          <mxGeometry width="758" height="102.63157894736844" relative="1" as="geometry">
+            <mxPoint y="32" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LtjbSMwdjiCwW_tdUmAE-54" value="" style="dashed=0;shape=mxgraph.gmdl.preferences;strokeColor=none;fillColor=#ffffff;" vertex="1" parent="LtjbSMwdjiCwW_tdUmAE-53">
+          <mxGeometry width="24" height="16" relative="1" as="geometry">
+            <mxPoint x="16" y="20" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LtjbSMwdjiCwW_tdUmAE-55" value="Jobs" style="text;fontSize=13;fontColor=#FFFFFF;verticalAlign=middle;align=center;" vertex="1" parent="LtjbSMwdjiCwW_tdUmAE-53">
+          <mxGeometry y="1" width="106" height="48" relative="1" as="geometry">
+            <mxPoint x="68" y="-48" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LtjbSMwdjiCwW_tdUmAE-56" value="Applications" style="text;fontSize=13;fontColor=#FFFFFF;verticalAlign=middle;align=center;textOpacity=80;" vertex="1" parent="LtjbSMwdjiCwW_tdUmAE-53">
+          <mxGeometry y="1" width="106" height="48" relative="1" as="geometry">
+            <mxPoint x="174" y="-48" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LtjbSMwdjiCwW_tdUmAE-62" value="" style="dashed=0;shape=rect;strokeColor=none;fillColor=#F1FB8F;" vertex="1" parent="LtjbSMwdjiCwW_tdUmAE-53">
+          <mxGeometry y="1" width="106" height="4" relative="1" as="geometry">
+            <mxPoint x="68" y="-3" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="LtjbSMwdjiCwW_tdUmAE-64" value="" style="dashed=0;shape=mxgraph.gmdl.settings;strokeColor=none;fillColor=#ffffff;" vertex="1" parent="LtjbSMwdjiCwW_tdUmAE-53">
+          <mxGeometry x="1" width="5" height="16" relative="1" as="geometry">
+            <mxPoint x="-28" y="20" as="offset" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
