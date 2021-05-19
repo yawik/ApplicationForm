@@ -7,11 +7,11 @@
       <!-- eslint-disable quasar/no-invalid-props -->
       <q-stepper ref="stepper" v-model="currentStep" animated header-nav all-panels>
         <!-- eslint-enable quasar/no-invalid-props -->
-        <q-step v-for="(stepData,stepName) in form" :key="stepName" :name="stepName" :prefix="steps.indexOf(stepName)+1" :title="$t(stepName+'.title')"
+        <q-step v-for="stepName in steps" :key="stepName" :name="stepName" :prefix="steps.indexOf(stepName)+1" :title="$t(stepName+'.title')"
                 done-color="positive" active-color="primary" error-color="negative"
                 :done="isCompleted(stepName)" :error="validationErrors(stepName)"
         >
-          <component :is="stepName" v-model="form[stepName]" :active="currentStep === stepName" :stepper="stepper" :width="maxWidth" style="min-height: 500px;" @uploader="setUploader" />
+          <component :is="stepName" :active="currentStep === stepName" :stepper="stepper" :width="maxWidth" style="min-height: 500px;" />
         </q-step>
         <div slot="navigation" class="row justify-end q-px-lg q-pb-lg">
           <q-btn v-if="steps.indexOf(currentStep) > 0" outline color="primary" :label="$t('buttons.back')" class="q-mr-md" @click.stop="navigate('previous')" />
@@ -24,7 +24,7 @@
         <q-btn color="negative" class="q-ml-md">{{ $t('abortForm') }}</q-btn>
       </div>
     </q-form>
-    <DialogPreview v-model="dlgPreview" :form="form" :job="jobName" :org="orgName" :files="uploader ? uploader.files : []" @send="dlgPreview = false, trySubmit()" />
+    <DialogPreview v-model="dlgPreview" :job="jobName" :org="orgName" @send="dlgPreview = false, trySubmit()" />
     <q-overlay v-model="sending" no-scroll :z-index="5" background-color="rgba(0, 0, 0, 0.5)">
       <div slot="body" class="fullscreen column justify-center items-center">
         <q-spinner color="primary" size="3em" class="q-mb-lg" />
@@ -47,6 +47,8 @@ import StepFive from 'src/components/StepFive';
 import SwitchLanguage from 'src/components/SwitchLanguage';
 import DialogPreview from 'src/components/DialogPreview';
 import { QOverlay } from '@quasar/quasar-ui-qoverlay';
+import { GET_COVER_LETTER, GET_FILES, GET_PHOTO, GET_FORM } from '../store/names';
+import { mapGetters } from 'vuex';
 
 export default
 {
@@ -80,66 +82,19 @@ export default
     return {
       currentStep: 'stepOne',
       lastStep: false,
-      uploader: null, // used to get the list of attachments
       stepper: null, // used by StepOne.vue to navigate to step 2 on ENTER key in any input field
-      maxWidth: 1e4, // used to limit the width of QEditor on step 2, otherwise it grows too much when you type text
+      maxWidth: 1024, // used to limit the width of QEditor on step 2, otherwise it grows too much when you type text
       dlgPreview: false,
       sending: false,
       progress: 0,
-      form:
-        {
-          stepOne:
-            {
-              salutation: null,
-              firstName: '',
-              lastName: '',
-              street: '',
-              houseNumber: '',
-              postalCode: '',
-              city: '',
-              country: '',
-              phone: '',
-              email: '',
-              social:
-                {
-                  facebook: null,
-                  xing: null,
-                  linkedin: null,
-                  google: null,
-                },
-            },
-          stepTwo:
-            {
-              coverLetter: '',
-            },
-          stepThree:
-            {
-              startDate: '',
-              immediate: false,
-              salary:
-                {
-                  value: 0,
-                  currency: 'EUR',
-                  period: null,
-                }
-            },
-          stepFour:
-            {
-              photo: null,
-            },
-          stepFive:
-            {
-              carbonCopy: false,
-              acceptTerms: false,
-            },
-        },
     };
   },
   computed:
     {
+      ...mapGetters([GET_COVER_LETTER, GET_FORM]),
       steps()
       {
-        return Object.keys(this.form);
+        return ['stepOne', 'stepTwo', 'stepThree', 'stepFour', 'stepFive'];
       },
       jobID()
       {
@@ -147,29 +102,36 @@ export default
       },
       jsonData()
       {
+        const form = this[GET_FORM];
         return {
           job: this.jobID,
           org: process.env.YAWIK_ORGANIZATION,
           user:
             {
-              // we do not use ES6 spread operator to avoid the "social" data
-              firstName: this.form.stepOne.firstName,
-              lastName: this.form.stepOne.lastName,
-              street: this.form.stepOne.street,
-              houseNumber: this.form.stepOne.houseNumber,
-              postalCode: this.form.stepOne.postalCode,
-              city: this.form.stepOne.city,
-              country: this.form.stepOne.country,
-              phone: this.form.stepOne.phone,
-              email: this.form.stepOne.email,
-              gender: this.form.stepOne.salutation === 1 ? 'male' : this.form.stepOne.salutation === 2 ? 'female' : '',
+              firstName: form.firstName,
+              lastName: form.lastName,
+              street: form.street,
+              houseNumber: form.houseNumber,
+              postalCode: form.postalCode,
+              city: form.city,
+              country: form.country,
+              phone: form.phone,
+              email: form.email,
+              gender: form.salutation === 1 ? 'male' : form.salutation === 2 ? 'female' : '',
             },
-          summary: this.form.stepTwo.coverLetter,
+          summary: form.coverLetter,
           extras:
             {
-              exampleSocialProfiles: this.form.stepOne.social,
-              ...this.form.stepFive,
-              ...this.form.stepThree,
+              startDate: form.startDate,
+              immediate: form.immediate,
+              salary:
+                {
+                  amount: form.salaryAmount,
+                  currency: form.currency,
+                  period: form.salaryPeriod,
+                },
+              carbonCopy: form.carbonCopy,
+              acceptTerms: form.acceptTerms,
             }
         };
       },
@@ -206,13 +168,6 @@ export default
       {
         // limit the width of QEditor on StepTwo - otherwise it grows too much on typing
         this.maxWidth = this.$refs.frm.$el.clientWidth;
-      },
-      setUploader(component)
-      {
-        // since $refs are not reactive - we wait StepFour.vue to be mounted and to give us the instance of q-uploader
-        // which is then provided to FormSubmit.vue to clone the list of attachments
-        // The only purpose of FormSubmit's existence is to show the progress of uploading attachments - otherwise we could've used a simple spinner in the FINISH button
-        this.uploader = component;
       },
       navigate(direction)
       {
@@ -274,18 +229,19 @@ export default
       isCompleted(step)
       {
         if (this.steps.indexOf(this.currentStep) <= this.steps.indexOf(step)) return false;
-        if (step === 'stepTwo' && !this.form.stepTwo.coverLetter) return false;
-        if (step === 'stepFour' && this.uploader.files.length === 0 && !this.form.stepOne.photo) return false;
+        if (step === 'stepTwo' && !this[GET_COVER_LETTER]) return false;
+        if (step === 'stepFour' && this[GET_FILES].length === 0 && !this[GET_PHOTO]) return false;
         return true;
       },
       submitForm()
       {
         const data = new FormData();
         data.append('application', JSON.stringify(this.jsonData));
-        if (this.form.stepFour.photo) data.append('photo', this.form.stepFour.photo);
-        if (this.uploader)
+        const photo = this[GET_PHOTO];
+        if (photo) data.append('photo', photo);
+        if (this[GET_FILES].length)
         {
-          this.uploader.files.forEach(file =>
+          this[GET_FILES].forEach(file =>
           {
             data.append('attached[]', file);
           });

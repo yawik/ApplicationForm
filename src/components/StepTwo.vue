@@ -1,21 +1,19 @@
 <template>
   <div>
     <div class="q-pb-xs">{{ $t('stepTwo.description') }}</div>
-    <q-editor ref="editor" v-model="form.coverLetter" min-height="435px" :content-style="{'max-width': width ? width - 50 + 'px' : 'none'}" />
+    <q-editor ref="editor" v-model="coverLetter" min-height="435px" :content-style="{'max-width': width ? width - 50 + 'px' : 'none'}" />
   </div>
 </template>
 
 <script>
+import { GET_COVER_LETTER, SET_COVER_LETTER } from '../store/names';
+import { mapGetters, mapMutations } from 'vuex';
+
 export default
 {
   name: 'StepTwo',
   props:
     {
-      value:
-        {
-          type: Object,
-          required: true
-        },
       width:
         {
           type: Number,
@@ -27,33 +25,23 @@ export default
           default: false
         }
     },
-  data()
-  {
-    return {
-      form:
+  computed:
+    {
+      ...mapGetters([GET_COVER_LETTER]),
+      coverLetter:
+      {
+        get()
         {
-          coverLetter: '',
+          return this[GET_COVER_LETTER];
+        },
+        set(value)
+        {
+          this[SET_COVER_LETTER](value);
         }
-    };
-  },
+      }
+    },
   watch:
     {
-      value:
-        {
-          immediate: true,
-          handler(newVal)
-          {
-            this.form = newVal;
-          }
-        },
-      form:
-        {
-          deep: true,
-          handler(newVal)
-          {
-            this.$emit('input', newVal);
-          }
-        },
       active(newVal)
       {
         if (newVal)
@@ -62,5 +50,9 @@ export default
         }
       }
     },
+  methods:
+    {
+      ...mapMutations([SET_COVER_LETTER]),
+    }
 };
 </script>

@@ -2,12 +2,12 @@
   <div>
     <div class="q-pb-xs">{{ $t('stepThree.startDate') }}</div>
     <div class="row items-start">
-      <DateInput ref="start" v-model.trim="form.startDate" placeholder="DD-MM-YYYY" lazy-rules :rules="[ruleRequired]" :disable="form.immediate" style="max-width: 180px;" />
-      <q-checkbox v-model="form.immediate" :label="$t('stepThree.immediately')" class="q-ml-md" />
+      <DateInput ref="start" v-model.trim="startDate" placeholder="DD-MM-YYYY" lazy-rules :rules="[ruleRequired]" :disable="immediately" style="max-width: 180px;" />
+      <q-checkbox v-model="immediately" :label="$t('stepThree.immediately')" class="q-ml-md" />
     </div>
 
     <div class="q-pt-md q-pb-xs">{{ $t('stepThree.expectedSalary') }}</div>
-    <SalaryInput v-model="form.salary" />
+    <SalaryInput v-model="salary" />
   </div>
 </template>
 
@@ -15,6 +15,19 @@
 import DateInput from 'src/components/DateInput';
 import SalaryInput from 'src/components/SalaryInput';
 import validations from 'src/lib/validations';
+import {
+  GET_START_DATE,
+  GET_START_NOW,
+  GET_SALARY_AMOUNT,
+  GET_CURRENCY,
+  GET_SALARY_PERIOD,
+  SET_SALARY_PERIOD,
+  SET_CURRENCY,
+  SET_SALARY_AMOUNT,
+  SET_START_DATE,
+  SET_START_NOW
+} from '../store/names';
+import { mapGetters, mapMutations } from 'vuex';
 
 export default
 {
@@ -27,51 +40,57 @@ export default
   mixins: [validations],
   props:
     {
-      value:
-        {
-          type: Object,
-          required: true
-        },
       active:
         {
           type: Boolean,
           default: false
         }
     },
-  data()
-  {
-    return {
-      form:
+  computed:
+    {
+      ...mapGetters([GET_SALARY_AMOUNT, GET_CURRENCY, GET_SALARY_PERIOD, GET_START_DATE, GET_START_NOW]),
+      startDate:
         {
-          startDate: '',
-          immediate: false,
-          salary:
-            {
-              value: 0,
-              currency: 'EUR',
-              period: null,
-            }
-        }
-    };
-  },
+          get()
+          {
+            return this[GET_START_DATE];
+          },
+          set(value)
+          {
+            this[SET_START_DATE](value);
+          }
+        },
+      immediately:
+        {
+          get()
+          {
+            return this[GET_START_NOW];
+          },
+          set(value)
+          {
+            this[SET_START_NOW](value);
+          }
+        },
+      salary:
+        {
+          get()
+          {
+            return {
+              value: this[GET_SALARY_AMOUNT],
+              currency: this[GET_CURRENCY],
+              period: this[GET_SALARY_PERIOD],
+            };
+          },
+          set(value)
+          {
+            if (value.value !== this[GET_SALARY_AMOUNT]) this[SET_SALARY_AMOUNT](value.value);
+            if (value.currency !== this[GET_CURRENCY]) this[SET_CURRENCY](value.currency);
+            if (value.period !== this[GET_SALARY_PERIOD]) this[SET_SALARY_PERIOD](value.period);
+          }
+        },
+    },
   watch:
     {
-      value:
-        {
-          immediate: true,
-          handler(newVal)
-          {
-            this.form = newVal;
-          }
-        },
-      form:
-        {
-          deep: true,
-          handler(newVal)
-          {
-            this.$emit('input', newVal);
-          }
-        },
       active(newVal)
       {
         if (newVal)
@@ -80,5 +99,9 @@ export default
         }
       }
     },
+  methods:
+    {
+      ...mapMutations([SET_SALARY_AMOUNT, SET_CURRENCY, SET_SALARY_PERIOD, SET_START_DATE, SET_START_NOW]),
+    }
 };
 </script>

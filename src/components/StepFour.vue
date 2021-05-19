@@ -3,7 +3,9 @@
     <!-- Attachments -->
     <div class="col-6 column" style="border-right: 16px solid transparent;">
       <div class="q-pb-sm">{{ $t('stepFour.help') }}</div>
-      <q-uploader ref="uploader" class="uploader col-grow shadow-1" style="width: 100%; max-height: none;" multiple hide-upload-btn accept=".pdf,.doc,.docx,.xls,.xlsx,image/*" :max-total-size="maxFileSize" @rejected="rejectedFiles">
+      <q-uploader ref="uploader" class="uploader col-grow shadow-1" style="width: 100%; max-height: none;" multiple hide-upload-btn
+                  accept=".pdf,.doc,.docx,.xls,.xlsx,image/*" :max-total-size="maxFileSize" @rejected="rejectedFiles" @added="filesAdded" @removed="filesRemoved"
+      >
         <template #list="scope">
           <q-list separator>
             <q-item v-for="file in scope.files" :key="file.name">
@@ -38,7 +40,7 @@
       <div class="column">
         <div class="q-pb-sm">{{ $t('stepFour.photo') }}</div>
         <DropZone @change="choosePhoto" />
-        <UserPhoto :image="image" :width="maxImageSize" :height="maxImageSize" class="q-mx-auto q-mt-md" @remove="form.photo = null,image = ''" />
+        <UserPhoto :image="image" :width="maxImageSize" :height="maxImageSize" class="q-mx-auto q-mt-md" @remove="photo = null,image = ''" />
       </div>
     </div>
   </div>
@@ -47,6 +49,8 @@
 <script>
 import DropZone from 'src/components/DropZone';
 import UserPhoto from 'src/components/UserPhoto';
+import { GET_PHOTO, SET_PHOTO, GET_FILES } from '../store/names';
+import { mapGetters, mapMutations } from 'vuex';
 
 export default
 {
@@ -56,47 +60,32 @@ export default
       DropZone,
       UserPhoto,
     },
-  props:
-    {
-      value:
-        {
-          type: Object,
-          default: () => ({})
-        }
-    },
   data()
   {
     return {
       maxFileSize: 2e7, // in bytes
       maxImageSize: 300, // max width/height in pixels for user's photo
       image: '',
-      form:
-        {
-          photo: null,
-        }
     };
   },
-  watch:
+  computed:
     {
-      value(newVal)
-      {
-        this.form = newVal;
-      },
-      form:
+      ...mapGetters([GET_FILES, GET_PHOTO]),
+      photo:
         {
-          deep: true,
-          handler(newVal)
+          get()
           {
-            this.$emit('input', newVal);
+            return this[GET_PHOTO];
+          },
+          set(value)
+          {
+            this[SET_PHOTO](value);
           }
         }
     },
-  mounted()
-  {
-    this.$emit('uploader', this.$refs.uploader);
-  },
   methods:
     {
+      ...mapMutations([SET_PHOTO]),
       choosePhoto(list)
       {
         if (list[0].size)
@@ -117,7 +106,7 @@ export default
             this.image = e.target.result;
           };
           reader.readAsDataURL(list[0]);
-          this.form.photo = list[0];
+          this.photo = list[0];
         }
       },
       rejectedFiles(files)
@@ -127,6 +116,23 @@ export default
           position: 'top',
           icon: 'mdi-alert',
           message: this.$t('files.attachmentsRejected', { count: files.length }),
+        });
+      },
+      filesAdded(files)
+      {
+        const attached = this[GET_FILES];
+        files.forEach(file =>
+        {
+          attached.push(file);
+        });
+      },
+      filesRemoved(files)
+      {
+        const attached = this[GET_FILES];
+        files.forEach(file =>
+        {
+          const idx = attached.indexOf(file);
+          if (idx !== -1) attached.splice(idx, 1);
         });
       }
     }

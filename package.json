@@ -22,7 +22,8 @@
     "core-js": "^3.6.5",
     "hellojs": "^1.19.3",
     "quasar": "^1.0.0",
-    "vue-i18n": "^8.22.4"
+    "vue-i18n": "^8.22.4",
+    "vuex-persistedstate": "^2.7.0"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.13.14",

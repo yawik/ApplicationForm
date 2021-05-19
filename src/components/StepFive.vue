@@ -1,13 +1,13 @@
 <template>
   <div>
     <div>
-      <q-checkbox v-model="form.carbonCopy" :label="$t('stepFive.carbonCopy')" />
+      <q-checkbox v-model="carbonCopy" :label="$t('stepFive.carbonCopy')" />
     </div>
 
     <div class="row">
-      <q-field :value="form.acceptTerms" class="field" lazy-rules :rules="[ruleRequired]" borderless dense>
+      <q-field :value="acceptTerms" class="field" lazy-rules :rules="[ruleRequired]" borderless dense>
         <template #control>
-          <q-checkbox v-model="form.acceptTerms">
+          <q-checkbox v-model="acceptTerms">
             <!-- eslint-disable vue/no-v-html -->
             <div class="terms" v-html="$t('stepFive.privacyPolicy')" />
             <!-- eslint-enable vue/no-v-html -->
@@ -20,48 +20,43 @@
 
 <script>
 import validations from 'src/lib/validations';
+import { GET_COPY, GET_TERMS, SET_COPY, SET_TERMS } from '../store/names';
+import { mapGetters, mapMutations } from 'vuex';
 
 export default
 {
   name: 'StepFive',
   mixins: [validations],
-  props:
+  computed:
     {
-      value:
+      ...mapGetters([GET_TERMS, GET_COPY]),
+      carbonCopy:
         {
-          type: Object,
-          required: true
-        },
-    },
-  data()
-  {
-    return {
-      form:
-        {
-          carbonCopy: false,
-          acceptTerms: false,
-        }
-    };
-  },
-  watch:
-    {
-      value:
-        {
-          immediate: true,
-          handler(newVal)
+          get()
           {
-            this.form = newVal;
+            return this[GET_COPY];
+          },
+          set(value)
+          {
+            this[SET_COPY](value);
           }
         },
-      form:
+      acceptTerms:
         {
-          deep: true,
-          handler(newVal)
+          get()
           {
-            this.$emit('input', newVal);
+            return this[GET_TERMS];
+          },
+          set(value)
+          {
+            this[SET_TERMS](value);
           }
         },
     },
+  methods:
+    {
+      ...mapMutations([SET_TERMS, SET_COPY]),
+    }
 };
 </script>
 
