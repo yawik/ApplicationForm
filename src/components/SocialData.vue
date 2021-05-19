@@ -2,25 +2,7 @@
   <div>
     <div class="q-pb-sm">{{ $t('stepOne.social.import') }}</div>
     <div class="row items-start q-gutter-md">
-      <q-btn-dropdown v-for="social in listSocial" :key="social.title" color="primary" :icon="social.icon" :label="social.title" glossy push>
-        <q-list>
-          <q-item v-close-popup clickable @click="importProfile(social.network)">
-            <q-item-section>
-              <q-item-label>{{ $t('stepOne.social.attach') }}</q-item-label>
-            </q-item-section>
-          </q-item>
-          <q-item v-close-popup clickable :disable="!form[social.title.toLowerCase()]">
-            <q-item-section>
-              <q-item-label>{{ $t('stepOne.social.detach') }}</q-item-label>
-            </q-item-section>
-          </q-item>
-          <q-item v-close-popup clickable :disable="!form[social.title.toLowerCase()]">
-            <q-item-section>
-              <q-item-label>{{ $t('stepOne.social.view') }}</q-item-label>
-            </q-item-section>
-          </q-item>
-        </q-list>
-      </q-btn-dropdown>
+      <q-btn v-for="social in listSocial" :key="social.title" color="primary" :icon="social.icon" :label="social.title" glossy push @click="importProfile(social.network)" />
     </div>
   </div>
 </template>
@@ -31,26 +13,6 @@ import hello from 'hellojs';
 export default
 {
   name: 'SocialData',
-  props:
-    {
-      value:
-        {
-          type: Object,
-          required: true
-        }
-    },
-  data()
-  {
-    return {
-      form:
-        {
-          facebook: null,
-          xing: null,
-          linkedin: null,
-          google: null,
-        }
-    };
-  },
   computed:
     {
       listSocial()
@@ -80,25 +42,6 @@ export default
           },
         ];
       },
-    },
-  watch:
-    {
-      value:
-        {
-          immediate: true,
-          handler(newVal)
-          {
-            this.form = newVal;
-          }
-        },
-      form:
-        {
-          deep: true,
-          handler(newVal)
-          {
-            this.$emit('input', newVal);
-          }
-        }
     },
   created()
   {

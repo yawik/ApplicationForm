@@ -56,7 +56,7 @@ export default
       salary:
         {
           value: null,
-          currency: 'EUR',
+          currency: null,
           period: null
         }
     };
@@ -70,24 +70,25 @@ export default
       periodList()
       {
         return Object.entries(this.$root.$i18n.messages[this.$root.$i18n.locale].salary.period).map(([key, value]) => ({
-          value: key,
+          value: +key,
           label: value,
         }));
       }
     },
   watch:
     {
-      value(newVal, oldVal)
-      {
-        if (newVal !== oldVal)
+      value:
         {
-          this.salary = {
-            value: newVal.value,
-            currency: newVal.currency || 'EUR',
-            period: newVal.period || 2,
-          };
-        }
-      },
+          immediate: true,
+          handler(newVal)
+          {
+            this.salary = {
+              value: newVal.value,
+              currency: newVal.currency,
+              period: newVal.period || 2,
+            };
+          },
+        },
       salary:
         {
           deep: true,
