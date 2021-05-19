@@ -90,7 +90,7 @@ export default
   },
   computed:
     {
-      ...mapGetters([GET_COVER_LETTER, GET_FORM, GET_STEP]),
+      ...mapGetters([GET_COVER_LETTER, GET_FORM, GET_STEP, GET_FILES]),
       currentStep:
         {
           get()
