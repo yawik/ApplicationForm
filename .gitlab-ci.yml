@@ -28,7 +28,7 @@ publish:
 pages:
   stage: deploy
   script:
-    - env | grep YAWIK > .env
+    - env | ( grep YAWIK || echo "# no YWIK_* vars set" )  > .env
     - yarn
     - yarn build
     - mkdir .public
