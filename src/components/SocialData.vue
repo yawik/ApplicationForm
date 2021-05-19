@@ -135,9 +135,7 @@ export default
         else oauth[social.network] = social.configured;
       }
     });
-    hello.init(oauth, {
-      display: 'popup',
-    });
+    hello.init(oauth);
   },
   mounted()
   {
