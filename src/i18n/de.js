@@ -67,11 +67,14 @@ export default
     {
       title: 'Fragen',
       startDate: 'frühester Eintrittstermin?',
+      immediately: 'sofort',
+      expectedSalary: 'Wie hoch ist ihre Gehaltsvorstellung?',
     },
   stepFour:
     {
       title: 'Anhänge',
-      help: 'Fügen sie Bilder oder PDF Dokumente der Bewerbung hinzu - bis zu 2 MB (Drag & Drop ist möglich)',
+      help: 'Bilder oder PDF-, DOC(x)-, XLS(x)-Dokumente anhängen - bis zu 2 MB',
+      photo: 'Sie können ein Bewerbungsfoto hochladen',
       status: 'Status: {status}',
     },
   stepFive:
@@ -83,17 +86,30 @@ export default
     },
   dropZone:
     {
-      dragDrop: 'Sie können Dokumente reinziehen-',
-      clickHere: 'click here',
-      chooseManually: 'to choose manually'
+      dragDrop: 'Sie können Dokumente reinziehen - oder ',
+      clickHere: 'klicken Sie hier',
+      chooseManually: ', um dateien manuell zu wählen.'
     },
   preview:
     {
-      title: 'Voransicht Berwerbung',
+      title: 'Voransicht Bewerbung',
       email: 'E-Mail',
       phone: 'Tel.',
       address: 'Anschrift',
       canStart: 'frühester Eintrittstermin.',
+      expectedSalary: 'Gehaltsvorstellung',
       acceptTerms: 'Ich habe die Datenschutzbestimmungen gelesen und akzeptiere sie.'
+    },
+  salary:
+    {
+      periodTitle: 'Zeitraum',
+      period:
+        {
+          1: 'Jahr',
+          2: 'Monat',
+          3: 'Stunde',
+        },
+      amount: 'Gehaltsvorstellung',
+      currency: 'Währung',
     }
 };
