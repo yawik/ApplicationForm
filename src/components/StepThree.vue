@@ -25,7 +25,8 @@ import {
   SET_CURRENCY,
   SET_SALARY_AMOUNT,
   SET_START_DATE,
-  SET_START_NOW
+  SET_START_NOW,
+  GET_STEP
 } from '../store/names';
 import { mapGetters, mapMutations } from 'vuex';
 
@@ -48,7 +49,7 @@ export default
     },
   computed:
     {
-      ...mapGetters([GET_SALARY_AMOUNT, GET_CURRENCY, GET_SALARY_PERIOD, GET_START_DATE, GET_START_NOW]),
+      ...mapGetters([GET_SALARY_AMOUNT, GET_CURRENCY, GET_SALARY_PERIOD, GET_START_DATE, GET_START_NOW, GET_STEP]),
       startDate:
         {
           get()
@@ -93,15 +94,20 @@ export default
     {
       active(newVal)
       {
-        if (newVal)
-        {
-          this.$refs.start.focus();
-        }
+        if (newVal) this.setFocus();
       }
     },
+  mounted()
+  {
+    if (this[GET_STEP] === 'stepThree') this.setFocus();
+  },
   methods:
     {
       ...mapMutations([SET_SALARY_AMOUNT, SET_CURRENCY, SET_SALARY_PERIOD, SET_START_DATE, SET_START_NOW]),
+      setFocus()
+      {
+        this.$refs.start.focus();
+      }
     }
 };
 </script>

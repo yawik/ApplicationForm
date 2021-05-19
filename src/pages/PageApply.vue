@@ -21,7 +21,7 @@
       </q-stepper>
       <div class="flex q-py-md justify-center">
         <q-btn color="primary" class="q-mr-md" outline @click="dlgPreview = true">{{ $t('previewForm') }}</q-btn>
-        <q-btn color="negative" class="q-ml-md">{{ $t('abortForm') }}</q-btn>
+        <q-btn color="negative" class="q-ml-md" @click="abortForm">{{ $t('abortForm') }}</q-btn>
       </div>
     </q-form>
     <DialogPreview v-model="dlgPreview" :job="jobName" :org="orgName" @send="dlgPreview = false, trySubmit()" />
@@ -47,8 +47,8 @@ import StepFive from 'src/components/StepFive';
 import SwitchLanguage from 'src/components/SwitchLanguage';
 import DialogPreview from 'src/components/DialogPreview';
 import { QOverlay } from '@quasar/quasar-ui-qoverlay';
-import { GET_COVER_LETTER, GET_FILES, GET_PHOTO, GET_FORM } from '../store/names';
-import { mapGetters } from 'vuex';
+import { GET_COVER_LETTER, GET_FILES, GET_PHOTO, GET_FORM, CLEAR_FORM, GET_STEP, SET_STEP } from '../store/names';
+import { mapGetters, mapMutations } from 'vuex';
 
 export default
 {
@@ -80,7 +80,6 @@ export default
   data()
   {
     return {
-      currentStep: 'stepOne',
       lastStep: false,
       stepper: null, // used by StepOne.vue to navigate to step 2 on ENTER key in any input field
       maxWidth: 1024, // used to limit the width of QEditor on step 2, otherwise it grows too much when you type text
@@ -91,7 +90,18 @@ export default
   },
   computed:
     {
-      ...mapGetters([GET_COVER_LETTER, GET_FORM]),
+      ...mapGetters([GET_COVER_LETTER, GET_FORM, GET_STEP]),
+      currentStep:
+        {
+          get()
+          {
+            return this[GET_STEP];
+          },
+          set(value)
+          {
+            this[SET_STEP](value);
+          }
+        },
       steps()
       {
         return ['stepOne', 'stepTwo', 'stepThree', 'stepFour', 'stepFive'];
@@ -164,6 +174,7 @@ export default
   },
   methods:
     {
+      ...mapMutations([CLEAR_FORM, SET_STEP]),
       onResize()
       {
         // limit the width of QEditor on StepTwo - otherwise it grows too much on typing
@@ -264,7 +275,11 @@ export default
               message: response.data.message || this.$t('submitFailed'),
             });
           }
-          else this.$router.push({ name: 'submitSuccessful' });
+          else
+          {
+            this[CLEAR_FORM]();
+            this.$router.push({ name: 'submitSuccessful' });
+          }
         }).catch(err =>
         {
           this.$q.notify({
@@ -277,6 +292,10 @@ export default
         {
           this.sending = false;
         });
+      },
+      abortForm()
+      {
+        this[CLEAR_FORM]();
       }
     }
 };
