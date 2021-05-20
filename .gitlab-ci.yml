@@ -20,8 +20,7 @@ stages:
 publish:
   stage: release
   script:
-    - yarn
-    - yarn semantic-release
+    - env | ( grep YAWIK && yarn && yarn semantic-release || echo "skip semantic-release" )
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
 
