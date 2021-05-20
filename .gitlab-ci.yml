@@ -28,7 +28,7 @@ publish:
 pages:
   stage: deploy
   script:
-    - env | ( grep YAWIK || echo "# no YWIK_* vars set" )  > .env
+    - env | ( grep YAWIK || echo "ROUTER_BASE=/${CI_PAGES_URL#*://*/}/" )  > .env
     - yarn
     - yarn build
     - mkdir .public
