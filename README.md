@@ -32,10 +32,11 @@ The form is .env-aware.
 | Name                         | Value                               | 
 |------------------------------|-------------------------------------|
 | YAWIK_APPLICATION_FORM_ACTON | URL to which form data is sent      |
+| YAWIK_JOB_DETAIL_URL         | URL where we get title or company   |
 | YAWIK_ORGANIZATION           | Organizaion ID                      |
 | YAWIK_OAUTH_FACEBOOK         | App Identifier                      |
 | YAWIK_OAUTH_GOOGLE           | App Identifier                      |
-| YAWIK_OAUTH_LINKEDIN         | **not working**                     |
+| YAWIK_OAUTH_LINKEDIN         | App Identifier                      |
 | YAWIK_OAUTH_XING             | **not working**                     |
 
 If an **YAWIK_OAUTH_\*** variable is not shown, the feature is not used within the form.
