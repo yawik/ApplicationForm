@@ -1,8 +1,10 @@
 <template>
   <q-layout view="lHh Lpr lFf">
     <q-page-container style="overflow-x: hidden;">
-      <img class="block q-mx-auto q-mt-sm" src="yawik-logo.png">
-      <div v-if="jobName || orgName" class="text-center text-h6 q-mt-md">{{ orgName }} &nbsp;&mdash;&nbsp; {{ jobName }}</div>
+      <img class="block q-mx-auto q-mt-sm" :src="logo || 'yawik-logo.png'" style="max-width: 800px; max-height: 160px;">
+      <div v-if="jobName || orgName" class="text-center text-h6 q-mt-md">
+        <a :href="jobLink">{{ orgName }} &nbsp;&mdash;&nbsp; {{ jobName }}</a>
+      </div>
       <transition name="fade" appear mode="out-in">
         <router-view :job-name="jobName" :org-name="orgName" />
       </transition>
@@ -17,8 +19,10 @@ export default
   data()
   {
     return {
+      jobLink: '',
       jobName: '',
       orgName: '',
+      logo: '',
     };
   },
   computed:
@@ -46,13 +50,15 @@ export default
       getJobDetails()
       {
         this.$q.loading.show({ delay: 100 });
-        this.$axios.get(`https://www.e-posting.de/details?job=${this.jobID}`).then(response =>
+        this.$axios.get(process.env.YAWIK_JOB_DETAIL_URL + '?job=' + this.jobID).then(response =>
         {
           this.$q.loading.hide();
           if (response.data && response.data.success)
           {
+            this.jobLink = response.data.payload.uri;
             this.jobName = response.data.payload.title;
             this.orgName = response.data.payload.organization.name;
+            this.logo = response.data.payload.organization.logo;
           }
         }).catch(err =>
         {
