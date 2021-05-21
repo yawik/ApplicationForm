@@ -1,13 +1,13 @@
 <template>
   <div>
     <div>
-      <q-checkbox v-model="carbonCopy" :label="$t('stepFive.carbonCopy')" />
+      <q-checkbox v-model="carbonCopy" name="copy" :label="$t('stepFive.carbonCopy')" />
     </div>
 
     <div class="row">
       <q-field :value="acceptTerms" class="field" lazy-rules :rules="[ruleRequired]" borderless dense>
         <template #control>
-          <q-checkbox v-model="acceptTerms">
+          <q-checkbox v-model="acceptTerms" name="terms">
             <!-- eslint-disable vue/no-v-html -->
             <div class="terms" v-html="$t('stepFive.privacyPolicy')" />
             <!-- eslint-enable vue/no-v-html -->

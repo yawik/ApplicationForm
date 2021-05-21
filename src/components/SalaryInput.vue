@@ -2,6 +2,7 @@
   <div class="row q-col-gutter-sm">
     <q-input
       v-model.number="salary.value"
+      :name="name ? name + '_amount' : null"
       outlined
       dense
       :mask="salary.period === 3 ? '#.##' : '###,###'"
@@ -14,6 +15,7 @@
     />
     <q-select
       v-model="salary.currency"
+      :name="name ? name + '_currency' : null"
       outlined
       dense
       style="min-width: 135px;"
@@ -23,6 +25,7 @@
     />
     <q-select
       v-model="salary.period"
+      :name="name ? name + '_period' : null"
       style="min-width: 140px;"
       outlined
       dense
@@ -48,6 +51,11 @@ export default
         {
           type: Object,
           default: () => ({})
+        },
+      name:
+        {
+          type: String,
+          default: ''
         }
     },
   data()

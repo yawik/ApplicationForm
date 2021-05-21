@@ -12,7 +12,7 @@
     "lint-css": "node --preserve-symlinks --preserve-symlinks-main ./node_modules/stylelint/bin/stylelint src/**/*.{vue,css,scss}",
     "lintfix-css": "node --preserve-symlinks --preserve-symlinks-main ./node_modules/stylelint/bin/stylelint src/**/*.{vue,css,scss} --fix",
     "prepare": "custompatch",
-    "test": "echo \"No test specified\" && exit 0",
+    "test": "npx cypress open",
     "semantic-release": "semantic-release"
   },
   "dependencies": {
@@ -29,25 +29,26 @@
     "@babel/eslint-parser": "^7.13.14",
     "@kazupon/vue-i18n-loader": "^0.3.0",
     "@quasar/app": "^2.0.0",
+    "@semantic-release/git": "^9.0.0",
+    "@semantic-release/gitlab": "^6.0.5",
+    "@semantic-release/npm": "^7.0.8",
     "babel-eslint": "^10.0.1",
     "custompatch": "^1.0.17",
+    "cypress": "^7.3.0",
     "dotenv-flow": "^3.2.0",
     "eslint": "^7.23.0",
-    "eslint-loader": "^4.0.2",
     "eslint-config-standard": "^16.0.2",
+    "eslint-loader": "^4.0.2",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-node": "^11.0.0",
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-quasar": "^1.0.0",
     "eslint-plugin-vue": "^7.8.0",
+    "semantic-release": "^17.3.0",
     "stylelint": "^13.9.0",
     "stylelint-config-standard": "^20.0.0",
     "stylelint-scss": "^3.18.0",
-    "stylelint-webpack-plugin": "^1.2.3",
-    "@semantic-release/git": "^9.0.0",
-    "@semantic-release/gitlab": "^6.0.5",
-    "@semantic-release/npm": "^7.0.8",
-    "semantic-release": "^17.3.0"
+    "stylelint-webpack-plugin": "^1.2.3"
   },
   "release": {
     "branches": [
@@ -62,9 +63,18 @@
         {
           "gitlabUrl": "https://gitlab.com/cross-solution1/applicationform.git",
           "assets": [
-            { "path": "index.js", "label": "Module" },
-            { "path": "README.md", "label": "Documentation" },
-            { "path": "LICENSE", "label": "License" }
+            {
+              "path": "index.js",
+              "label": "Module"
+            },
+            {
+              "path": "README.md",
+              "label": "Documentation"
+            },
+            {
+              "path": "LICENSE",
+              "label": "License"
+            }
           ]
         }
       ]

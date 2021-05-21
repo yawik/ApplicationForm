@@ -16,7 +16,7 @@ Vue.use(VueRouter);
 
 export default function(/* { store, ssrContext } */)
 {
-  return new VueRouter({
+  const router = new VueRouter({
     scrollBehavior: () => ({
       x: 0,
       y: 0
@@ -29,4 +29,12 @@ export default function(/* { store, ssrContext } */)
     mode: process.env.VUE_ROUTER_MODE,
     base: process.env.VUE_ROUTER_BASE
   });
+
+  router.beforeEach((to, from, next) =>
+  {
+    if (Object.values(to.query).length > 0) next();
+    else next(Object.assign({}, to, { query: from.query }));
+  });
+
+  return router;
 }

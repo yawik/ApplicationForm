@@ -1,0 +1,15 @@
+{
+  "success": true,
+  "payload":
+  {
+    "title": "Software-Entwickler PHP5 (m/w)",
+    "uri": "https://yawik.org/demo/en/jobs/view?subscriberUri=https://yawik.org/subscriber/1&id=55ae77c46b10f87d728b4628",
+    "organization":
+    {
+      "name": "CROSS Solution",
+      "logo": "https://yawik.org/demo/static/Organizations/Image/2/4/5be52cfd0d972e02a71be442.png",
+      "thumbnail": "https://yawik.org/demo/static/Organizations/Image/3/4/5be52cfd0d972e02a71be443.png",
+      "ref": "55ae77c46b10f87d728b4628"
+    }
+  }
+}

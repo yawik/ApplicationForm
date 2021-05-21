@@ -22,14 +22,14 @@
           <component :is="stepName" :active="currentStep === stepName" :stepper="stepper" :width="maxWidth" style="min-height: 500px;" />
         </q-step>
         <div slot="navigation" class="row justify-end q-px-lg q-pb-lg">
-          <q-btn v-if="steps.indexOf(currentStep) > 0" outline color="primary" :label="$t('buttons.back')" class="q-mr-md" @click.stop="navigate('previous')" />
-          <q-btn v-if="lastStep" color="primary" :label="$t('buttons.send')" @click.stop="trySubmit" />
-          <q-btn v-else color="primary" :label="$t('buttons.continue')" @click.stop="navigate('next')" />
+          <q-btn v-if="steps.indexOf(currentStep) > 0" name="prev" outline color="primary" :label="$t('buttons.back')" class="q-mr-md" @click.stop="navigate('previous')" />
+          <q-btn v-if="lastStep" color="primary" name="next" :label="$t('buttons.send')" @click.stop="trySubmit" />
+          <q-btn v-else color="primary" name="next" :label="$t('buttons.continue')" @click.stop="navigate('next')" />
         </div>
       </q-stepper>
       <div class="flex q-py-md justify-center">
-        <q-btn color="primary" class="q-mr-md" outline @click="dlgPreview = true">{{ $t('previewForm') }}</q-btn>
-        <q-btn color="negative" class="q-ml-md" @click="abortForm">{{ $t('abortForm') }}</q-btn>
+        <q-btn name="preview" color="primary" class="q-mr-md" outline @click="dlgPreview = true">{{ $t('previewForm') }}</q-btn>
+        <q-btn name="abort" color="negative" class="q-ml-md" @click="abortForm">{{ $t('abortForm') }}</q-btn>
       </div>
     </q-form>
     <DialogPreview v-model="dlgPreview" :job="jobName" :org="orgName" @send="dlgPreview = false, trySubmit()" />
@@ -286,7 +286,7 @@ export default
           else
           {
             this[CLEAR_FORM]();
-            this.$router.push({ name: 'submitSuccessful' });
+            this.$router.push({ name: 'submitSuccessful' }).catch(() => true);
           }
         }).catch(err =>
         {
