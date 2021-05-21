@@ -1,6 +1,11 @@
 # Application Form
 
-Quasar based application form for [Yawik](https://yawik.org).
+standalone application form based on [quasar](https://quasar.dev/). It is a single page application (SPA) running in the 
+clients browser. It can be configured  to send it's form data to a yawik installation with the 
+[form2mail](https://packagist.org/packages/yawik/form2mail) module enabled.
+
+But the form also works without Yawik. A simple [form2mail.php](https://gitlab.com/yawik/applicationform/-/snippets/2124038) 
+snipped shows what you need for a mail.
 
 ## Task description
 
@@ -8,7 +13,12 @@ https://gitlab.cross-solution.de/CROSS/strategy/results/applicationform/-/issues
 
 ## Status
 
-WIP
+currently works out of the box with our [Demo](https://yawik.org/demo/de)
+
+```
+YAWIK_APPLICATION_FORM_ACTON=https://yawik.org/demo/dendmail
+YAWIK_JOB_DETAIL_URL=https://yawik.org/demo/details
+```
 
 ## Requirements
 
