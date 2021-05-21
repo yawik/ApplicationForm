@@ -2,7 +2,15 @@
   <div>
     <div class="q-pb-sm">{{ $t('stepOne.social.import') }}</div>
     <div class="row items-start q-gutter-md">
-      <q-btn v-for="social in listSocial" :key="social.title" color="primary" :icon="social.icon" :label="social.title" glossy push @click="importProfile(social.network)" />
+      <q-btn v-for="social in listSocial"
+             :key="social.title"
+             color="primary"
+             :icon="social.icon"
+             :label="$q.screen.gt.xs ? social.title : void 0"
+             glossy
+             push
+             @click="importProfile(social.network)"
+      />
     </div>
   </div>
 </template>

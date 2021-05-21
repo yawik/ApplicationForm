@@ -20,15 +20,14 @@ stages:
 publish:
   stage: release
   script:
-    - yarn
-    - yarn semantic-release
+    - env | ( grep YAWIK && yarn && yarn semantic-release || echo "skip semantic-release" )
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
 
 pages:
   stage: deploy
   script:
-    - env | ( grep YAWIK || echo "# no YWIK_* vars set" )  > .env
+    - env | ( grep YAWIK || echo "ROUTER_BASE=/${CI_PAGES_URL#*://*/}/" )  > .env
     - yarn
     - yarn build
     - mkdir .public

@@ -5,7 +5,15 @@
         <SwitchLanguage class="q-mx-auto" />
       </div>
       <!-- eslint-disable quasar/no-invalid-props -->
-      <q-stepper ref="stepper" v-model="currentStep" animated header-nav all-panels>
+      <q-stepper
+        ref="stepper"
+        v-model="currentStep"
+        animated
+        header-nav
+        all-panels
+        :swipeable="$q.platform.is.mobile"
+        :contracted="$q.platform.is.mobile"
+      >
         <!-- eslint-enable quasar/no-invalid-props -->
         <q-step v-for="stepName in steps" :key="stepName" :name="stepName" :prefix="steps.indexOf(stepName)+1" :title="$t(stepName+'.title')"
                 done-color="positive" active-color="primary" error-color="negative"
