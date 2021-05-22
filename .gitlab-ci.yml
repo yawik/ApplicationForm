@@ -14,8 +14,19 @@ variables:
   NPM_TOKEN: ${CI_JOB_TOKEN}
 
 stages:
+  - test
   - release
   - deploy
+
+cypress:
+  image: cypress/browsers:node12.14.1-chrome85-ff81
+  stage: test
+  script:
+    - env | ( grep YAWIK || echo "ROUTER_BASE=/${CI_PAGES_URL#*://*/}/" )  > .env
+    - yarn 
+    - yarn dev &
+    - sleep 20
+    - npx cypress run form_submit.spec.js
 
 publish:
   stage: release

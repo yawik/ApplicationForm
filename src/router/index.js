@@ -32,7 +32,7 @@ export default function(/* { store, ssrContext } */)
 
   router.beforeEach((to, from, next) =>
   {
-    if (Object.values(to.query).length > 0) next();
+    if (Object.values(to.query).length > 0 || Object.values(from.query).length === 0) next();
     else next(Object.assign({}, to, { query: from.query }));
   });
 
