@@ -1,5 +1,5 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
+  <q-layout view="lHh Lpr lFf" class="yawik">
     <q-page-container style="overflow-x: hidden;">
       <img class="block q-mx-auto q-mt-sm" :src="logo || 'yawik-logo.png'" style="max-width: 800px; max-height: 160px;">
       <div v-if="jobName || orgName" class="text-center text-h6 q-mt-md">
@@ -76,6 +76,11 @@ export default
 </script>
 
 <style>
+  .yawik
+  {
+    background-color: #EEF4FB;
+  }
+
   .fade-enter-active,
   .fade-leave-active
   {
