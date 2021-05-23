@@ -6,8 +6,6 @@ form thus offers the applicant a maximum of user-friendliness. Already during th
 input of the application data, the applicant is signaled that data is entered 
 correctly or incorrectly.
 
-Demo: https://form.yawik.org
-
 ## free application forms
 
 you can create an application form for free at 
@@ -35,3 +33,24 @@ cd applicationform
 yarn install
 yarn dev
 ```
+
+## Configuration
+
+The form is .env-aware. 
+
+| Name                         | Value                               | 
+|------------------------------|-------------------------------------|
+| YAWIK_APPLICATION_FORM_ACTON | URL to which form data is sent      |
+| YAWIK_JOB_DETAIL_URL         | URL where we get title or company   |
+| YAWIK_ORGANIZATION           | Organizaion ID                      |
+| YAWIK_OAUTH_FACEBOOK         | App Identifier                      |
+| YAWIK_OAUTH_GOOGLE           | App Identifier                      |
+| YAWIK_OAUTH_LINKEDIN         | App Identifier                      |
+| YAWIK_OAUTH_XING             | **not working**                     |
+
+If an **YAWIK_OAUTH_\*** variable is not shown, the feature is not used within the form.
+Linkedin and Xing are currently not working because of: https://github.com/MrSwitch/hello.js/issues/585
+
+## Demo
+
+https://form.yawik.org

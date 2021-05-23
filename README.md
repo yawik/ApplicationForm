@@ -22,9 +22,8 @@ YAWIK_JOB_DETAIL_URL=https://yawik.org/demo/details
 
 ## Requirements
 
-* "node": ">= 10.18.1",
-* "npm": ">= 6.13.4",
-* "yarn": ">= 1.21.1"
+- [nodesjs](https://nodejs.org/)
+- [yarn](https://yarnpkg.com/) (recommended)
 
 ## Installation
 
