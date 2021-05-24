@@ -87,15 +87,16 @@ export default
     },
   dropZone:
     {
-      dragDrop: 'Sie können Dokumente reinziehen - oder ',
+      dragDrop: 'Sie können Dokumente hier ablegen - oder ',
       clickHere: 'klicken Sie hier',
-      chooseManually: ', um dateien manuell zu wählen.'
+      chooseManually: ', um Dateien manuell zu wählen.'
     },
   preview:
     {
       title: 'Voransicht Bewerbung',
       email: 'E-Mail',
       phone: 'Tel.',
+      contact: 'Kontakt',
       address: 'Anschrift',
       canStart: 'frühester Eintrittstermin.',
       expectedSalary: 'Gehaltsvorstellung',
