@@ -23,6 +23,7 @@ export default
       cancel: 'Cancel',
       close: 'Close',
       remove: 'Remove',
+      preview: 'Preview'
     },
   rules:
     {

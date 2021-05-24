@@ -3,9 +3,11 @@
     <q-form ref="frm" class="q-mx-auto" @submit="submitForm" @validation-error="hasErrors">
       <div class="justify-center q-pb-lg flex">
         <q-btn-group push>
-          <q-btn name="preview" color="primary" outline @click="dlgPreview = true">{{ $t('previewForm') }}</q-btn>
+          <q-btn name="preview" color="primary" outline @click="dlgPreview = true">
+            {{ $q.platform.is.mobile ? $t('buttons.preview') : $t('previewForm') }}
+          </q-btn>
           <SwitchLanguage class="q-mx-auto" />
-          <q-btn name="abort" color="negative" @click="abortForm">{{ $t('abortForm') }}</q-btn>
+          <q-btn name="abort" color="negative" @click="abortForm">{{ $q.platform.is.mobile ? $t('buttons.cancel') : $t('abortForm') }}</q-btn>
         </q-btn-group>
       </div>
       <!-- eslint-disable quasar/no-invalid-props -->
