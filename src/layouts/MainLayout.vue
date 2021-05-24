@@ -76,11 +76,6 @@ export default
 </script>
 
 <style>
-  .yawik
-  {
-    background-color: #EEF4FB;
-  }
-
   .fade-enter-active,
   .fade-leave-active
   {

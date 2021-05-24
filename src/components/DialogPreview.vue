@@ -1,33 +1,21 @@
 <template>
   <q-dialog :value="value" maximized @input="close">
-    <q-card flat>
+    <q-card flat class="yawik">
       <q-card-actions class="bg-primary text-white q-py-sm" align="center">
         <q-btn color="secondary" @click="close">{{ $t('buttons.close') }}</q-btn>
       </q-card-actions>
       <q-card-section class="row">
-        <div class="q-mx-auto q-card--bordered rounded-borders q-px-lg q-pb-lg" style="min-width: 40%; max-width: 1024px; border-style: double; border-width: 3px;">
+        <div class="bg-white q-mx-auto q-card--bordered rounded-borders q-px-lg q-pb-lg" style="min-width: 50%; max-width: 1024px; border-style: double; border-width: 3px;">
           <h4 align="center" class="q-my-sm">{{ $t('preview.title') }}</h4>
           <h6 v-if="job || org" align="center" class="q-my-sm">{{ org }} &nbsp;&mdash;&nbsp; {{ job }}</h6>
           <!-- Personal details -->
           <div class="row">
             <div class="col-6 row justify-center items-center q-pa-md">
               <img v-if="GET_PHOTO" :src="photoURL" class="user_photo rounded-borders">
-              <img v-else src="~src/images/avatar.svg" width="200" height="200">
+              <img v-else src="~src/images/Person.svg" width="200" height="200">
             </div>
             <div class="col-6 q-pa-md">
               <h5 class="q-my-md">{{ `${salutationsMap[GET_FORM.salutation] || ''} ${GET_FORM.firstName || 'John'} ${GET_FORM.lastName || 'Doe'}` }}</h5>
-              <div>
-                <strong>{{ $t('preview.email') }}:</strong> &nbsp; {{ GET_FORM.email || 'n/a' }}
-              </div>
-              <div>
-                <strong>{{ $t('preview.phone') }}:</strong> &nbsp; {{ GET_FORM.phone || 'n/a' }}
-              </div>
-              <div>
-                <strong>{{ $t('preview.canStart') }}:</strong> &nbsp; {{ GET_FORM.startDate ? dateLocale(GET_FORM.startDate) : 'n/a' }}
-              </div>
-              <div v-if="GET_FORM.salaryAmount">
-                <strong>{{ $t('preview.expectedSalary') }}:</strong> &nbsp; {{ `${thousand(GET_FORM.salaryAmount,' ',GET_FORM.salaryPeriod === 3 ? 2 : 0)} ${GET_FORM.currency}/${salaryPeriodMap[GET_FORM.salaryPeriod]}` }}
-              </div>
               <div class="q-mt-md">
                 <strong>{{ $t('preview.address') }}:</strong> &nbsp;
                 <br>
@@ -37,6 +25,20 @@
                 <br>
                 {{ `${GET_FORM.country || $t('stepOne.country')}` }}
               </div>
+              <div>
+                <strong>{{ $t('preview.email') }}:</strong> &nbsp; {{ GET_FORM.email || 'n/a' }}
+              </div>
+              <div>
+                <strong>{{ $t('preview.phone') }}:</strong> &nbsp; {{ GET_FORM.phone || 'n/a' }}
+              </div>
+            </div>
+          </div>
+          <div class="q-pt-md">
+            <div>
+              <strong>{{ $t('preview.canStart') }}:</strong> &nbsp; {{ GET_FORM.startDate ? dateLocale(GET_FORM.startDate) : 'n/a' }}
+            </div>
+            <div v-if="GET_FORM.salaryAmount">
+              <strong>{{ $t('preview.expectedSalary') }}:</strong> &nbsp; {{ `${thousand(GET_FORM.salaryAmount,' ',GET_FORM.salaryPeriod === 3 ? 2 : 0)} ${GET_FORM.currency}/${salaryPeriodMap[GET_FORM.salaryPeriod]}` }}
             </div>
           </div>
           <!-- Cover letter -->
