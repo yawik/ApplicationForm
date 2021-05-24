@@ -90,7 +90,7 @@ export default
       title: 'Privacy policy',
       ccTitle: 'Carbon copy',
       carbonCopy: 'Send me a copy of this application by e-mail.',
-      privacyPolicy: 'I have read the <a href="https://yawik.org/demo/en/content/applications-privacy-policy" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation(); return true;">Privacy policy</a> and I accept it.', // the link won't work without the onClick handler
+      privacyPolicy: 'Note on data protection: After sending the entered data, it will be processed on our server and forwarded in an email to the person responsible for processing. We assure you of the highest level of confidentiality and compliance with all legal requirements. For more information on data processing, please refer to our <a href="https://yawik.org/demo/en/content/applications-privacy-policy" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation(); return true;">Privacy policy</a>.' // the link won't work without the onClick handler
     },
   dropZone:
     {

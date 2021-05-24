@@ -1,5 +1,5 @@
 <template>
-  <div class="row q-col-gutter-md">
+  <div class="row q-col-gutter-md yawik-stepper-width">
     <!-- Attachments -->
     <div class="col-6 column" style="border-right: 16px solid transparent;">
       <div class="q-pb-sm">{{ $t('stepFour.help') }}</div>

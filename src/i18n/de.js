@@ -83,7 +83,7 @@ export default
       title: 'Datenschutz',
       ccTitle: 'CC',
       carbonCopy: 'Senden sie mir eine Kopie meiner Datein an meine E-Mail.',
-      privacyPolicy: 'Ich habe die <a href="https://yawik.org/demo/en/content/applications-privacy-policy" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation(); return true;">Datenschutzbestimmungen</a> gelesen und akzeptiere sie.', // the link won't work without the onClick handler
+      privacyPolicy: 'Hinweis zum Datenschutz: Nach dem Absenden der eingegebenen Daten werden diese auf unserem Server verarbeitet und in einer Mail an die für die Bearbeitung zuständige Person weitergeleitet. Wir sichern Ihnen dabei ein Höchstmaß an Vertraulichkeit zu und versichern die Einhaltung aller gesetzlichen Vorschriften. Weitere Informationen zur Datenverarbeitung erhalten Sie auf unserer <a href="https://yawik.org/demo/en/content/applications-privacy-policy" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation(); return true;">Datenschutzbestimmungen</a>.' // the link won't work without the onClick handler
     },
   dropZone:
     {

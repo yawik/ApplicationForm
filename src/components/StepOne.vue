@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="yawik-stepper-width">
     <SocialData v-if="socialAllowed" />
 
     <div class="q-pt-lg q-pb-xs">{{ $t('preview.address') }}</div>

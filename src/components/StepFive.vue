@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="yawik-stepper-width">
     <div>
       <q-checkbox v-model="carbonCopy" name="copy" :label="$t('stepFive.carbonCopy')" />
     </div>
@@ -78,5 +78,4 @@ export default
       padding: 0;
     }
   }
-
 </style>
