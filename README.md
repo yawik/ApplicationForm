@@ -47,6 +47,9 @@ The form is .env-aware.
 | YAWIK_OAUTH_GOOGLE           | App Identifier                      |
 | YAWIK_OAUTH_LINKEDIN         | App Identifier                      |
 | YAWIK_OAUTH_XING             | **not working**                     |
+| YAWIK_URL_OPERATOR           | Links to the opeartor of the form   |
+| YAWIK_URL_IMPRINT            | Link to the Imprint of the operator |
+| YAWIK_URL_PRIVACY            | Link to the Privacy notes           |
 
 If an **YAWIK_OAUTH_\*** variable is not shown, the feature is not used within the form.
 Linkedin and Xing are currently not working because of: https://github.com/MrSwitch/hello.js/issues/585
@@ -55,7 +58,9 @@ Linkedin and Xing are currently not working because of: https://github.com/MrSwi
 
 The demo is hosted as a Gitlab Page. The form checks users locale and redirects ...
 
-https://form.yawik.org/
+* https://form.yawik.org/
+* https://form.yawik.org/?job=sw-devel
+
 
 ## Documentation
 
