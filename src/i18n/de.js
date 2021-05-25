@@ -100,7 +100,7 @@ export default
       phone: 'Tel.',
       contact: 'Kontakt',
       address: 'Anschrift',
-      canStart: 'frühester Eintrittstermin.',
+      canStart: 'frühester Eintrittstermin',
       expectedSalary: 'Gehaltsvorstellung',
       acceptTerms: 'Ich habe die Datenschutzbestimmungen gelesen und akzeptiere sie.'
     },

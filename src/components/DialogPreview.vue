@@ -35,7 +35,13 @@
           </div>
           <div class="q-pt-md">
             <div>
-              <strong>{{ $t('preview.canStart') }}:</strong> &nbsp; {{ GET_FORM.startDate ? dateLocale(GET_FORM.startDate) : 'n/a' }}
+              <strong>{{ $t('preview.canStart') }}:</strong> &nbsp;
+              <span v-if="GET_FORM.immediate">
+                {{ $t('stepThree.immediately') }}
+              </span>
+              <span v-else>
+                {{ GET_FORM.startDate ? dateLocale(GET_FORM.startDate) : 'n/a' }}
+              </span>
             </div>
             <div v-if="GET_FORM.salaryAmount">
               <strong>{{ $t('preview.expectedSalary') }}:</strong> &nbsp; {{ `${thousand(GET_FORM.salaryAmount,' ',GET_FORM.salaryPeriod === 3 ? 2 : 0)} ${GET_FORM.currency}/${salaryPeriodMap[GET_FORM.salaryPeriod]}` }}
