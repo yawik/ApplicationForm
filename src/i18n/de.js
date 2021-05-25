@@ -9,6 +9,8 @@ export default
   applicationWasSent: 'Bewerbung wurde versendet.',
   goHome: 'Gehe zur Homepage',
   fileNotFound: 'Seite nicht gefunden',
+  Imprint: 'Impressum',
+  Privacy: 'Datenschutz',
   buttons:
     {
       finish: 'Beenden',

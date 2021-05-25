@@ -9,13 +9,19 @@
         <router-view :job-name="jobName" :org-name="orgName" />
       </transition>
     </q-page-container>
+    <PageFooter />
   </q-layout>
 </template>
 
 <script>
+import PageFooter from '../components/PageFooter';
+
 export default
 {
   name: 'MainLayout',
+  components: {
+    PageFooter
+  },
   data()
   {
     return {

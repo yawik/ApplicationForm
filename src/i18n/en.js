@@ -9,6 +9,8 @@ export default
   applicationWasSent: 'Application was received.',
   goHome: 'Go to homepage',
   fileNotFound: 'Page not found',
+  Imprint: 'Imprint',
+  Privacy: 'Privacy',
   files:
     {
       photoRejected: 'File is larger than 2 MB',
