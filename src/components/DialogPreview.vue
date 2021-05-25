@@ -70,11 +70,23 @@
             {{ $t('preview.acceptTerms') }}
             -->
             <!-- eslint-disable vue/no-mutating-props -->
-            <q-checkbox v-model="acceptTerms">
-              <!-- eslint-disable vue/no-v-html -->
-              <div class="terms" v-html="$t('stepFive.privacyPolicy')" />
-              <!-- eslint-enable vue/no-v-html -->
-            </q-checkbox>
+            <q-field :value="acceptTerms" class="field" lazy-rules :rules="[ruleRequired]" borderless dense>
+              <template #control>
+                <q-item v-ripple tag="label">
+                  <q-item-section avatar top>
+                    <q-checkbox v-model="acceptTerms" name="terms" />
+                  </q-item-section>
+                  <q-item-section>
+                    <q-item-label>{{ $t('Privacy') }}</q-item-label>
+                    <q-item-label caption>
+                      <!-- eslint-disable vue/no-v-html -->
+                      <div class="terms" v-html="$t('stepFive.privacyPolicy', [urlPrivacy])" />
+                      <!-- eslint-enable vue/no-v-html -->
+                    </q-item-label>
+                  </q-item-section>
+                </q-item>
+              </template>
+            </q-field>
             <!-- eslint-enable vue/no-mutating-props -->
           </div>
           <!-- Signature -->
@@ -148,7 +160,11 @@ export default
         {
           this[SET_TERMS](value);
         }
-      }
+      },
+      urlPrivacy()
+      {
+        return process.env.YAWIK_URL_PRIVACY;
+      },
     },
   watch:
     {

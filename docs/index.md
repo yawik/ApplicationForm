@@ -47,6 +47,10 @@ The form is .env-aware.
 | YAWIK_OAUTH_GOOGLE           | App Identifier                      |
 | YAWIK_OAUTH_LINKEDIN         | App Identifier                      |
 | YAWIK_OAUTH_XING             | **not working**                     |
+| YAWIK_URL_IMPRINT            | Link to imprint                     |
+| YAWIK_URL_PRIVACY            | Link to privacy notes               |
+| YAWIK_URL_OPERATOR           | Link to operator                    |
+
 
 If an **YAWIK_OAUTH_\*** variable is not shown, the feature is not used within the form.
 Linkedin and Xing are currently not working because of: https://github.com/MrSwitch/hello.js/issues/585

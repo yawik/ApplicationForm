@@ -4,7 +4,7 @@
       <div class="justify-center q-pb-lg flex">
         <q-btn-group push>
           <q-btn name="preview" color="primary" outline @click="dlgPreview = true">
-            {{ $q.platform.is.mobile ? $t('buttons.preview') : $t('previewForm') }}
+            {{ $t('buttons.preview') }}
           </q-btn>
           <SwitchLanguage class="q-mx-auto" />
           <q-btn name="abort" color="negative" @click="abortForm">{{ $q.platform.is.mobile ? $t('buttons.cancel') : $t('abortForm') }}</q-btn>

@@ -1,8 +1,8 @@
 export default
 {
   localeName: 'Deutsch',
-  previewForm: 'Voransicht der Bewerbung',
-  abortForm: 'Bewerbung abbrechen',
+  previewForm: 'Vorschau',
+  abortForm: 'Abbrechen',
   submitting: 'Bewerbung absenden',
   submitFailed: 'Versand fehlgeschlagen',
   success: 'Success',
@@ -83,9 +83,9 @@ export default
   stepFive:
     {
       title: 'Datenschutz',
-      ccTitle: 'CC',
+      ccTitle: 'Kopie meiner Daten',
       carbonCopy: 'Senden sie mir eine Kopie meiner Datein an meine E-Mail.',
-      privacyPolicy: 'Hinweis zum Datenschutz: Nach dem Absenden der eingegebenen Daten werden diese auf unserem Server verarbeitet und in einer Mail an die für die Bearbeitung zuständige Person weitergeleitet. Wir sichern Ihnen dabei ein Höchstmaß an Vertraulichkeit zu und versichern die Einhaltung aller gesetzlichen Vorschriften. Weitere Informationen zur Datenverarbeitung erhalten Sie auf unserer <a href="https://yawik.org/demo/en/content/applications-privacy-policy" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation(); return true;">Datenschutzbestimmungen</a>.' // the link won't work without the onClick handler
+      privacyPolicy: 'Hinweis zum Datenschutz: Nach dem Absenden der eingegebenen Daten werden diese auf unserem Server verarbeitet und in einer Mail an die für die Bearbeitung zuständige Person weitergeleitet. Wir sichern Ihnen dabei ein Höchstmaß an Vertraulichkeit zu und versichern die Einhaltung aller gesetzlichen Vorschriften. Weitere Informationen zur Datenverarbeitung erhalten Sie auf unserer <a href="{0}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation(); return true;">Datenschutzbestimmungen</a>.' // the link won't work without the onClick handler
     },
   dropZone:
     {
@@ -95,7 +95,7 @@ export default
     },
   preview:
     {
-      title: 'Voransicht Bewerbung',
+      title: 'Vorschau',
       email: 'E-Mail',
       phone: 'Tel.',
       contact: 'Kontakt',
