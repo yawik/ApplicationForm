@@ -54,13 +54,21 @@ The form is .env-aware.
 If an **YAWIK_OAUTH_\*** variable is not shown, the feature is not used within the form.
 Linkedin and Xing are currently not working because of: https://github.com/MrSwitch/hello.js/issues/585
 
+It's possible to hide the Logo and the Footer by using query parameters. Usefull if you plan to use the form in an iframe.
+
+| Param        | Description       |
+|--------------|-------------------|
+| hl           | hide Logo         |
+| hf           | hide Footer       |
+
 ## Demo
 
 The demo is hosted as a Gitlab Page. The form checks users locale and redirects ...
 
 * https://form.yawik.org/
 * https://form.yawik.org/?job=sw-devel
-
+* https://form.yawik.org/?hl=1
+* https://form.yawik.org/?hf=1
 
 ## Documentation
 

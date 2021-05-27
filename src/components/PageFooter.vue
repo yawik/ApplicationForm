@@ -5,7 +5,7 @@
         name="yawik"
       >
         <q-btn
-          class="full-size"
+          class="full-width"
           flat
           no-caps
           type="a"
@@ -20,7 +20,7 @@
         name="imprint"
       >
         <q-btn
-          class="full-size"
+          class="full-width"
           flat
           :ripple="false"
           no-caps
@@ -35,7 +35,7 @@
         name="privacy"
       >
         <q-btn
-          class="full-size"
+          class="full-width"
           flat
           no-caps
           type="a"

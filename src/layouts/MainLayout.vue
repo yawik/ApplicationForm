@@ -1,7 +1,7 @@
 <template>
   <q-layout view="lHh Lpr lFf" class="yawik">
     <q-page-container style="overflow-x: hidden;">
-      <img class="block q-mx-auto q-mt-sm" :src="logo || 'yawik-logo.png'" style="max-width: 800px; max-height: 160px;">
+      <img v-if="showLogo" class="block q-mx-auto q-mt-sm" :src="logo || 'yawik-logo.png'" style="max-width: 800px; max-height: 160px;">
       <div v-if="jobName || orgName" class="text-center text-h6 q-mt-md">
         <a :href="jobLink">{{ orgName }} &nbsp;&mdash;&nbsp; {{ jobName }}</a>
       </div>
@@ -9,7 +9,7 @@
         <router-view :job-name="jobName" :org-name="orgName" />
       </transition>
     </q-page-container>
-    <PageFooter />
+    <PageFooter v-if="showFooter" />
   </q-layout>
 </template>
 
@@ -36,6 +36,14 @@ export default
       jobID()
       {
         return this.$route.query.job;
+      },
+      showLogo()
+      {
+        return !this.$route.query.hl;
+      },
+      showFooter()
+      {
+        return !this.$route.query.hf;
       },
     },
   created()

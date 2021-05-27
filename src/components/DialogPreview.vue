@@ -25,6 +25,7 @@
                 <br>
                 {{ `${GET_FORM.country || $t('stepOne.country')}` }}
               </div>
+              <q-separator />
               <div>
                 <strong>{{ $t('preview.email') }}:</strong> &nbsp; {{ GET_FORM.email || 'n/a' }}
               </div>
@@ -33,6 +34,7 @@
               </div>
             </div>
           </div>
+          <q-separator />
           <div class="q-pt-md">
             <div>
               <strong>{{ $t('preview.canStart') }}:</strong> &nbsp;

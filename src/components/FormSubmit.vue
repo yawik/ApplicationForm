@@ -4,7 +4,7 @@
       <q-card-section class="text-h6 bg-primary text-white">{{ $t('submitting') }}</q-card-section>
       <q-card-section>
         <q-uploader ref="uploader" class="uploader shadow-1" multiple batch :url="uploadURL"
-                    :headers="[{name: 'X-Requested-With', value: 'XmlHttpRequest'}]" :max-total-size="2*1024*1024"
+                    :headers="[{name: 'X-Requested-With', value: 'XmlHttpRequest'}]" :max-total-size="10*1024*1024"
                     field-name="upload[]" :form-fields="formFields" hide-upload-btn style="min-height: 320px;"
                     @uploaded="success" @failed="failure"
         >
