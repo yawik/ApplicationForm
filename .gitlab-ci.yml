@@ -30,7 +30,7 @@ cypress:
 publish:
   stage: release
   script:
-    - env | ( grep YAWIK && yarn && yarn semantic-release || echo "skip semantic-release" )
+    - env | ( grep YAWIK && yarn && yarn semantic-release || echo "skip semantic-release" ) > /dev/null
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
 
