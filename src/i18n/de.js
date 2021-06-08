@@ -11,6 +11,11 @@ export default
   fileNotFound: 'Seite nicht gefunden',
   Imprint: 'Impressum',
   Privacy: 'Datenschutz',
+  files:
+    {
+      photoRejected: 'Das Foto ist größer als 2 MB',
+      attachmentsRejected: '{count} Dateien wurden abgelehnt, weil sie insgesamt größer als 9 MB sind'
+    },
   buttons:
     {
       finish: 'Beenden',
@@ -76,7 +81,7 @@ export default
   stepFour:
     {
       title: 'Anhänge',
-      help: 'Bilder oder PDF-, DOC(x)-, XLS(x)-Dokumente anhängen - bis zu 2 MB',
+      help: 'Bilder oder PDF-, DOC(x)-, XLS(x)-Dokumente anhängen - bis zu 9 MB',
       photo: 'Sie können ein Bewerbungsfoto hochladen',
       status: 'Status: {status}',
     },

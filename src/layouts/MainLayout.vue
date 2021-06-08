@@ -79,7 +79,7 @@ export default
           this.$q.loading.hide();
           this.$q.notify({
             color: 'negative',
-            position: 'top',
+            position: 'center',
             icon: 'mdi-alert',
             message: err.message || err,
           });

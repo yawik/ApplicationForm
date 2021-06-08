@@ -19,6 +19,8 @@ Of course, we assure that everything is done in accordance with data protection.
 ## Features
 
 * multilingual
+* file and photo Upload
+* preview
 * hosting as Github or Gitlab Page possible
 * compatible with Yawik. 
 

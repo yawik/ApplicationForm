@@ -14,7 +14,7 @@ export default
   files:
     {
       photoRejected: 'File is larger than 2 MB',
-      attachmentsRejected: '{count} file(s) were rejected as they are larger than 2 MB'
+      attachmentsRejected: '{count} file(s) were rejected as they are larger than 9 MB'
     },
   buttons:
     {
@@ -83,7 +83,7 @@ export default
   stepFour:
     {
       title: 'Attachments',
-      help: 'Attach images or PDF, DOC(x), XLS(x) documents - up to 2 MB',
+      help: 'Attach images or PDF, DOC(x), XLS(x) documents - up to 9 MB',
       photo: 'You can provide a photo of yourself',
       status: 'Status: {status}',
     },
