@@ -1,8 +1,8 @@
 export default
 {
   localeName: 'English',
-  previewForm: 'Preview application',
-  abortForm: 'Abort application',
+  previewForm: 'Preview',
+  abortForm: 'Abort',
   submitting: 'Submit your application',
   submitFailed: 'Submit failed',
   success: 'Success',

@@ -73,7 +73,7 @@ export default
   data()
   {
     return {
-      maxFileSize: 2e7, // in bytes
+      maxFileSize: 9437184, // 9MB in bytes
       maxImageSize: 300, // max width/height in pixels for user's photo
       image: '',
     };

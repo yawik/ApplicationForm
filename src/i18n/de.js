@@ -25,7 +25,7 @@ export default
       cancel: 'Abbrechen',
       close: 'Schließen',
       remove: 'Löschen',
-      preview: 'Preview'
+      preview: 'Vorschau'
     },
   rules:
     {
