@@ -102,7 +102,7 @@ export default
   },
   computed:
     {
-      ...mapGetters([GET_COVER_LETTER, GET_FORM, GET_STEP, GET_FILES]),
+      ...mapGetters([GET_COVER_LETTER, GET_FORM, GET_STEP, GET_FILES, GET_PHOTO]),
       currentStep:
         {
           get()
@@ -260,9 +260,8 @@ export default
       {
         const data = new FormData();
         data.append('application', JSON.stringify(this.jsonData));
-        data.append('test', 1);
         const photo = this[GET_PHOTO];
-        if (photo) data.append('attached[photo]', photo);
+        if (photo) data.append('photo', photo);
         if (this[GET_FILES].length)
         {
           this[GET_FILES].forEach(file =>
