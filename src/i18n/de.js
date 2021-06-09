@@ -13,7 +13,7 @@ export default
   Privacy: 'Datenschutz',
   files:
     {
-      photoRejected: 'Das Foto ist größer als 2 MB',
+      photoRejected: 'Das Foto ist größer als 9 MB',
       attachmentsRejected: '{count} Dateien wurden abgelehnt, weil sie insgesamt größer als 9 MB sind'
     },
   buttons:

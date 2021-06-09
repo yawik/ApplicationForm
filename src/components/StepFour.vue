@@ -73,7 +73,7 @@ export default
   data()
   {
     return {
-      maxFileSize: 9437184, // in bytes
+      maxFileSize: 2e7, // in bytes
       maxImageSize: 300, // max width/height in pixels for user's photo
       image: '',
     };
@@ -91,8 +91,9 @@ export default
           {
             this[SET_PHOTO](value);
           }
-        },
-      methods:
+        }
+    },
+  methods:
     {
       ...mapMutations([SET_PHOTO]),
       choosePhoto(list)
@@ -144,9 +145,9 @@ export default
           if (idx !== -1) attached.splice(idx, 1);
         });
       }
-    },
     }
 };
+
 </script>
 
 <style>
