@@ -261,7 +261,7 @@ export default
         const data = new FormData();
         data.append('application', JSON.stringify(this.jsonData));
         const photo = this[GET_PHOTO];
-        if (photo) data.append('photo', photo);
+        if (photo) data.append('attached[photo]', photo);
         if (this[GET_FILES].length)
         {
           this[GET_FILES].forEach(file =>
