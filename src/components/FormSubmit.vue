@@ -99,6 +99,7 @@ export default
         {
           this.$refs.uploader.reset();
           this.$refs.uploader.addFiles(this.files);
+          this.$refs.uploader.addFiles([this.photo]);
         });
       }
     }
