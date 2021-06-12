@@ -50,6 +50,7 @@ The form is .env-aware.
 | YAWIK_URL_OPERATOR           | Links to the opeartor of the form   |
 | YAWIK_URL_IMPRINT            | Link to the Imprint of the operator |
 | YAWIK_URL_PRIVACY            | Link to the Privacy notes           |
+| YAWIK_ROUTER_BASE            | BASE of the pages                   |
 
 If an **YAWIK_OAUTH_\*** variable is not shown, the feature is not used within the form.
 Linkedin and Xing are currently not working because of: https://github.com/MrSwitch/hello.js/issues/585
