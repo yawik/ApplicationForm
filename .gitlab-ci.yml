@@ -26,6 +26,9 @@ cypress:
     - yarn dev &
     - sleep 20
     - npx cypress run form_submit.spec.js
+  only:
+    variables:
+      - $YAWIK_APPLICATION_FORM_ACTION == "https://form2mail.yawik.org/sendmail"
 
 publish:
   stage: release
@@ -33,6 +36,9 @@ publish:
     - env | ( grep YAWIK && yarn && yarn semantic-release || echo "skip semantic-release" ) > /dev/null
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  only:
+    variables:
+      - $YAWIK_APPLICATION_FORM_ACTION == "https://form2mail.yawik.org/sendmail"
 
 pages:
   stage: deploy
