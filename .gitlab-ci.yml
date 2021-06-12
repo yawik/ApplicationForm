@@ -44,6 +44,7 @@ pages:
   script:
     - env | ( grep YAWIK || echo "ROUTER_BASE=/${CI_PAGES_URL#*://*/}/" )  > .env
     - env | ( grep YAWIK_ROUTER_BASE || echo "ROUTER_BASE=/${CI_PAGES_URL#*://*/}/" )  >> .env
+    - cat .env
     - yarn
     - yarn build
     - mkdir .public
