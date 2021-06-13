@@ -9,7 +9,7 @@ describe('Filling and sending the form', () =>
 {
   it('successfully loads', () =>
   {
-    cy.intercept('https://form2mail.yawik.org/details*', { fixture: 'job_info.json' }).as('getJobDetails');
+    cy.intercept(Cypress.env('YAWIK_JOB_DETAIL_URL') + '*', { fixture: 'job_info.json' }).as('getJobDetails');
     cy.intercept(Cypress.env('YAWIK_APPLICATION_FORM_ACTION'), { body: { success: true } }).as('submitForm');
     // open our app
     cy.visit('/en?job=sw-devel');
