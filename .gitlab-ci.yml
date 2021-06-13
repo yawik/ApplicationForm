@@ -42,10 +42,8 @@ publish:
 pages:
   stage: deploy
   script:
-    - env | ( grep YAWIK || echo "ROUTER_BASE=/${CI_PAGES_URL#*://*/}/" )  > .env
-    - cat .env | grep -v YAWIK_ROUTER_BASE || echo -n "" > .env.tmp
-    - mv .env.tmp .env
-    - env | grep YAWIK_ROUTER_BASE || echo "ROUTER_BASE=/${CI_PAGES_URL#*://*/}/" )  >> .env
+    - env | grep YAWIK_ROUTER_BASE || echo "ROUTER_BASE=/${CI_PAGES_URL#*://*/}/" )  > .env
+    - env | ( grep YAWIK || echo "ROUTER_BASE=/${CI_PAGES_URL#*://*/}/" )  >> .env
     - yarn
     - yarn build
     - mkdir .public
