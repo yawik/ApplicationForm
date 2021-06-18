@@ -65,6 +65,13 @@ import { mapGetters, mapMutations } from 'vuex';
 export default
 {
   name: 'PageApply',
+  meta()
+  {
+    return {
+      title: this.title,
+      titleTemplate: title => `${title} ` + (this.orgName ? ' - ' + this.orgName : '')
+    };
+  },
   components:
     {
       StepOne,
@@ -92,6 +99,7 @@ export default
   data()
   {
     return {
+      title: this.jobName ? 'Bewerbung auf: ' + this.jobName : 'Initiativbewerbung',
       lastStep: false,
       stepper: null, // used by StepOne.vue to navigate to step 2 on ENTER key in any input field
       maxWidth: 1024, // used to limit the width of QEditor on step 2, otherwise it grows too much when you type text
