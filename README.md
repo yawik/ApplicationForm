@@ -16,7 +16,7 @@ https://gitlab.cross-solution.de/CROSS/strategy/results/applicationform/-/issues
 currently works out of the box with our [Demo](https://yawik.org/demo/de)
 
 ```
-YAWIK_APPLICATION_FORM_ACTON=https://yawik.org/demo/dendmail
+YAWIK_APPLICATION_FORM_ACTON=https://yawik.org/demo/sendmail
 YAWIK_JOB_DETAIL_URL=https://yawik.org/demo/details
 ```
 
