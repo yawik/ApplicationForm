@@ -19,12 +19,20 @@ import PageFooter from '../components/PageFooter';
 export default
 {
   name: 'MainLayout',
+  meta()
+  {
+    return {
+      title: this.title,
+      titleTemplate: title => `${title} ` + (this.orgName ? ' - ' + this.orgName : '')
+    };
+  },
   components: {
     PageFooter
   },
   data()
   {
     return {
+      title: this.jobName ? 'Bewerbung auf: ' + this.jobName : 'Initiativbewerbung',
       jobLink: '',
       jobName: '',
       orgName: '',
@@ -73,6 +81,7 @@ export default
             this.jobName = response.data.payload.title;
             this.orgName = response.data.payload.organization.name;
             this.logo = response.data.payload.organization.logo;
+            this.title = 123;
           }
         }).catch(err =>
         {
