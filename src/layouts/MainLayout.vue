@@ -2,11 +2,16 @@
   <q-layout view="lHh Lpr lFf" class="yawik">
     <q-page-container style="overflow-x: hidden;">
       <img v-if="showLogo" class="block q-mx-auto q-mt-sm" :src="logo || 'yawik-logo.png'" style="max-width: 800px; max-height: 160px;">
-      <div v-if="jobName || orgName" class="text-center text-h6 q-mt-md">
-        <a :href="jobLink">{{ orgName }} &nbsp;&mdash;&nbsp; {{ jobName }}</a>
+      <div class="text-center text-h6 q-mt-md">
+        <span if="jobTitle" class="text-center text-h6 q-mt-md">
+          <a :href="jobLink">{{ jobTitle }}</a>
+        </span>
+        <span v-if="orgName" class="text-center text-h6 q-mt-md">
+          - {{ orgName }}
+        </span>
       </div>
       <transition name="fade" appear mode="out-in">
-        <router-view :job-name="jobName" :org-name="orgName" />
+        <router-view :job-name="jobTitle" :org-name="orgName" />
       </transition>
     </q-page-container>
     <PageFooter v-if="showFooter" />
@@ -22,7 +27,7 @@ export default
   meta()
   {
     return {
-      title: this.title,
+      title: this.jobTitle,
       titleTemplate: title => `${title} ` + (this.orgName ? ' - ' + this.orgName : '')
     };
   },
@@ -32,9 +37,8 @@ export default
   data()
   {
     return {
-      title: this.jobName ? 'Bewerbung auf: ' + this.jobName : 'Initiativbewerbung',
       jobLink: '',
-      jobName: '',
+      jobTitle: this.jobTitle ? 'Bewerbung auf: ' + this.jobTitle : 'Initiativbewerbung',
       orgName: '',
       logo: '',
     };
@@ -78,10 +82,9 @@ export default
           if (response.data && response.data.success)
           {
             this.jobLink = response.data.payload.uri;
-            this.jobName = response.data.payload.title;
+            this.jobTitle = response.data.payload.title;
             this.orgName = response.data.payload.organization.name;
             this.logo = response.data.payload.organization.logo;
-            this.title = 123;
           }
         }).catch(err =>
         {
