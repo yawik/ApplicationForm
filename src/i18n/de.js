@@ -3,6 +3,7 @@ export default
   localeName: 'Deutsch',
   previewForm: 'Vorschau',
   abortForm: 'Abbrechen',
+  noteAbort: 'alle Formular Daten werden gelöscht.',
   submitting: 'Bewerbung absenden',
   submitFailed: 'Versand fehlgeschlagen',
   success: 'Success',

@@ -1,7 +1,18 @@
 <template>
   <q-layout view="lHh Lpr lFf" class="yawik">
+    <q-header reveal class="bg-white text-primary">
+      <q-toolbar>
+        <q-toolbar-title>
+          <img v-if="showLogo" class="block" :src="logo || 'yawik-logo.png'" style="max-width: 160px; max-height: 80px;">
+        </q-toolbar-title>
+        <q-btn dense flat round
+               :icon="right ? 'mdi-menu' : 'mdi-menu-open'"
+               @click="right = !right"
+        />
+      </q-toolbar>
+    </q-header>
+    <drawer v-model="right" />
     <q-page-container style="overflow-x: hidden;">
-      <img v-if="showLogo" class="block q-mx-auto q-mt-sm" :src="logo || 'yawik-logo.png'" style="max-width: 800px; max-height: 160px;">
       <div class="text-center text-h6 q-mt-md">
         <span if="jobTitle" class="text-center text-h6 q-mt-md">
           <a :href="jobLink">{{ jobTitle }}</a>
@@ -19,7 +30,9 @@
 </template>
 
 <script>
+
 import PageFooter from '../components/PageFooter';
+import Drawer from './parts/Drawer.vue';
 
 export default
 {
@@ -32,7 +45,8 @@ export default
     };
   },
   components: {
-    PageFooter
+    PageFooter,
+    Drawer
   },
   data()
   {
@@ -41,6 +55,7 @@ export default
       jobTitle: this.jobTitle ? 'Bewerbung auf: ' + this.jobTitle : 'Initiativbewerbung',
       orgName: '',
       logo: '',
+      right: false
     };
   },
   computed:

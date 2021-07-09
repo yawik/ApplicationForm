@@ -3,6 +3,7 @@ export default
   localeName: 'English',
   previewForm: 'Preview',
   abortForm: 'Abort',
+  noteAbort: 'all form data will be deleted.',
   submitting: 'Submit your application',
   submitFailed: 'Submit failed',
   success: 'Success',
@@ -106,6 +107,7 @@ export default
       email: 'E-mail',
       phone: 'Tel',
       address: 'Address',
+      contact: 'Contact',
       canStart: 'Can start on',
       expectedSalary: 'Expected salary',
       acceptTerms: 'I have read and accept the Privacy Policy.'
