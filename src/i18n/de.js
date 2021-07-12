@@ -1,14 +1,21 @@
 export default
 {
   localeName: 'Deutsch',
-  previewForm: 'Voransicht der Bewerbung',
-  abortForm: 'Bewerbung abbrechen',
+  previewForm: 'Vorschau',
+  abortForm: 'Abbrechen',
   submitting: 'Bewerbung absenden',
   submitFailed: 'Versand fehlgeschlagen',
   success: 'Success',
   applicationWasSent: 'Bewerbung wurde versendet.',
   goHome: 'Gehe zur Homepage',
   fileNotFound: 'Seite nicht gefunden',
+  Imprint: 'Impressum',
+  Privacy: 'Datenschutz',
+  files:
+    {
+      photoRejected: 'Das Foto ist größer als 9 MB',
+      attachmentsRejected: '{count} Dateien wurden abgelehnt, weil sie insgesamt größer als 9 MB sind'
+    },
   buttons:
     {
       finish: 'Beenden',
@@ -18,6 +25,7 @@ export default
       cancel: 'Abbrechen',
       close: 'Schließen',
       remove: 'Löschen',
+      preview: 'Vorschau'
     },
   rules:
     {
@@ -73,30 +81,31 @@ export default
   stepFour:
     {
       title: 'Anhänge',
-      help: 'Bilder oder PDF-, DOC(x)-, XLS(x)-Dokumente anhängen - bis zu 2 MB',
+      help: 'Bilder oder PDF-, DOC(x)-, XLS(x)-Dokumente anhängen - bis zu 9 MB',
       photo: 'Sie können ein Bewerbungsfoto hochladen',
       status: 'Status: {status}',
     },
   stepFive:
     {
       title: 'Datenschutz',
-      ccTitle: 'CC',
+      ccTitle: 'Kopie meiner Daten',
       carbonCopy: 'Senden sie mir eine Kopie meiner Datein an meine E-Mail.',
-      privacyPolicy: 'Ich habe die <a href="https://yawik.org/demo/en/content/applications-privacy-policy" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation(); return true;">Datenschutzbestimmungen</a> gelesen und akzeptiere sie.', // the link won't work without the onClick handler
+      privacyPolicy: 'Hinweis zum Datenschutz: Nach dem Absenden der eingegebenen Daten werden diese auf unserem Server verarbeitet und in einer Mail an die für die Bearbeitung zuständige Person weitergeleitet. Wir sichern Ihnen dabei ein Höchstmaß an Vertraulichkeit zu und versichern die Einhaltung aller gesetzlichen Vorschriften. Weitere Informationen zur Datenverarbeitung erhalten Sie auf unserer <a href="{0}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation(); return true;">Datenschutzbestimmungen</a>.' // the link won't work without the onClick handler
     },
   dropZone:
     {
-      dragDrop: 'Sie können Dokumente reinziehen - oder ',
+      dragDrop: 'Sie können Dokumente hier ablegen - oder ',
       clickHere: 'klicken Sie hier',
-      chooseManually: ', um dateien manuell zu wählen.'
+      chooseManually: ', um Dateien manuell zu wählen.'
     },
   preview:
     {
-      title: 'Voransicht Bewerbung',
+      title: 'Vorschau',
       email: 'E-Mail',
       phone: 'Tel.',
+      contact: 'Kontakt',
       address: 'Anschrift',
-      canStart: 'frühester Eintrittstermin.',
+      canStart: 'frühester Eintrittstermin',
       expectedSalary: 'Gehaltsvorstellung',
       acceptTerms: 'Ich habe die Datenschutzbestimmungen gelesen und akzeptiere sie.'
     },

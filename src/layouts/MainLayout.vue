@@ -1,26 +1,44 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
+  <q-layout view="lHh Lpr lFf" class="yawik">
     <q-page-container style="overflow-x: hidden;">
-      <img class="block q-mx-auto q-mt-sm" :src="logo || 'yawik-logo.png'" style="max-width: 800px; max-height: 160px;">
-      <div v-if="jobName || orgName" class="text-center text-h6 q-mt-md">
-        <a :href="jobLink">{{ orgName }} &nbsp;&mdash;&nbsp; {{ jobName }}</a>
+      <img v-if="showLogo" class="block q-mx-auto q-mt-sm" :src="logo || 'yawik-logo.png'" style="max-width: 800px; max-height: 160px;">
+      <div class="text-center text-h6 q-mt-md">
+        <span if="jobTitle" class="text-center text-h6 q-mt-md">
+          <a :href="jobLink">{{ jobTitle }}</a>
+        </span>
+        <span v-if="orgName" class="text-center text-h6 q-mt-md">
+          - {{ orgName }}
+        </span>
       </div>
       <transition name="fade" appear mode="out-in">
-        <router-view :job-name="jobName" :org-name="orgName" />
+        <router-view :job-name="jobTitle" :org-name="orgName" />
       </transition>
     </q-page-container>
+    <PageFooter v-if="showFooter" />
   </q-layout>
 </template>
 
 <script>
+import PageFooter from '../components/PageFooter';
+
 export default
 {
   name: 'MainLayout',
+  meta()
+  {
+    return {
+      title: this.jobTitle,
+      titleTemplate: title => `${title} ` + (this.orgName ? ' - ' + this.orgName : '')
+    };
+  },
+  components: {
+    PageFooter
+  },
   data()
   {
     return {
       jobLink: '',
-      jobName: '',
+      jobTitle: this.jobTitle ? 'Bewerbung auf: ' + this.jobTitle : 'Initiativbewerbung',
       orgName: '',
       logo: '',
     };
@@ -30,6 +48,14 @@ export default
       jobID()
       {
         return this.$route.query.job;
+      },
+      showLogo()
+      {
+        return !this.$route.query.hl;
+      },
+      showFooter()
+      {
+        return !this.$route.query.hf;
       },
     },
   created()
@@ -56,7 +82,7 @@ export default
           if (response.data && response.data.success)
           {
             this.jobLink = response.data.payload.uri;
-            this.jobName = response.data.payload.title;
+            this.jobTitle = response.data.payload.title;
             this.orgName = response.data.payload.organization.name;
             this.logo = response.data.payload.organization.logo;
           }
@@ -65,7 +91,7 @@ export default
           this.$q.loading.hide();
           this.$q.notify({
             color: 'negative',
-            position: 'top',
+            position: 'center',
             icon: 'mdi-alert',
             message: err.message || err,
           });

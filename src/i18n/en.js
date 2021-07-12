@@ -1,18 +1,20 @@
 export default
 {
   localeName: 'English',
-  previewForm: 'Preview application',
-  abortForm: 'Abort application',
+  previewForm: 'Preview',
+  abortForm: 'Abort',
   submitting: 'Submit your application',
   submitFailed: 'Submit failed',
   success: 'Success',
   applicationWasSent: 'Application was received.',
   goHome: 'Go to homepage',
   fileNotFound: 'Page not found',
+  Imprint: 'Imprint',
+  Privacy: 'Privacy',
   files:
     {
       photoRejected: 'File is larger than 2 MB',
-      attachmentsRejected: '{count} file(s) were rejected as they are larger than 2 MB'
+      attachmentsRejected: '{count} file(s) were rejected as they are larger than 9 MB'
     },
   buttons:
     {
@@ -23,6 +25,8 @@ export default
       cancel: 'Cancel',
       close: 'Close',
       remove: 'Remove',
+      preview: 'Preview',
+      contact: 'Contact'
     },
   rules:
     {
@@ -79,7 +83,7 @@ export default
   stepFour:
     {
       title: 'Attachments',
-      help: 'Attach images or PDF, DOC(x), XLS(x) documents - up to 2 MB',
+      help: 'Attach images or PDF, DOC(x), XLS(x) documents - up to 9 MB',
       photo: 'You can provide a photo of yourself',
       status: 'Status: {status}',
     },
@@ -88,7 +92,7 @@ export default
       title: 'Privacy policy',
       ccTitle: 'Carbon copy',
       carbonCopy: 'Send me a copy of this application by e-mail.',
-      privacyPolicy: 'I have read the <a href="https://yawik.org/demo/en/content/applications-privacy-policy" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation(); return true;">Privacy policy</a> and I accept it.', // the link won't work without the onClick handler
+      privacyPolicy: 'Note on data protection: After sending the entered data, it will be processed on our server and forwarded in an email to the person responsible for processing. We assure you of the highest level of confidentiality and compliance with all legal requirements. For more information on data processing, please refer to our <a href="{0}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation(); return true;">Privacy policy</a>.' // the link won't work without the onClick handler
     },
   dropZone:
     {
