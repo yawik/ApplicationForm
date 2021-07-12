@@ -3,83 +3,42 @@
     <SocialData v-if="socialAllowed" />
 
     <div class="q-pt-lg q-pb-xs">{{ $t('preview.address') }}</div>
-    <q-option-group
-      v-model="salutation"
-      :label="$t('stepOne.stepOne.salutation')"
-      :options="$t('stepOne.salutationTypes')" color="primary" inline name="salutation"
-    />
+    <q-option-group v-model="salutation" :options="salutationTypes" :label="$t('stepOne.stepOne.salutation')" color="primary" inline name="salutation" />
 
     <div class="q-col-gutter-sm row">
       <div class="col-6 column">
-        <q-input
-          ref="fname"
-          v-model.trim="firstName"
-          :label="$t('stepOne.firstName')"
-          name="fname" outlined dense lazy-rules
-          :rules="[ruleRequired]"
-          @keypress.enter="gotoNext"
-        />
+        <q-input ref="fname" v-model.trim="firstName" name="fname" :label="$t('stepOne.firstName')" outlined dense lazy-rules :rules="[ruleRequired]" @keypress.enter="gotoNext" />
       </div>
       <div class="col-6 column">
-        <q-input
-          v-model.trim="lastName"
-          :label="$t('stepOne.lastName')"
-          name="lname" outlined dense lazy-rules
-          :rules="[ruleRequired]" @keypress.enter="gotoNext"
-        />
+        <q-input v-model.trim="lastName" name="lname" :label="$t('stepOne.lastName')" outlined dense lazy-rules :rules="[ruleRequired]" @keypress.enter="gotoNext" />
       </div>
     </div>
 
     <div class="q-col-gutter-sm row">
       <div class="col-xs-8">
-        <q-input
-          v-model.trim="street"
-          :label="$t('stepOne.street')"
-          name="street" outlined dense lazy-rules :rules="[ruleRequired]" @keypress.enter="gotoNext"
-        />
+        <q-input v-model.trim="street" name="street" :label="$t('stepOne.street')" outlined dense lazy-rules :rules="[ruleRequired]" @keypress.enter="gotoNext" />
       </div>
-      <div class="column col-xs-4">
-        <q-input
-          v-model.trim="houseNumber"
-          :label="$t('stepOne.houseNumber')"
-          name="house" outlined dense lazy-rules :rules="[ruleRequired]" style="min-width: 70px;"
-          @keypress.enter="gotoNext"
-        />
+      <div class="col-xs-4">
+        <q-input v-model.trim="houseNumber" name="house" :label="$t('stepOne.houseNumber')" outlined dense lazy-rules :rules="[ruleRequired]" style="min-width: 120px;" @keypress.enter="gotoNext" />
       </div>
     </div>
 
     <div class="q-col-gutter-sm row">
       <div class="col-xs-3">
-        <q-input
-          v-model.trim="postalCode"
-          :label="$t('stepOne.zipCode')"
-          name="zip" outlined dense lazy-rules :rules="[ruleRequired]" style="min-width: 70px;"
-          @keypress.enter="gotoNext"
-        />
+        <q-input v-model.trim="postalCode" name="zip" :label="$t('stepOne.zipCode')" outlined dense lazy-rules :rules="[ruleRequired]" style="min-width: 160px;" @keypress.enter="gotoNext" />
       </div>
-      <div class="column col-xs-5">
-        <q-input
-          v-model.trim="city"
-          :label="$t('stepOne.city')"
-          name="city" outlined dense lazy-rules
-          :rules="[ruleRequired]"
-          @keypress.enter="gotoNext"
-        />
+      <div class="col-xs-5">
+        <q-input v-model.trim="city" name="city" :label="$t('stepOne.city')" outlined dense lazy-rules :rules="[ruleRequired]" @keypress.enter="gotoNext" />
       </div>
       <div class="col-xs-4">
-        <q-input
-          v-model.trim="country"
-          :label="$t('stepOne.country')"
-          name="country" outlined dense lazy-rules :rules="[ruleRequired]"
-          @keypress.enter="gotoNext"
-        />
+        <q-input v-model.trim="country" name="country" :label="$t('stepOne.country')" outlined dense lazy-rules :rules="[ruleRequired]" @keypress.enter="gotoNext" />
       </div>
     </div>
 
     <hr>
     <div class="q-pt-lg q-pb-xs">{{ $t('preview.contact') }}</div>
     <div class="q-col-gutter-sm row">
-      <div class="column col-xs-12 col-md-6">
+      <div class="col-xs-12 col-md-6">
         <q-input
           v-model.trim="phone"
           :label="$t('stepOne.phone')"
@@ -87,7 +46,7 @@
           @keypress.enter="gotoNext"
         />
       </div>
-      <div class="column col-xs-12 col-md-6">
+      <div class="col-xs-12 col-md-6">
         <q-input
           v-model.trim="email"
           :label="$t('stepOne.email')"
@@ -159,6 +118,19 @@ export default
       socialAllowed()
       {
         return !!process.env.YAWIK_OAUTH_FACEBOOK || !!process.env.YAWIK_OAUTH_GOOGLE || !!process.env.YAWIK_OAUTH_LINKEDIN || !!process.env.YAWIK_OAUTH_GITHUB || !!process.env.YAWIK_OAUTH_DROPBOX;
+      },
+      salutationTypes()
+      {
+        return [
+          {
+            value: 1,
+            label: this.$t('stepOne.salutationTypes.Mister'),
+          },
+          {
+            value: 2,
+            label: this.$t('stepOne.salutationTypes.Missis'),
+          },
+        ];
       },
       salutation:
         {

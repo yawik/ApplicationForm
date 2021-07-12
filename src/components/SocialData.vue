@@ -92,7 +92,7 @@ export default
   {
     hello.on('auth.login', this.onLogin);
   },
-  beforeDestroy()
+  beforeUnmount()
   {
     hello.off('auth.login', this.onLogin);
   },

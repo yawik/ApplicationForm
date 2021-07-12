@@ -7,11 +7,11 @@
        @drop.prevent="chooseFile"
   >
     {{ $t('dropZone.dragDrop') }}
-    <label ref="file_btn" :for="'filebox_'+_uid" tabindex="0" @keypress="selectFile">
+    <label ref="file_btn" tabindex="0" @keypress="selectFile">
       {{ $t('dropZone.clickHere') }}
+      <input ref="file_ctrl" type="file" :accept="accept" :multiple="multiple" @change="chooseFile" @focus="resetFocus">
     </label>
     {{ $t('dropZone.chooseManually') }}.
-    <input :id="'filebox_'+_uid" ref="file_ctrl" type="file" :accept="accept" :multiple="multiple" @change="chooseFile" @focus="resetFocus">
   </div>
 </template>
 
@@ -32,6 +32,7 @@ export default
           default: 'image/*'
         }
     },
+  emits: ['change'],
   data()
   {
     return {

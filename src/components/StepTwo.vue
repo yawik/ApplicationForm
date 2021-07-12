@@ -14,6 +14,11 @@ export default
   name: 'StepTwo',
   props:
     {
+      stepper:
+        {
+          type: Object,
+          default: null
+        },
       width:
         {
           type: Number,

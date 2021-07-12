@@ -26,8 +26,8 @@ export default
         // TODO - if we store the data in Vuex, we can redirect to the relevant route; at the moment we can't because form data will be lost after the redirect
         this.$root.$i18n.locale = lang;
         import(
-          /* webpackInclude: /(de|en-gb)\.js$/ */
-          'quasar/lang/' + (lang === 'en' ? 'en-gb' : lang)
+          /* webpackInclude: /(de|en-GB)\.js$/ */
+          'quasar/lang/' + (lang === 'en' ? 'en-GB' : lang)
         ).then(lang =>
         {
           this.$q.lang.set(lang.default);

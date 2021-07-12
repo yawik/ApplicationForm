@@ -4,7 +4,11 @@
     <div class="row items-start">
       <DateInput
         ref="start"
-        v-model.trim="startDate" name="begin" placeholder="DD-MM-YYYY" lazy-rules
+        v-model.trim="startDate"
+        name="begin"
+        placeholder="DD-MM-YYYY"
+        lazy-rules
+        :rules="[ruleRequired]"
         :disable="immediately"
         style="max-width: 180px;"
       />
@@ -46,6 +50,11 @@ export default
   mixins: [validations],
   props:
     {
+      stepper:
+        {
+          type: Object,
+          default: null
+        },
       active:
         {
           type: Boolean,

@@ -1,5 +1,5 @@
 <template>
-  <q-dialog :value="value" maximized @input="close">
+  <q-dialog :model-value="modelValue" maximized @update:modelValue="close">
     <q-card flat class="yawik">
       <q-card-actions class="bg-primary text-white q-py-sm" align="center">
         <q-btn color="secondary" @click="close">{{ $t('buttons.close') }}</q-btn>
@@ -67,10 +67,6 @@
             </div>
           </div>
           <div class="q-mt-lg q-pb-md row items-center">
-            <!--
-            <q-icon name="mdi-checkbox-marked-outline" class="q-mr-sm" size="24px" color="grey-7" />
-            {{ $t('preview.acceptTerms') }}
-            -->
             <!-- eslint-disable vue/no-mutating-props -->
             <q-field :value="acceptTerms" class="field" lazy-rules :rules="[ruleRequired]" borderless dense>
               <template #control>
@@ -115,7 +111,7 @@ export default
   mixins: [validations],
   props:
     {
-      value:
+      modelValue:
         {
           type: Boolean,
           default: false
@@ -131,6 +127,7 @@ export default
           default: ''
         }
     },
+  emits: ['send', 'update:modelValue'],
   data()
   {
     return {
@@ -143,12 +140,10 @@ export default
       ...mapGetters([GET_FORM, GET_PHOTO, GET_FILES, GET_TERMS]),
       salutationsMap()
       {
-        const result = {};
-        this.$t('stepOne.salutationTypes').forEach(salutation =>
-        {
-          result[salutation.value] = salutation.label;
-        });
-        return result;
+        return {
+          1: this.$t('stepOne.salutationTypes.Mister'),
+          2: this.$t('stepOne.salutationTypes.Missis')
+        };
       },
       salaryPeriodMap()
       {
@@ -204,7 +199,7 @@ export default
       ...mapMutations([SET_TERMS]),
       close()
       {
-        this.$emit('input', false);
+        this.$emit('update:modelValue', false);
       },
       dateLocale(value)
       {
