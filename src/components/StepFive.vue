@@ -12,7 +12,7 @@
       </q-item-section>
     </q-item>
     <!-- Todo: create component start -->
-    <q-field :value="acceptTerms" class="field" lazy-rules :rules="[ruleRequired]" borderless dense>
+    <q-field :model-value="acceptTerms" class="field" lazy-rules :rules="[ruleRequired]" borderless dense>
       <template #control>
         <q-item v-ripple tag="label">
           <q-item-section avatar top>
@@ -42,6 +42,14 @@ export default
 {
   name: 'StepFive',
   mixins: [validations],
+  props:
+    {
+      stepper:
+        {
+          type: Object,
+          default: null
+        },
+    },
   computed:
     {
       ...mapGetters([GET_TERMS, GET_COPY]),
@@ -97,4 +105,5 @@ export default
       padding: 0;
     }
   }
+
 </style>

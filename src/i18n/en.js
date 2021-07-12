@@ -14,7 +14,7 @@ export default
   files:
     {
       photoRejected: 'File is larger than 2 MB',
-      attachmentsRejected: '{count} file(s) were rejected as they are larger than 9 MB'
+      attachmentsRejected: '{count} file(s) were rejected as they are larger than 2 MB'
     },
   buttons:
     {
@@ -40,16 +40,10 @@ export default
       title: 'Personal information',
       salutation: 'Salutation',
       salutationTypes:
-      [
         {
-          value: 1,
-          label: 'Mr.',
+          Mister: 'Mr.',
+          Missis: 'Mrs.'
         },
-        {
-          value: 2,
-          label: 'Mrs.',
-        },
-      ],
       firstName: 'First name',
       lastName: 'Last name',
       street: 'Street address',

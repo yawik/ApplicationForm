@@ -1,13 +1,10 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
+import { createStore } from 'vuex';
 import createPersistedState from 'vuex-persistedstate';
 import yawik from './yawik';
 
-Vue.use(Vuex);
-
 export default function(/* { ssrContext } */)
 {
-  const Store = new Vuex.Store({
+  const Store = createStore({
     modules: {
       yawik,
     },

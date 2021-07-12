@@ -29,23 +29,27 @@
         >
           <component :is="stepName" :active="currentStep === stepName" :stepper="stepper" :width="maxWidth" style="min-height: 500px;" />
         </q-step>
-        <div slot="navigation" class="row justify-end q-px-lg q-pb-lg">
-          <q-btn v-if="steps.indexOf(currentStep) > 0" name="prev" outline color="primary" :label="$t('buttons.back')" class="q-mr-md" @click.stop="navigate('previous')" />
-          <q-btn v-if="lastStep" color="primary" name="next" :label="$t('buttons.send')" @click.stop="trySubmit" />
-          <q-btn v-else color="primary" name="next" :label="$t('buttons.continue')" @click.stop="navigate('next')" />
-        </div>
+        <template #navigation>
+          <div class="row justify-end q-px-lg q-pb-lg">
+            <q-btn v-if="steps.indexOf(currentStep) > 0" name="prev" outline color="primary" :label="$t('buttons.back')" class="q-mr-md" @click.stop="navigate('previous')" />
+            <q-btn v-if="lastStep" color="primary" name="next" :label="$t('buttons.send')" @click.stop="trySubmit" />
+            <q-btn v-else color="primary" name="next" :label="$t('buttons.continue')" @click.stop="navigate('next')" />
+          </div>
+        </template>
       </q-stepper>
     </q-form>
     <DialogPreview v-model="dlgPreview" :job="jobName" :org="orgName" @send="dlgPreview = false, trySubmit()" />
     <q-overlay v-model="sending" no-scroll :z-index="5" background-color="rgba(0, 0, 0, 0.5)">
-      <div slot="body" class="fullscreen column justify-center items-center">
-        <q-spinner color="primary" size="3em" class="q-mb-lg" />
-        <q-linear-progress :value="progress" size="32px" color="secondary" track-color="white" rounded instant-feedback style="max-width: 260px;">
-          <div class="absolute-full flex flex-center">
-            <q-badge color="white" text-color="secondary" :label="(progress * 100).toFixed(1) + ' %'" />
-          </div>
-        </q-linear-progress>
-      </div>
+      <template #body>
+        <div class="fullscreen column justify-center items-center">
+          <q-spinner color="primary" size="3em" class="q-mb-lg" />
+          <q-linear-progress :value="progress" size="32px" color="secondary" track-color="white" rounded instant-feedback style="max-width: 260px;">
+            <div class="absolute-full flex flex-center">
+              <q-badge color="white" text-color="secondary" :label="(progress * 100).toFixed(1) + ' %'" />
+            </div>
+          </q-linear-progress>
+        </div>
+      </template>
     </q-overlay>
   </q-page>
 </template>
@@ -58,7 +62,7 @@ import StepFour from 'src/components/StepFour';
 import StepFive from 'src/components/StepFive';
 import SwitchLanguage from 'src/components/SwitchLanguage';
 import DialogPreview from 'src/components/DialogPreview';
-import { QOverlay } from '@quasar/quasar-ui-qoverlay';
+import { QOverlay } from '@quasar/quasar-ui-qoverlay/dist/index.esm.js';
 import { GET_COVER_LETTER, GET_FILES, GET_PHOTO, GET_FORM, CLEAR_FORM, GET_STEP, SET_STEP } from '../store/names';
 import { mapGetters, mapMutations } from 'vuex';
 
@@ -180,7 +184,7 @@ export default
     // we have to update maxWidth on window resize
     window.addEventListener('resize', this.onResize, false);
   },
-  beforeDestroy()
+  beforeUnmount()
   {
     window.removeEventListener('resize', this.onResize, false);
   },
@@ -210,7 +214,7 @@ export default
         do
         {
           node = node.$parent;
-          if (node.$options._componentTag === 'q-step')
+          if (node.$options.name === 'QStep')
           {
             if (node.name !== node.$parent.value)
             {
@@ -218,9 +222,9 @@ export default
               do
               {
                 node = node.$parent;
-                if (node.$options._componentTag === 'q-stepper')
+                if (node.$options.name === 'QStepper')
                 {
-                  node.$emit('input', newName);
+                  node.$emit('update:modelValue', newName);
                   break;
                 }
               } while (node !== this.$root);
@@ -239,7 +243,7 @@ export default
         do
         {
           node = node.$parent;
-          if (node.$options._componentTag === 'q-step') return node.name;
+          if (node.$options.name === 'QStep') return node.name;
         } while (node !== this.$root);
       },
       validationErrors(step)
@@ -247,7 +251,7 @@ export default
         if (!this.$refs.frm) return false;
         // get all components for the given step and check if they have a validation error
         const components = this.$refs.frm.getValidationComponents().filter(ref => this.findStep(ref) === step);
-        return step !== this.currentStep ? components.some(item => !item.validate()) : components.some(item => !!item.innerError);
+        return step !== this.currentStep ? components.some(item => !item.validate()) : components.some(item => item.hasError);
       },
       isCompleted(step)
       {

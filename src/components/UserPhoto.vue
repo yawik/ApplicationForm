@@ -29,6 +29,7 @@ export default
           default: 300
         }
     },
+  emits: ['remove'],
   computed:
     {
       stylePhoto()

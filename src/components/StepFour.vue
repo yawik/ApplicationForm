@@ -70,6 +70,14 @@ export default
       DropZone,
       UserPhoto,
     },
+  props:
+    {
+      stepper:
+        {
+          type: Object,
+          default: null
+        },
+    },
   data()
   {
     return {
@@ -147,7 +155,6 @@ export default
       }
     }
 };
-
 </script>
 
 <style>
