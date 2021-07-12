@@ -1,8 +1,13 @@
 <template>
-  <div>
+  <div class="yawik-stepper-three">
     <div class="q-pb-xs">{{ $t('stepThree.startDate') }}</div>
     <div class="row items-start">
-      <DateInput ref="start" v-model.trim="startDate" name="begin" placeholder="DD-MM-YYYY" lazy-rules :rules="[ruleRequired]" :disable="immediately" style="max-width: 180px;" />
+      <DateInput
+        ref="start"
+        v-model.trim="startDate" name="begin" placeholder="DD-MM-YYYY" lazy-rules
+        :disable="immediately"
+        style="max-width: 180px;"
+      />
       <q-checkbox v-model="immediately" :label="$t('stepThree.immediately')" class="q-ml-md" />
     </div>
 

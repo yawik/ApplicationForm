@@ -1,10 +1,20 @@
 <template>
-  <div class="row q-col-gutter-md">
+  <div class="row q-col-gutter-md yawik-stepper-width">
     <!-- Attachments -->
     <div class="col-6 column" style="border-right: 16px solid transparent;">
       <div class="q-pb-sm">{{ $t('stepFour.help') }}</div>
-      <q-uploader ref="uploader" class="uploader col-grow shadow-1" style="width: 100%; max-height: none;" multiple hide-upload-btn
-                  accept=".pdf,.doc,.docx,.xls,.xlsx,image/*" :max-total-size="maxFileSize" @rejected="rejectedFiles" @added="filesAdded" @removed="filesRemoved"
+      <q-uploader
+        ref="uploader"
+        class="uploader col-grow shadow-1"
+        style="width: 100%; max-height: none;"
+        multiple
+        hide-upload-btn
+        accept=".pdf,.doc,.docx,.odt,.xls,.xlsx,image/*"
+        :max-total-size="maxFileSize"
+        :max-files="5"
+        @rejected="rejectedFiles"
+        @added="filesAdded"
+        @removed="filesRemoved"
       >
         <template #list="scope">
           <q-list separator>
@@ -63,7 +73,7 @@ export default
   data()
   {
     return {
-      maxFileSize: 2e7, // in bytes
+      maxFileSize: 9437184, // 9MB in bytes
       maxImageSize: 300, // max width/height in pixels for user's photo
       image: '',
     };
@@ -137,6 +147,7 @@ export default
       }
     }
 };
+
 </script>
 
 <style>

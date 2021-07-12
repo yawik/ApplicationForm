@@ -1,20 +1,35 @@
 <template>
-  <div>
-    <div>
-      <q-checkbox v-model="carbonCopy" name="copy" :label="$t('stepFive.carbonCopy')" />
-    </div>
-
-    <div class="row">
-      <q-field :value="acceptTerms" class="field" lazy-rules :rules="[ruleRequired]" borderless dense>
-        <template #control>
-          <q-checkbox v-model="acceptTerms" name="terms">
-            <!-- eslint-disable vue/no-v-html -->
-            <div class="terms" v-html="$t('stepFive.privacyPolicy')" />
-            <!-- eslint-enable vue/no-v-html -->
-          </q-checkbox>
-        </template>
-      </q-field>
-    </div>
+  <div class="yawik-stepper-width">
+    <q-item v-ripple tag="label">
+      <q-item-section avatar top>
+        <q-checkbox v-model="carbonCopy" name="copy" />
+      </q-item-section>
+      <q-item-section>
+        <q-item-label>{{ $t('stepFive.ccTitle') }}</q-item-label>
+        <q-item-label caption>
+          {{ $t('stepFive.carbonCopy') }}
+        </q-item-label>
+      </q-item-section>
+    </q-item>
+    <!-- Todo: create component start -->
+    <q-field :value="acceptTerms" class="field" lazy-rules :rules="[ruleRequired]" borderless dense>
+      <template #control>
+        <q-item v-ripple tag="label">
+          <q-item-section avatar top>
+            <q-checkbox v-model="acceptTerms" name="terms" />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>{{ $t('Privacy') }}</q-item-label>
+            <q-item-label caption>
+              <!-- eslint-disable vue/no-v-html -->
+              <div class="terms" v-html="$t('stepFive.privacyPolicy', [urlPrivacy])" />
+              <!-- eslint-enable vue/no-v-html -->
+            </q-item-label>
+          </q-item-section>
+        </q-item>
+      </template>
+    </q-field>
+    <!-- Todo: create component end -->
   </div>
 </template>
 
@@ -52,6 +67,10 @@ export default
             this[SET_TERMS](value);
           }
         },
+      urlPrivacy()
+      {
+        return process.env.YAWIK_URL_PRIVACY;
+      },
     },
   methods:
     {
@@ -78,5 +97,4 @@ export default
       padding: 0;
     }
   }
-
 </style>

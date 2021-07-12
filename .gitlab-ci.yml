@@ -3,7 +3,6 @@ image: node:latest
 cache:
   key: ${CI_COMMIT_REF_SLUG}
   paths:
-    - .npm/
     - node_modules/
 
 workflow:
@@ -14,20 +13,37 @@ variables:
   NPM_TOKEN: ${CI_JOB_TOKEN}
 
 stages:
+  - test
   - release
   - deploy
+
+cypress:
+  image: cypress/browsers:node12.14.1-chrome85-ff81
+  stage: test
+  script:
+    - env | ( grep YAWIK || echo "ROUTER_BASE=/${CI_PAGES_URL#*://*/}/" )  > .env
+    - yarn 
+    - yarn dev &
+    - sleep 20
+    - npx cypress run form_submit.spec.js
+  only:
+    variables:
+      - $YAWIK_APPLICATION_FORM_ACTION == "https://form2mail.yawik.org/sendmail"
 
 publish:
   stage: release
   script:
-    - env | ( grep YAWIK && yarn && yarn semantic-release || echo "skip semantic-release" )
-  rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - env | ( grep YAWIK && yarn && yarn semantic-release || echo "skip semantic-release" ) > /dev/null
+  only:
+    variables:
+      - $YAWIK_APPLICATION_FORM_ACTION == "https://form2mail.yawik.org/sendmail"
+      - $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
 
 pages:
   stage: deploy
   script:
-    - env | ( grep YAWIK || echo "ROUTER_BASE=/${CI_PAGES_URL#*://*/}/" )  > .env
+    - env | ( grep YAWIK_ROUTER_BASE || echo "ROUTER_BASE=/${CI_PAGES_URL#*://*/}/" )  > .env
+    - env | ( grep YAWIK || echo -n "" )  >> .env
     - yarn
     - yarn build
     - mkdir .public

@@ -16,15 +16,14 @@ https://gitlab.cross-solution.de/CROSS/strategy/results/applicationform/-/issues
 currently works out of the box with our [Demo](https://yawik.org/demo/de)
 
 ```
-YAWIK_APPLICATION_FORM_ACTON=https://yawik.org/demo/dendmail
+YAWIK_APPLICATION_FORM_ACTON=https://yawik.org/demo/sendmail
 YAWIK_JOB_DETAIL_URL=https://yawik.org/demo/details
 ```
 
 ## Requirements
 
-* "node": ">= 10.18.1",
-* "npm": ">= 6.13.4",
-* "yarn": ">= 1.21.1"
+- [nodesjs](https://nodejs.org/)
+- [yarn](https://yarnpkg.com/) (recommended)
 
 ## Installation
 
@@ -48,15 +47,29 @@ The form is .env-aware.
 | YAWIK_OAUTH_GOOGLE           | App Identifier                      |
 | YAWIK_OAUTH_LINKEDIN         | App Identifier                      |
 | YAWIK_OAUTH_XING             | **not working**                     |
+| YAWIK_URL_OPERATOR           | Links to the opeartor of the form   |
+| YAWIK_URL_IMPRINT            | Link to the Imprint of the operator |
+| YAWIK_URL_PRIVACY            | Link to the Privacy notes           |
+| YAWIK_ROUTER_BASE            | BASE of the pages                   |
 
 If an **YAWIK_OAUTH_\*** variable is not shown, the feature is not used within the form.
 Linkedin and Xing are currently not working because of: https://github.com/MrSwitch/hello.js/issues/585
+
+It's possible to hide the Logo and the Footer by using query parameters. Usefull if you plan to use the form in an iframe.
+
+| Param        | Description       |
+|--------------|-------------------|
+| hl           | hide Logo         |
+| hf           | hide Footer       |
 
 ## Demo
 
 The demo is hosted as a Gitlab Page. The form checks users locale and redirects ...
 
-https://form.yawik.org/
+* https://form.yawik.org/
+* https://form.yawik.org/?job=sw-devel
+* https://form.yawik.org/?hl=1
+* https://form.yawik.org/?hf=1
 
 ## Documentation
 

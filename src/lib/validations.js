@@ -14,7 +14,7 @@ export default
       },
       validEmail(value)
       {
-        return value ? /^([a-zA-Z0-9]+\.|[a-zA-Z0-9]+[_-]+[a-zA-Z0-9]+\.)*([a-zA-Z0-9]+|[a-zA-Z0-9]+[_-]+[a-zA-Z0-9]+)@(([a-zA-Z0-9]+|[a-zA-Z0-9]+[-]+[a-zA-Z0-9]+)\.)+[a-zA-Z]{2,5}$/.test(value) || this.$t('rules.invalidEmail') : true;
+        return value ? /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(value) || this.$t('rules.invalidEmail') : true;
       }
     }
 };

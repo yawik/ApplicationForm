@@ -1,18 +1,26 @@
 <template>
   <q-page class="flex" padding>
     <q-form ref="frm" class="q-mx-auto" @submit="submitForm" @validation-error="hasErrors">
-      <div class="row q-pb-lg">
-        <SwitchLanguage class="q-mx-auto" />
+      <div class="justify-center q-pb-lg flex">
+        <q-btn-group push>
+          <q-btn name="preview" color="primary" outline @click="dlgPreview = true">
+            {{ $t('buttons.preview') }}
+          </q-btn>
+          <SwitchLanguage class="q-mx-auto" />
+          <q-btn name="abort" color="negative" @click="abortForm">{{ $q.platform.is.mobile ? $t('buttons.cancel') : $t('abortForm') }}</q-btn>
+        </q-btn-group>
       </div>
       <!-- eslint-disable quasar/no-invalid-props -->
       <q-stepper
         ref="stepper"
         v-model="currentStep"
         animated
+        bordered
         header-nav
         all-panels
         :swipeable="$q.platform.is.mobile"
         :contracted="$q.platform.is.mobile"
+        header-class="yawik-stepper"
       >
         <!-- eslint-enable quasar/no-invalid-props -->
         <q-step v-for="stepName in steps" :key="stepName" :name="stepName" :prefix="steps.indexOf(stepName)+1" :title="$t(stepName+'.title')"
@@ -27,10 +35,6 @@
           <q-btn v-else color="primary" name="next" :label="$t('buttons.continue')" @click.stop="navigate('next')" />
         </div>
       </q-stepper>
-      <div class="flex q-py-md justify-center">
-        <q-btn name="preview" color="primary" class="q-mr-md" outline @click="dlgPreview = true">{{ $t('previewForm') }}</q-btn>
-        <q-btn name="abort" color="negative" class="q-ml-md" @click="abortForm">{{ $t('abortForm') }}</q-btn>
-      </div>
     </q-form>
     <DialogPreview v-model="dlgPreview" :job="jobName" :org="orgName" @send="dlgPreview = false, trySubmit()" />
     <q-overlay v-model="sending" no-scroll :z-index="5" background-color="rgba(0, 0, 0, 0.5)">
@@ -98,7 +102,7 @@ export default
   },
   computed:
     {
-      ...mapGetters([GET_COVER_LETTER, GET_FORM, GET_STEP, GET_FILES]),
+      ...mapGetters([GET_COVER_LETTER, GET_FORM, GET_STEP, GET_FILES, GET_PHOTO]),
       currentStep:
         {
           get()

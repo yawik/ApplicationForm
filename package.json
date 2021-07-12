@@ -16,19 +16,19 @@
     "semantic-release": "semantic-release"
   },
   "dependencies": {
-    "@quasar/extras": "^1.0.0",
+    "@quasar/extras": "^1.10.8",
     "@quasar/quasar-ui-qoverlay": "^1.0.5",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "hellojs": "^1.19.3",
-    "quasar": "^1.0.0",
+    "quasar": "^1.15.21",
     "vue-i18n": "^8.22.4",
     "vuex-persistedstate": "^2.7.0"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.13.14",
     "@kazupon/vue-i18n-loader": "^0.3.0",
-    "@quasar/app": "^2.0.0",
+    "@quasar/app": "^2.2.10",
     "@semantic-release/git": "^9.0.0",
     "@semantic-release/gitlab": "^6.0.5",
     "@semantic-release/npm": "^7.0.8",

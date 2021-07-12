@@ -40,3 +40,4 @@ package-lock.json
 .npm
 .env.*
 /build
+/cypress/videos/

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="yawik-stepper-width">
     <div class="q-pb-xs">{{ $t('stepTwo.description') }}</div>
     <q-editor ref="editor" v-model="coverLetter" name="letter" min-height="435px" :content-style="{'max-width': width ? width - 50 + 'px' : 'none'}" />
   </div>

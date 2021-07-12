@@ -25,3 +25,18 @@ body
   display: table;
   clear: both;
 }
+
+.yawik-stepper
+{
+  background-color: #F7F7F7;
+}
+
+.yawik-stepper-width
+{
+  max-width: $yawik-max-stepper-width;
+}
+
+.yawik
+{
+  background-color: #EEF4FB;
+}

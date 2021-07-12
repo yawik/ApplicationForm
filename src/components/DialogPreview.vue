@@ -1,33 +1,21 @@
 <template>
   <q-dialog :value="value" maximized @input="close">
-    <q-card flat>
+    <q-card flat class="yawik">
       <q-card-actions class="bg-primary text-white q-py-sm" align="center">
         <q-btn color="secondary" @click="close">{{ $t('buttons.close') }}</q-btn>
       </q-card-actions>
       <q-card-section class="row">
-        <div class="q-mx-auto q-card--bordered rounded-borders q-px-lg q-pb-lg" style="min-width: 40%; max-width: 1024px; border-style: double; border-width: 3px;">
+        <div class="bg-white q-mx-auto q-card--bordered rounded-borders q-px-lg q-pb-lg" style="min-width: 50%; max-width: 1024px; border-style: double; border-width: 3px;">
           <h4 align="center" class="q-my-sm">{{ $t('preview.title') }}</h4>
           <h6 v-if="job || org" align="center" class="q-my-sm">{{ org }} &nbsp;&mdash;&nbsp; {{ job }}</h6>
           <!-- Personal details -->
           <div class="row">
             <div class="col-6 row justify-center items-center q-pa-md">
               <img v-if="GET_PHOTO" :src="photoURL" class="user_photo rounded-borders">
-              <img v-else src="~src/images/avatar.svg" width="200" height="200">
+              <img v-else src="~src/images/Person.svg" width="200" height="200">
             </div>
             <div class="col-6 q-pa-md">
               <h5 class="q-my-md">{{ `${salutationsMap[GET_FORM.salutation] || ''} ${GET_FORM.firstName || 'John'} ${GET_FORM.lastName || 'Doe'}` }}</h5>
-              <div>
-                <strong>{{ $t('preview.email') }}:</strong> &nbsp; {{ GET_FORM.email || 'n/a' }}
-              </div>
-              <div>
-                <strong>{{ $t('preview.phone') }}:</strong> &nbsp; {{ GET_FORM.phone || 'n/a' }}
-              </div>
-              <div>
-                <strong>{{ $t('preview.canStart') }}:</strong> &nbsp; {{ GET_FORM.startDate ? dateLocale(GET_FORM.startDate) : 'n/a' }}
-              </div>
-              <div v-if="GET_FORM.salaryAmount">
-                <strong>{{ $t('preview.expectedSalary') }}:</strong> &nbsp; {{ `${thousand(GET_FORM.salaryAmount,' ',GET_FORM.salaryPeriod === 3 ? 2 : 0)} ${GET_FORM.currency}/${salaryPeriodMap[GET_FORM.salaryPeriod]}` }}
-              </div>
               <div class="q-mt-md">
                 <strong>{{ $t('preview.address') }}:</strong> &nbsp;
                 <br>
@@ -37,6 +25,28 @@
                 <br>
                 {{ `${GET_FORM.country || $t('stepOne.country')}` }}
               </div>
+              <q-separator />
+              <div>
+                <strong>{{ $t('preview.email') }}:</strong> &nbsp; {{ GET_FORM.email || 'n/a' }}
+              </div>
+              <div>
+                <strong>{{ $t('preview.phone') }}:</strong> &nbsp; {{ GET_FORM.phone || 'n/a' }}
+              </div>
+            </div>
+          </div>
+          <q-separator />
+          <div class="q-pt-md">
+            <div>
+              <strong>{{ $t('preview.canStart') }}:</strong> &nbsp;
+              <span v-if="GET_FORM.immediate">
+                {{ $t('stepThree.immediately') }}
+              </span>
+              <span v-else>
+                {{ GET_FORM.startDate ? dateLocale(GET_FORM.startDate) : 'n/a' }}
+              </span>
+            </div>
+            <div v-if="GET_FORM.salaryAmount">
+              <strong>{{ $t('preview.expectedSalary') }}:</strong> &nbsp; {{ `${thousand(GET_FORM.salaryAmount,' ',GET_FORM.salaryPeriod === 3 ? 2 : 0)} ${GET_FORM.currency}/${salaryPeriodMap[GET_FORM.salaryPeriod]}` }}
             </div>
           </div>
           <!-- Cover letter -->
@@ -62,11 +72,23 @@
             {{ $t('preview.acceptTerms') }}
             -->
             <!-- eslint-disable vue/no-mutating-props -->
-            <q-checkbox v-model="acceptTerms">
-              <!-- eslint-disable vue/no-v-html -->
-              <div class="terms" v-html="$t('stepFive.privacyPolicy')" />
-              <!-- eslint-enable vue/no-v-html -->
-            </q-checkbox>
+            <q-field :value="acceptTerms" class="field" lazy-rules :rules="[ruleRequired]" borderless dense>
+              <template #control>
+                <q-item v-ripple tag="label">
+                  <q-item-section avatar top>
+                    <q-checkbox v-model="acceptTerms" name="terms" />
+                  </q-item-section>
+                  <q-item-section>
+                    <q-item-label>{{ $t('Privacy') }}</q-item-label>
+                    <q-item-label caption>
+                      <!-- eslint-disable vue/no-v-html -->
+                      <div class="terms" v-html="$t('stepFive.privacyPolicy', [urlPrivacy])" />
+                      <!-- eslint-enable vue/no-v-html -->
+                    </q-item-label>
+                  </q-item-section>
+                </q-item>
+              </template>
+            </q-field>
             <!-- eslint-enable vue/no-mutating-props -->
           </div>
           <!-- Signature -->
@@ -83,12 +105,14 @@
 </template>
 
 <script>
+import validations from 'src/lib/validations';
 import { mapGetters, mapMutations } from 'vuex';
 import { GET_FORM, GET_PHOTO, GET_FILES, GET_TERMS, SET_TERMS } from '../store/names';
 
 export default
 {
   name: 'DialogPreview',
+  mixins: [validations],
   props:
     {
       value:
@@ -140,7 +164,11 @@ export default
         {
           this[SET_TERMS](value);
         }
-      }
+      },
+      urlPrivacy()
+      {
+        return process.env.YAWIK_URL_PRIVACY;
+      },
     },
   watch:
     {

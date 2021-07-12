@@ -2,7 +2,7 @@
   <q-btn-dropdown color="primary">
     <template #label>
       <img :src="'flags/'+$root.$i18n.locale+'.png'" width="28" :alt="$root.$i18n.locale.substr(0, 2).toUpperCase()" class="q-mr-md">
-      {{ $t('localeName') }}
+      {{ $q.platform.is.mobile ? '' : $t('localeName') }}
     </template>
     <q-list>
       <q-item v-for="(msg,lang) in $root.$i18n.messages" :key="lang" v-close-popup clickable class="items-center" @click="setLocale(lang)">
