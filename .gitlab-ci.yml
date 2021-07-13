@@ -22,7 +22,6 @@ cypress:
   stage: test
   script:
     - env | ( grep YAWIK || echo "ROUTER_BASE=/${CI_PAGES_URL#*://*/}/" )  > .env
-    - cat .env
     - yarn 
     - yarn dev &
     - sleep 30
