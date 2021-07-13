@@ -24,7 +24,7 @@ cypress:
     - env | ( grep YAWIK || echo "ROUTER_BASE=/${CI_PAGES_URL#*://*/}/" )  > .env
     - yarn 
     - yarn dev &
-    - sleep 20
+    - sleep 30
     - npx cypress run form_submit.spec.js
   only:
     variables:
