@@ -25,7 +25,8 @@ export default
       cancel: 'Abbrechen',
       close: 'Schließen',
       remove: 'Löschen',
-      preview: 'Vorschau'
+      preview: 'Vorschau',
+      contact: 'Kontakt'
     },
   rules:
     {
@@ -38,16 +39,10 @@ export default
       title: 'Persönliche Angaben',
       salutation: 'Anrede',
       salutationTypes:
-        [
-          {
-            value: 1,
-            label: 'Herr',
-          },
-          {
-            value: 2,
-            label: 'Frau',
-          },
-        ],
+        {
+          Mister: 'Herr',
+          Missis: 'Frau',
+        },
       firstName: 'Vorname',
       lastName: 'Name',
       street: 'Strasse',
@@ -105,7 +100,7 @@ export default
       phone: 'Tel.',
       contact: 'Kontakt',
       address: 'Anschrift',
-      canStart: 'frühester Eintrittstermin',
+      canStart: 'frühester Eintrittstermin.',
       expectedSalary: 'Gehaltsvorstellung',
       acceptTerms: 'Ich habe die Datenschutzbestimmungen gelesen und akzeptiere sie.'
     },
@@ -120,5 +115,6 @@ export default
         },
       amount: 'Gehaltsvorstellung',
       currency: 'Währung',
-    }
+    },
+  copyright: '\xA9 {year} YAWIK'
 };

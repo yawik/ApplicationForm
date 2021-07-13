@@ -47,7 +47,7 @@ export default
   mixins: [validations],
   props:
     {
-      value:
+      modelValue:
         {
           type: Object,
           default: () => ({})
@@ -58,6 +58,7 @@ export default
           default: ''
         }
     },
+  emits: ['update:modelValue'],
   data()
   {
     return {
@@ -85,7 +86,7 @@ export default
     },
   watch:
     {
-      value:
+      modelValue:
         {
           immediate: true,
           handler(newVal)
@@ -102,7 +103,7 @@ export default
           deep: true,
           handler(newVal)
           {
-            this.$emit('input', newVal);
+            this.$emit('update:modelValue', newVal);
           }
         }
     }

@@ -1,4 +1,4 @@
-import Vue from 'vue';
+import { boot } from 'quasar/wrappers';
 import axios from 'axios';
 
 const api = axios.create({
@@ -8,4 +8,9 @@ const api = axios.create({
   }
 });
 
-Vue.prototype.$axios = api;
+export default boot(({ app }) =>
+{
+  app.config.globalProperties.$axios = api;
+});
+
+export { api };

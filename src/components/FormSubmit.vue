@@ -1,10 +1,10 @@
 <template>
-  <q-dialog :value="value" :persistent="saving" @input="close">
+  <q-dialog :model-value="modelValue" :persistent="saving" @update:model-value="close">
     <q-card>
       <q-card-section class="text-h6 bg-primary text-white">{{ $t('submitting') }}</q-card-section>
       <q-card-section>
         <q-uploader ref="uploader" class="uploader shadow-1" multiple batch :url="uploadURL"
-                    :headers="[{name: 'X-Requested-With', value: 'XmlHttpRequest'}]" :max-total-size="10*1024*1024"
+                    :headers="[{name: 'X-Requested-With', value: 'XmlHttpRequest'}]" :max-total-size="2*1024*1024"
                     field-name="upload[]" :form-fields="formFields" hide-upload-btn style="min-height: 320px;"
                     @uploaded="success" @failed="failure"
         >
@@ -51,7 +51,7 @@ export default
   name: 'FormSubmit',
   props:
     {
-      value:
+      modelValue:
         {
           type: Boolean,
           default: false
@@ -67,6 +67,7 @@ export default
           default: () => []
         },
     },
+  emits: ['update:modelValue'],
   data()
   {
     return {
@@ -108,7 +109,7 @@ export default
     {
       close()
       {
-        this.$emit('input', false);
+        this.$emit('update:modelValue', false);
       },
       startUpload()
       {

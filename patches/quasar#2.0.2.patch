@@ -1,0 +1,56 @@
+Index: \quasar\src\composables\private\use-panel.js
+===================================================================
+--- \quasar\src\composables\private\use-panel.js
++++ \quasar\src\composables\private\use-panel.js
+@@ -1,5 +1,5 @@
+-import { h, ref, computed, watch, nextTick, getCurrentInstance, Transition, KeepAlive } from 'vue'
++import { h, ref, computed, watch, nextTick, getCurrentInstance, Transition, TransitionGroup, KeepAlive, withDirectives, vShow } from 'vue'
+ 
+ import TouchSwipe from '../../directives/TouchSwipe.js'
+ 
+ import useCache from '../../composables/private/use-cache.js'
+@@ -36,9 +36,10 @@
+ 
+   keepAlive: Boolean,
+   keepAliveInclude: [ String, Array, RegExp ],
+   keepAliveExclude: [ String, Array, RegExp ],
+-  keepAliveMax: Number
++  keepAliveMax: Number,
++  allPanels: Boolean
+ }
+ 
+ export const usePanelEmits = [ 'update:modelValue', 'before-transition', 'transition' ]
+ 
+@@ -200,9 +201,17 @@
+     const panel = isValidPanelName(props.modelValue)
+       && updatePanelIndex()
+       && panels[ panelIndex.value ]
+ 
+-    return props.keepAlive === true
++    return props.allPanels === true  // ensure all panels are always mounted - to avoid form validation rules misses
++      ? panels.map((eachPanelItem, eachPanelIndex) =>
++        withDirectives(h('div', {
++          class: 'q-panel scroll',
++          key: eachPanelItem.key,
++          role: 'tabpanel'          
++        }, [ eachPanelItem ]), [[vShow, eachPanelIndex === panelIndex.value]])
++      )
++      : props.keepAlive === true
+       ? [
+           h(KeepAlive, keepAliveProps.value, [
+             h(
+               needsUniqueKeepAliveWrapper.value === true
+@@ -228,10 +237,11 @@
+     }
+ 
+     return props.animated === true
+       ? [
+-          h(Transition, {
+-            name: panelTransition.value
++          h(getPanelContentChild().length > 1 ? TransitionGroup : Transition, {
++            name: panelTransition.value,
++            mode: 'out-in'
+           }, getPanelContentChild)
+         ]
+       : getPanelContentChild()
+   }

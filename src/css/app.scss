@@ -11,12 +11,9 @@ body
   margin: 0;
 }
 
-#q-app
+.q-field
 {
-  .q-field
-  {
-    font-size: 1rem;
-  }
+  font-size: 1rem;
 }
 
 .clear_float::after

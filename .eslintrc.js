@@ -32,7 +32,7 @@ module.exports = {
     // See https://eslint.vuejs.org/rules/#available-rules
     // 'plugin:vue/essential', // Priority A: Essential (Error Prevention)
     // 'plugin:vue/strongly-recommended', // Priority B: Strongly Recommended (Improving Readability)
-    'plugin:vue/recommended', // Priority C: Recommended (Minimizing Arbitrary Choices and Cognitive Overhead)
+    'plugin:vue/vue3-recommended', // Priority C: Recommended (Minimizing Arbitrary Choices and Cognitive Overhead)
 
     'standard',
     "plugin:quasar/standard"
@@ -245,7 +245,7 @@ module.exports = {
     'vue/next-tick-style': ['error', 'callback'],
     'vue/no-bare-strings-in-template': ['error', {
       allowlist: [
-        '(', ')', ',', '.', '&', '+', '-', '=', '*', '/', '#', '%', '$', '!', '?', ':', '[', ']', '{', '}', '<', '>', 
+        '(', ')', ',', '.', '&', '+', '-', '=', '*', '/', '#', '%', '$', '!', '?', ':', '[', ']', '{', '}', '<', '>',
         '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '\u00b7', '\u200B', '\u2022', '\u2010', '\u2013', '\u2014', '\u2212', '|'
       ],
       attributes: {
@@ -284,10 +284,12 @@ module.exports = {
     }],
     'vue/require-name-property': 'error',
     'vue/v-for-delimiter-style': ['error', 'in'],
+    /*
     'vue/v-on-event-hyphenation': ['error', 'always', {
       autofix: false,
       ignore: []
     }],
+    */
     'vue/v-on-function-call': 'error',
     'vue/valid-next-tick': 'error',
     'vue/array-bracket-spacing': 'error',
