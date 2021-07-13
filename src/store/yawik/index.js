@@ -42,7 +42,9 @@ import {
   SET_COPY,
   SET_TERMS,
   SET_FILES,
-  SET_STEP
+  SET_STEP,
+  ADD_FILE,
+  REMOVE_FILE
 } from '../names';
 
 const emptyForm = {
@@ -280,6 +282,15 @@ export default
       [SET_STEP](state, value)
       {
         state.form.step = value;
+      },
+      [ADD_FILE](state, file)
+      {
+        state.attachments.push(file);
+      },
+      [REMOVE_FILE](state, file)
+      {
+        const idx = state.attachments.indexOf(file);
+        if (idx !== -1) state.attachments.splice(idx, 1);
       }
     }
 };

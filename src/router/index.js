@@ -1,9 +1,5 @@
-import Vue from 'vue';
-import VueRouter from 'vue-router';
-
+import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router';
 import routes from './routes';
-
-Vue.use(VueRouter);
 
 /*
  * If not building with SSR mode, you can
@@ -16,18 +12,18 @@ Vue.use(VueRouter);
 
 export default function(/* { store, ssrContext } */)
 {
-  const router = new VueRouter({
+  const createHistory = process.env.VUE_ROUTER_MODE === 'history' ? createWebHistory : createWebHashHistory;
+  const router = createRouter({
     scrollBehavior: () => ({
-      x: 0,
-      y: 0
+      left: 0,
+      top: 0
     }),
     routes,
 
-    // Leave these as they are and change in quasar.conf.js instead!
+    // Leave this as is and make changes in quasar.conf.js instead!
     // quasar.conf.js -> build -> vueRouterMode
     // quasar.conf.js -> build -> publicPath
-    mode: process.env.VUE_ROUTER_MODE,
-    base: process.env.VUE_ROUTER_BASE
+    history: createHistory(process.env.MODE === 'ssr' ? undefined : process.env.VUE_ROUTER_BASE)
   });
 
   router.beforeEach((to, from, next) =>

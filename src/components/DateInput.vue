@@ -1,10 +1,12 @@
 <template>
-  <q-input ref="date" :value="value" :mask="$root.$i18n.locale === 'de' ? '##.##.####' : '##-##-####'" :rules="(rules || []).concat([validDMY])" outlined dense v-bind="$attrs" @input="updateValue">
-    <q-icon slot="append" name="mdi-calendar-month" class="cursor-pointer">
-      <q-popup-proxy ref="qStartDate" transition-show="scale" transition-hide="scale">
-        <q-date :value="value" first-day-of-week="1" mask="DD-MM-YYYY" minimal @input="hideCalendar" />
-      </q-popup-proxy>
-    </q-icon>
+  <q-input ref="date" :model-value="modelValue" :mask="$root.$i18n.locale === 'de' ? '##.##.####' : '##-##-####'" :rules="(rules || []).concat([validDMY])" outlined dense v-bind="$attrs" @update:modelValue="updateValue">
+    <template #append>
+      <q-icon name="mdi-calendar-month" class="cursor-pointer">
+        <q-popup-proxy ref="qStartDate" transition-show="scale" transition-hide="scale">
+          <q-date :model-value="modelValue" first-day-of-week="1" mask="DD-MM-YYYY" minimal @update:modelValue="hideCalendar" />
+        </q-popup-proxy>
+      </q-icon>
+    </template>
   </q-input>
 </template>
 
@@ -18,7 +20,7 @@ export default
   inheritAttrs: false,
   props:
     {
-      value:
+      modelValue:
         {
           type: String,
           default: ''
@@ -29,15 +31,16 @@ export default
           default: () => []
         },
     },
+  emits: ['update:modelValue'],
   methods:
     {
       updateValue(value)
       {
-        this.$emit('input', value);
+        this.$emit('update:modelValue', value);
       },
       hideCalendar(value)
       {
-        this.$emit('input', value);
+        this.$emit('update:modelValue', value);
         this.$refs.qStartDate.hide();
       },
       focus()

@@ -3,16 +3,18 @@
     <q-page-container style="overflow-x: hidden;">
       <img v-if="showLogo" class="block q-mx-auto q-mt-sm" :src="logo || 'yawik-logo.png'" style="max-width: 800px; max-height: 160px;">
       <div class="text-center text-h6 q-mt-md">
-        <span if="jobTitle" class="text-center text-h6 q-mt-md">
+        <span v-if="jobTitle" class="text-center text-h6 q-mt-md">
           <a :href="jobLink">{{ jobTitle }}</a>
         </span>
         <span v-if="orgName" class="text-center text-h6 q-mt-md">
           - {{ orgName }}
         </span>
       </div>
-      <transition name="fade" appear mode="out-in">
-        <router-view :job-name="jobTitle" :org-name="orgName" />
-      </transition>
+      <router-view v-slot="{ Component }" :job-name="jobTitle" :org-name="orgName">
+        <transition name="fade" appear mode="out-in">
+          <component :is="Component" />
+        </transition>
+      </router-view>
     </q-page-container>
     <PageFooter v-if="showFooter" />
   </q-layout>
@@ -31,7 +33,8 @@ export default
       titleTemplate: title => `${title} ` + (this.orgName ? ' - ' + this.orgName : '')
     };
   },
-  components: {
+  components:
+  {
     PageFooter
   },
   data()
@@ -63,8 +66,8 @@ export default
     const lang = this.$route.params.lang;
     this.$root.$i18n.locale = lang;
     import(
-      /* webpackInclude: /(de|en-gb)\.js$/ */
-      'quasar/lang/' + (lang === 'en' ? 'en-gb' : lang)
+      /* webpackInclude: /(de|en-GB)\.js$/ */
+      'quasar/lang/' + (lang === 'en' ? 'en-GB' : lang)
     ).then(lang =>
     {
       this.$q.lang.set(lang.default);
