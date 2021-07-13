@@ -3,7 +3,7 @@
     <SocialData v-if="socialAllowed" />
 
     <div class="q-pt-lg q-pb-xs">{{ $t('preview.address') }}</div>
-    <q-option-group v-model="salutation" :options="salutationTypes" :label="$t('stepOne.stepOne.salutation')" color="primary" inline name="salutation" />
+    <q-option-group v-model="salutation" :options="salutationTypes" :label="$t('stepOne.salutation')" color="primary" inline name="salutation" />
 
     <div class="q-col-gutter-sm row">
       <div class="col-6 column">
