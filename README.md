@@ -43,7 +43,9 @@ The form is .env-aware.
 | YAWIK_APPLICATION_FORM_ACTON | URL to which form data is sent      |
 | YAWIK_JOB_DETAIL_URL         | URL where we get title or company   |
 | YAWIK_ORGANIZATION           | Organizaion ID                      |
+| YAWIK_OAUTH_DROPBOX          | App Identifier                      |
 | YAWIK_OAUTH_FACEBOOK         | App Identifier                      |
+| YAWIK_OAUTH_GITHUB           | App Identifier                      |
 | YAWIK_OAUTH_GOOGLE           | App Identifier                      |
 | YAWIK_OAUTH_LINKEDIN         | App Identifier                      |
 | YAWIK_OAUTH_XING             | **not working**                     |
@@ -52,7 +54,8 @@ The form is .env-aware.
 | YAWIK_URL_PRIVACY            | Link to the Privacy notes           |
 | YAWIK_ROUTER_BASE            | BASE of the pages                   |
 
-If an **YAWIK_OAUTH_\*** variable is not shown, the feature is not used within the form.
+If an **YAWIK_OAUTH_\*** variable is empty, the feature is not used within the form.
+
 Linkedin and Xing are currently not working because of: https://github.com/MrSwitch/hello.js/issues/585
 
 It's possible to hide the Logo and the Footer by using query parameters. Usefull if you plan to use the form in an iframe.
