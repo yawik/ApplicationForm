@@ -1,14 +1,27 @@
 <template>
   <q-layout view="lHh Lpr lFf" class="yawik">
+    <q-header v-if="showToolbar" reveal class="bg-white text-primary">
+      <q-toolbar>
+        <q-toolbar-title>
+          <Logo :logo="logo" />
+        </q-toolbar-title>
+        <q-btn dense flat round
+               :icon="right ? 'mdi-menu' : 'mdi-menu-open'"
+               @click="right = !right"
+        />
+      </q-toolbar>
+      <drawer v-model="right" />
+    </q-header>
     <q-page-container style="overflow-x: hidden;">
-      <img v-if="showLogo" class="block q-mx-auto q-mt-sm" :src="logo || 'yawik-logo.png'" style="max-width: 800px; max-height: 160px;">
       <div class="text-center text-h6 q-mt-md">
+        <Logo v-if="showLogo && !showToolbar"
+              :logo="logo"
+              class="text-center"
+        />
         <span v-if="jobTitle" class="text-center text-h6 q-mt-md">
           <a :href="jobLink">{{ jobTitle }}</a>
         </span>
-        <span v-if="orgName" class="text-center text-h6 q-mt-md">
-          - {{ orgName }}
-        </span>
+        <span v-if="orgName" class="text-center text-h6 q-mt-md"> - {{ orgName }}</span>
       </div>
       <router-view v-slot="{ Component }" :job-name="jobTitle" :org-name="orgName">
         <transition name="fade" appear mode="out-in">
@@ -21,7 +34,10 @@
 </template>
 
 <script>
+
 import PageFooter from '../components/PageFooter';
+import Drawer from './parts/Drawer.vue';
+import Logo from '../components/Logo';
 
 export default
 {
@@ -35,15 +51,18 @@ export default
   },
   components:
   {
-    PageFooter
+    PageFooter,
+    Drawer,
+    Logo
   },
   data()
   {
     return {
       jobLink: '',
       jobTitle: this.jobTitle ? 'Bewerbung auf: ' + this.jobTitle : 'Initiativbewerbung',
-      orgName: '',
-      logo: '',
+      orgName: this.orgName ? this.orgName : '',
+      logo: this.logo ? this.logo : 'yawik-logo.png',
+      right: false
     };
   },
   computed:
@@ -59,6 +78,10 @@ export default
       showFooter()
       {
         return !this.$route.query.hf;
+      },
+      showToolbar()
+      {
+        return this.$route.query.tb;
       },
     },
   created()

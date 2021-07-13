@@ -3,6 +3,7 @@ export default
   localeName: 'Deutsch',
   previewForm: 'Vorschau',
   abortForm: 'Abbrechen',
+  noteAbort: 'alle Formular Daten werden gelöscht.',
   submitting: 'Bewerbung absenden',
   submitFailed: 'Versand fehlgeschlagen',
   success: 'Success',
@@ -116,5 +117,6 @@ export default
       amount: 'Gehaltsvorstellung',
       currency: 'Währung',
     },
-  copyright: '\xA9 {year} YAWIK'
+  copyright: '\xA9 {year} YAWIK',
+  login: 'Anmelden'
 };
