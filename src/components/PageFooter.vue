@@ -13,7 +13,7 @@
           target="_blank"
           :href="urlOperator"
         >
-          {{ $t('(c)') + ' ' + new Date().getFullYear() + ' ' + $t('yawik') }}
+          {{ $t('copyright', {year: new Date().getFullYear() }) }}
         </q-btn>
       </q-tab>
       <q-tab

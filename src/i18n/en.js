@@ -99,6 +99,7 @@ export default
       title: 'Application Form',
       email: 'E-mail',
       phone: 'Tel',
+      contact: 'Contact',
       address: 'Address',
       canStart: 'Can start on',
       expectedSalary: 'Expected salary',
@@ -115,5 +116,6 @@ export default
         },
       amount: 'Expected amount',
       currency: 'Currency',
-    }
+    },
+  copyright: '\xA9 {year} YAWIK'
 };

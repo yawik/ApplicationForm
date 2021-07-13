@@ -59,7 +59,7 @@
 <script>
 import DropZone from 'src/components/DropZone';
 import UserPhoto from 'src/components/UserPhoto';
-import { GET_PHOTO, SET_PHOTO, GET_FILES } from '../store/names';
+import { GET_PHOTO, SET_PHOTO, ADD_FILE, REMOVE_FILE } from '../store/names';
 import { mapGetters, mapMutations } from 'vuex';
 
 export default
@@ -88,7 +88,7 @@ export default
   },
   computed:
     {
-      ...mapGetters([GET_FILES, GET_PHOTO]),
+      ...mapGetters([GET_PHOTO]),
       photo:
         {
           get()
@@ -103,7 +103,7 @@ export default
     },
   methods:
     {
-      ...mapMutations([SET_PHOTO]),
+      ...mapMutations([SET_PHOTO, ADD_FILE, REMOVE_FILE]),
       choosePhoto(list)
       {
         if (list[0].size)
@@ -138,19 +138,16 @@ export default
       },
       filesAdded(files)
       {
-        const attached = this[GET_FILES];
         files.forEach(file =>
         {
-          attached.push(file);
+          this[ADD_FILE](file);
         });
       },
       filesRemoved(files)
       {
-        const attached = this[GET_FILES];
         files.forEach(file =>
         {
-          const idx = attached.indexOf(file);
-          if (idx !== -1) attached.splice(idx, 1);
+          this[REMOVE_FILE](file);
         });
       }
     }

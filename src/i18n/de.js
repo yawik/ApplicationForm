@@ -115,5 +115,6 @@ export default
         },
       amount: 'Gehaltsvorstellung',
       currency: 'Währung',
-    }
+    },
+  copyright: '\xA9 {year} YAWIK'
 };

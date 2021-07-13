@@ -250,8 +250,9 @@ export default
       {
         if (!this.$refs.frm) return false;
         // get all components for the given step and check if they have a validation error
-        const components = this.$refs.frm.getValidationComponents().filter(ref => this.findStep(ref) === step);
-        return step !== this.currentStep ? components.some(item => !item.validate()) : components.some(item => item.hasError);
+        return false;
+        //const components = this.$refs.frm.getValidationComponents().filter(ref => this.findStep(ref) === step);
+        //return step !== this.currentStep ? components.some(item => !item.validate()) : components.some(item => item.hasError);
       },
       isCompleted(step)
       {
