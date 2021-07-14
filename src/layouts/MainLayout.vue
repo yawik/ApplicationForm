@@ -3,8 +3,9 @@
     <q-header v-if="showToolbar" reveal class="bg-white text-primary">
       <q-toolbar>
         <q-toolbar-title>
-          <Logo :logo="logo" />
+          <logo v-if="showToolbar" :logo-url="orgLogo" />
         </q-toolbar-title>
+        <SwitchLanguage class="q-mx-auto" />
         <q-btn dense flat round
                :icon="right ? 'mdi-menu' : 'mdi-menu-open'"
                @click="right = !right"
@@ -14,8 +15,8 @@
     </q-header>
     <q-page-container style="overflow-x: hidden;">
       <div class="text-center text-h6 q-mt-md">
-        <Logo v-if="showLogo && !showToolbar"
-              :logo="logo"
+        <logo v-if="showLogo && !showToolbar"
+              :logo-url="orgLogo"
               class="text-center"
         />
         <span v-if="jobTitle" class="text-center text-h6 q-mt-md">
@@ -36,8 +37,9 @@
 <script>
 
 import PageFooter from '../components/PageFooter';
+import SwitchLanguage from '../components/SwitchLanguage';
 import Drawer from './parts/Drawer.vue';
-import Logo from '../components/Logo';
+import Logo from './parts/Logo';
 
 export default
 {
@@ -53,15 +55,17 @@ export default
   {
     PageFooter,
     Drawer,
-    Logo
+    Logo,
+    SwitchLanguage
   },
   data()
   {
+    console.log('data');
     return {
       jobLink: '',
       jobTitle: this.jobTitle ? 'Bewerbung auf: ' + this.jobTitle : 'Initiativbewerbung',
       orgName: this.orgName ? this.orgName : '',
-      logo: this.logo ? this.logo : 'yawik-logo.png',
+      orgLogo: this.orgLogo ? this.orgLogo : 'yawik-logo.png',
       right: false
     };
   },
@@ -69,6 +73,7 @@ export default
     {
       jobID()
       {
+        console.log('compute jobs');
         return this.$route.query.job;
       },
       showLogo()
@@ -86,6 +91,8 @@ export default
     },
   created()
   {
+    console.log('created');
+    console.log('orgLogo: ' + this.orgLogo);
     const lang = this.$route.params.lang;
     this.$root.$i18n.locale = lang;
     import(
@@ -96,6 +103,10 @@ export default
       this.$q.lang.set(lang.default);
     });
     if (this.jobID) this.getJobDetails();
+  },
+  mounted()
+  {
+    console.log('mounted');
   },
   methods:
     {
@@ -110,7 +121,8 @@ export default
             this.jobLink = response.data.payload.uri;
             this.jobTitle = response.data.payload.title;
             this.orgName = response.data.payload.organization.name;
-            this.logo = response.data.payload.organization.logo;
+            this.orgLogo = response.data.payload.organization.logo;
+            console.log('git details: ' + this.orgLogo);
           }
         }).catch(err =>
         {

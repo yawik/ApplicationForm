@@ -1,7 +1,7 @@
 <template>
   <div>
     <a href="/">
-      <img :src="logo"
+      <img :src="logoUrl"
            style="max-width: 160px; max-height: 80px;"
       >
     </a>
@@ -12,9 +12,7 @@
 export default
 {
   name: 'Logo',
-  props:
-    {
-      logo: Text
-    },
+  // eslint-disable-next-line vue/require-prop-types
+  props: ['logoUrl']
 };
 </script>
