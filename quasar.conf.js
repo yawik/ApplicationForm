@@ -138,7 +138,8 @@ module.exports = function(ctx)
       plugins: [
         'Notify',
         'Loading',
-        'Meta']
+        'Meta',
+      ]
     },
 
     // animations: 'all', // --- includes all animations

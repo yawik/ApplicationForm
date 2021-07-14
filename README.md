@@ -64,6 +64,7 @@ It's possible to hide the Logo and the Footer by using query parameters. Usefull
 |--------------|-------------------|
 | hl           | hide Logo         |
 | hf           | hide Footer       |
+| tb           | use toolbar       |
 
 ## Demo
 
@@ -73,6 +74,7 @@ The demo is hosted as a Gitlab Page. The form checks users locale and redirects 
 * https://form.yawik.org/?job=sw-devel
 * https://form.yawik.org/?hl=1
 * https://form.yawik.org/?hf=1
+* https://form.yawik.org/?tb=1
 
 ## Documentation
 

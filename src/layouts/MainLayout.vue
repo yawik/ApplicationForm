@@ -1,14 +1,44 @@
 <template>
   <q-layout view="lHh Lpr lFf" class="yawik">
+    <q-header v-if="showToolbar" reveal class="bg-white text-primary">
+      <q-toolbar>
+        <q-toolbar-title>
+          <logo v-if="showToolbar"
+                :logo-url="orgLogo"
+                :org-name="orgName"
+          />
+        </q-toolbar-title>
+        <q-separator dark vertical />
+        <SwitchLanguage class="q-mx-auto" />
+
+        <q-separator spaced vertical />
+
+        <q-btn
+          flat
+          @click="auth = true"
+        >
+          {{ $t('login') }}
+        </q-btn>
+
+        <q-separator spaced vertical />
+
+        <q-btn dense flat round
+               :icon="right ? 'mdi-menu' : 'mdi-menu-open'"
+               @click="right = !right"
+        />
+      </q-toolbar>
+      <drawer v-model="right" />
+    </q-header>
     <q-page-container style="overflow-x: hidden;">
-      <img v-if="showLogo" class="block q-mx-auto q-mt-sm" :src="logo || 'yawik-logo.png'" style="max-width: 800px; max-height: 160px;">
       <div class="text-center text-h6 q-mt-md">
+        <logo v-if="showLogo && !showToolbar"
+              :logo-url="orgLogo"
+              class="text-center"
+        />
         <span v-if="jobTitle" class="text-center text-h6 q-mt-md">
           <a :href="jobLink">{{ jobTitle }}</a>
         </span>
-        <span v-if="orgName" class="text-center text-h6 q-mt-md">
-          - {{ orgName }}
-        </span>
+        <span v-if="orgName" class="text-center text-h6 q-mt-md"> - {{ orgName }}</span>
       </div>
       <router-view v-slot="{ Component }" :job-name="jobTitle" :org-name="orgName">
         <transition name="fade" appear mode="out-in">
@@ -17,11 +47,61 @@
       </router-view>
     </q-page-container>
     <PageFooter v-if="showFooter" />
+    <q-dialog v-model="auth">
+      <q-card>
+        <q-card-section class="bg-primary text-white">
+          <div class="text-h6">{{ $t('login') }}</div>
+        </q-card-section>
+
+        <q-card-section>
+          <div class="row">
+            <q-input v-model="username"
+                     outlined
+                     type="text"
+                     name="username"
+                     :label="$t('label.username')"
+                     lazy-rules
+            >
+              <template #append>
+                <q-icon :name="mdi-blank" />
+              </template>
+            </q-input>
+          </div>
+          <div class="row">
+            <q-input v-model="password"
+                     :label="$t('label.password')"
+                     outlined
+                     :type="isPwd ? 'password' : 'text'"
+            >
+              <template #append>
+                <q-icon
+                  :name="isPwd ? 'mdi-eye-off' : 'mdi-eye'"
+                  class="mdi-cursor-pointer"
+                  @click="isPwd = !isPwd"
+                />
+              </template>
+            </q-input>
+          </div>
+        </q-card-section>
+        <q-card-actions align="right">
+          <q-btn>
+            {{ $t('buttons.cancel') }}
+          </q-btn>
+          <q-btn>
+            {{ $t('buttons.send') }}
+          </q-btn>
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
   </q-layout>
 </template>
 
 <script>
+import { ref } from 'vue';
 import PageFooter from '../components/PageFooter';
+import SwitchLanguage from '../components/SwitchLanguage';
+import Drawer from './parts/Drawer.vue';
+import Logo from './parts/Logo';
 
 export default
 {
@@ -35,21 +115,26 @@ export default
   },
   components:
   {
-    PageFooter
+    PageFooter,
+    Drawer,
+    Logo,
+    SwitchLanguage
   },
   data()
   {
     return {
       jobLink: '',
-      jobTitle: this.jobTitle ? 'Bewerbung auf: ' + this.jobTitle : 'Initiativbewerbung',
-      orgName: '',
-      logo: '',
+      jobTitle: this.jobTitle ? this.$t('pageTitleApplication', this.jobTitle) : this.$t('speculativeApplication'),
+      orgName: this.orgName ? this.orgName : '',
+      orgLogo: this.orgLogo ? this.orgLogo : 'yawik-logo.png',
+      right: false
     };
   },
   computed:
     {
       jobID()
       {
+        console.log('compute jobs');
         return this.$route.query.job;
       },
       showLogo()
@@ -59,6 +144,10 @@ export default
       showFooter()
       {
         return !this.$route.query.hf;
+      },
+      showToolbar()
+      {
+        return this.$route.query.tb;
       },
     },
   created()
@@ -87,7 +176,7 @@ export default
             this.jobLink = response.data.payload.uri;
             this.jobTitle = response.data.payload.title;
             this.orgName = response.data.payload.organization.name;
-            this.logo = response.data.payload.organization.logo;
+            this.orgLogo = response.data.payload.organization.logo;
           }
         }).catch(err =>
         {
@@ -100,7 +189,17 @@ export default
           });
         });
       },
-    }
+    },
+  setup()
+  {
+    console.log('Setup');
+    return {
+      auth: ref(false),
+      username: ref(''),
+      password: ref(''),
+      isPwd: ref(true)
+    };
+  }
 };
 </script>
 

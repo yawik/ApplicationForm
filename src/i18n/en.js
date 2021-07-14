@@ -3,6 +3,7 @@ export default
   localeName: 'English',
   previewForm: 'Preview',
   abortForm: 'Abort',
+  noteAbort: 'all form data will be deleted.',
   submitting: 'Submit your application',
   submitFailed: 'Submit failed',
   success: 'Success',
@@ -117,5 +118,12 @@ export default
       amount: 'Expected amount',
       currency: 'Currency',
     },
-  copyright: '\xA9 {year} YAWIK'
+  label: {
+    username: 'Username',
+    password: 'Password'
+  },
+  copyright: '\xA9 {year} YAWIK',
+  login: 'Login',
+  pageTitleApplication: 'Apply for: {title}',
+  speculativeApplication: 'Speculative Application'
 };
