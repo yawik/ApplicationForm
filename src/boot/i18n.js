@@ -1,4 +1,5 @@
-import { createI18n } from 'vue-i18n';
+// https://stackoverflow.com/questions/66140411/you-are-running-the-esm-bundler-build-of-vue-i18n-it-is-recommended-to-configur
+import { createI18n } from 'vue-i18n/index';
 
 import messages from 'src/i18n';
 
