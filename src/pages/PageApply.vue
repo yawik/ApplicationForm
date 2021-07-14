@@ -82,6 +82,11 @@ export default
     },
   props:
     {
+      tb:
+      {
+        type: Boolean,
+        default: false
+      },
       jobName:
         {
           type: String,

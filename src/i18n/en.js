@@ -118,6 +118,12 @@ export default
       amount: 'Expected amount',
       currency: 'Currency',
     },
+  label: {
+    username: 'Username',
+    password: 'Password'
+  },
   copyright: '\xA9 {year} YAWIK',
-  login: 'Login'
+  login: 'Login',
+  pageTitleApplication: 'Apply for: {title}',
+  speculativeApplication: 'Speculative Application'
 };

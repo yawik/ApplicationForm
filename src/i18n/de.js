@@ -117,6 +117,12 @@ export default
       amount: 'Gehaltsvorstellung',
       currency: 'Währung',
     },
+  label: {
+    username: 'Benutzername',
+    password: 'Passwort'
+  },
   copyright: '\xA9 {year} YAWIK',
-  login: 'Anmelden'
+  login: 'Anmelden',
+  pageTitleApplication: 'Bewerbung auf: {title}',
+  speculativeApplication: 'Initiativbewerbung'
 };

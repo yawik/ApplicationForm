@@ -6,8 +6,8 @@
         color="primary"
         class="full-width"
         :label="$t('login')"
-        align="arround"
-        icon="mdi-login"
+        align="right"
+        icon-right="mdi-login"
         to="/"
         @click="switchDrawerState(false)"
       />
@@ -54,6 +54,7 @@
 </template>
 
 <script lang="javascript">
+
 export default {
   name: 'Drawer',
   props:
