@@ -1,7 +1,7 @@
 <template>
   <div class="row q-col-gutter-md yawik-stepper-width">
     <!-- Attachments -->
-    <div class="col-6 column" style="border-right: 16px solid transparent;">
+    <div class="col-md-6 col-sm-12 col-xs-12 column">
       <div class="q-pb-sm">{{ $t('stepFour.help') }}</div>
       <q-uploader
         ref="uploader"
@@ -45,8 +45,9 @@
         </template>
       </q-uploader>
     </div>
+
     <!-- User photo -->
-    <div class="col-6" style="border-left: 1px solid #DDD;">
+    <div class="col-md-6 col-sm-12 col-xs-12 column">
       <div class="column">
         <div class="q-pb-sm">{{ $t('stepFour.photo') }}</div>
         <DropZone @change="choosePhoto" />

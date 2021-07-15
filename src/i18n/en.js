@@ -120,10 +120,13 @@ export default
     },
   label: {
     username: 'Username',
-    password: 'Password'
+    password: 'Password',
+    subject: 'Subject'
   },
   copyright: '\xA9 {year} YAWIK',
   login: 'Login',
   pageTitleApplication: 'Apply for: {title}',
-  speculativeApplication: 'Speculative Application'
+  speculativeApplication: 'Speculative Application',
+  yourLogo: 'your logo could be here!'
+
 };

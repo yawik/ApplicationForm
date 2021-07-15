@@ -101,7 +101,7 @@ export default
       phone: 'Tel.',
       contact: 'Kontakt',
       address: 'Anschrift',
-      canStart: 'frühester Eintrittstermin.',
+      canStart: 'frühester Eintrittstermin',
       expectedSalary: 'Gehaltsvorstellung',
       acceptTerms: 'Ich habe die Datenschutzbestimmungen gelesen und akzeptiere sie.'
     },
@@ -119,10 +119,12 @@ export default
     },
   label: {
     username: 'Benutzername',
-    password: 'Passwort'
+    password: 'Passwort',
+    subject: 'Betreff'
   },
   copyright: '\xA9 {year} YAWIK',
   login: 'Anmelden',
   pageTitleApplication: 'Bewerbung auf: {title}',
-  speculativeApplication: 'Initiativbewerbung'
+  speculativeApplication: 'Initiativbewerbung',
+  yourLogo: 'Hier könnte ihr Logo stehen!'
 };

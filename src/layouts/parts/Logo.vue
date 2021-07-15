@@ -4,7 +4,7 @@
       <img :alt="orgName" :src="logoUrl"
            style="max-width: 160px; max-height: 80px;"
       >
-      <q-tooltip :delay="500" :offset="[0, 10]">{{ orgName }}</q-tooltip>
+      <q-tooltip :delay="500" :offset="[0, 10]">{{ orgName ? orgName : $t('yourLogo') }}</q-tooltip>
     </a>
   </div>
 </template>
