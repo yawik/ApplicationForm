@@ -35,12 +35,19 @@
               :logo-url="orgLogo"
               class="text-center"
         />
-        <span v-if="jobTitle" class="text-center text-h6 q-mt-md">
-          <a :href="jobLink">{{ jobTitle }}</a>
+        <span class="text-center text-h6 q-mt-md">
+          <a v-if="jobLink" :href="jobLink">{{ jobTitle }}</a>
+          <span v-else>
+            {{ $t('speculativeApplication') }}
+          </span>
         </span>
         <span v-if="orgName" class="text-center text-h6 q-mt-md"> - {{ orgName }}</span>
       </div>
-      <router-view v-slot="{ Component }" :job-name="jobTitle" :org-name="orgName">
+      <router-view v-slot="{ Component }"
+                   :job-title="jobTitle"
+                   :org-name="orgName"
+                   :toolbar="showToolbar"
+      >
         <transition name="fade" appear mode="out-in">
           <component :is="Component" />
         </transition>
@@ -109,7 +116,7 @@ export default
   meta()
   {
     return {
-      title: this.jobTitle,
+      title: this.jobTitle + 'abc',
       titleTemplate: title => `${title} ` + (this.orgName ? ' - ' + this.orgName : '')
     };
   },
@@ -124,7 +131,7 @@ export default
   {
     return {
       jobLink: '',
-      jobTitle: this.jobTitle ? this.$t('pageTitleApplication', this.jobTitle) : this.$t('speculativeApplication'),
+      jobTitle: this.jobTitle ? this.jobTitle : '',
       orgName: this.orgName ? this.orgName : '',
       orgLogo: this.orgLogo ? this.orgLogo : 'yawik-logo.png',
       right: false
@@ -148,7 +155,7 @@ export default
       showToolbar()
       {
         return this.$route.query.tb;
-      },
+      }
     },
   created()
   {
@@ -192,7 +199,6 @@ export default
     },
   setup()
   {
-    console.log('Setup');
     return {
       auth: ref(false),
       username: ref(''),

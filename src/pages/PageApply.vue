@@ -6,7 +6,7 @@
           <q-btn name="preview" color="primary" outline @click="dlgPreview = true">
             {{ $t('buttons.preview') }}
           </q-btn>
-          <SwitchLanguage class="q-mx-auto" />
+          <SwitchLanguage v-if="!toolbar" class="q-mx-auto" />
           <q-btn name="abort" color="negative" @click="abortForm">{{ $q.platform.is.mobile ? $t('buttons.cancel') : $t('abortForm') }}</q-btn>
         </q-btn-group>
       </div>
@@ -38,7 +38,11 @@
         </template>
       </q-stepper>
     </q-form>
-    <DialogPreview v-model="dlgPreview" :job="jobName" :org="orgName" @send="dlgPreview = false, trySubmit()" />
+    <DialogPreview v-model="dlgPreview"
+                   :job="jobTitle"
+                   :org="orgName"
+                   @send="dlgPreview = false, trySubmit()"
+    />
     <q-overlay v-model="sending" no-scroll :z-index="5" background-color="rgba(0, 0, 0, 0.5)">
       <template #body>
         <div class="fullscreen column justify-center items-center">
@@ -82,12 +86,12 @@ export default
     },
   props:
     {
-      tb:
+      toolbar:
       {
-        type: Boolean,
-        default: false
+        type: String,
+        default: ''
       },
-      jobName:
+      jobTitle:
         {
           type: String,
           default: ''

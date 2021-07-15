@@ -120,7 +120,8 @@ export default
     },
   label: {
     username: 'Username',
-    password: 'Password'
+    password: 'Password',
+    subject: 'Subject'
   },
   copyright: '\xA9 {year} YAWIK',
   login: 'Login',
