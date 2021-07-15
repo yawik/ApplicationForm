@@ -126,5 +126,7 @@ export default
   copyright: '\xA9 {year} YAWIK',
   login: 'Login',
   pageTitleApplication: 'Apply for: {title}',
-  speculativeApplication: 'Speculative Application'
+  speculativeApplication: 'Speculative Application',
+  yourLogo: 'your logo could be here!'
+
 };

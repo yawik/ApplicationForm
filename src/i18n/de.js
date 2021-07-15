@@ -125,5 +125,6 @@ export default
   copyright: '\xA9 {year} YAWIK',
   login: 'Anmelden',
   pageTitleApplication: 'Bewerbung auf: {title}',
-  speculativeApplication: 'Initiativbewerbung'
+  speculativeApplication: 'Initiativbewerbung',
+  yourLogo: 'Hier könnte ihr Logo stehen!'
 };
