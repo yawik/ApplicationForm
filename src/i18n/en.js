@@ -58,9 +58,6 @@ export default
         {
           title: 'Social profiles',
           import: 'Import data from your social profiles',
-          attach: 'Attach profile',
-          detach: 'Detach profile',
-          view: 'View profile data',
         }
     },
   stepTwo:
@@ -104,7 +101,6 @@ export default
       address: 'Address',
       canStart: 'Can start on',
       expectedSalary: 'Expected salary',
-      acceptTerms: 'I have read and accept the Privacy Policy.'
     },
   salary:
     {

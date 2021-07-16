@@ -5,7 +5,7 @@ import messages from 'src/i18n';
 
 const i18n = createI18n({
   locale: 'en',
-  fallbackLocale: 'en',
+  fallbackLocale: process.env.VUE_APP_I18N_FALLBACK_LOCALE || 'en',
   silentTranslationWarn: true,
   warnHtmlInMessage: 'off',
   messages

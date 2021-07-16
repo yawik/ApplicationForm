@@ -1,7 +1,7 @@
 <template>
   <q-btn-dropdown color="primary">
     <template #label>
-      <img :src="'flags/'+$root.$i18n.locale+'.png'" width="28" :alt="$root.$i18n.locale.substr(0, 2).toUpperCase()" class="q-mr-md">
+      <img :src="'flags/'+$root.$i18n.locale+'.svg'" width="28" :alt="$root.$i18n.locale.substr(0, 2).toUpperCase()" class="q-mr-md">
       {{ $q.platform.is.mobile ? '' : $t('localeName') }}
     </template>
     <q-list>
