@@ -11,6 +11,8 @@ workflow:
 
 variables:
   NPM_TOKEN: ${CI_JOB_TOKEN}
+  VUE_APP_I18N_FALLBACK_LOCALE: de
+  VUE_APP_I18N_SUPPORTED_LOCALE: en,de
 
 stages:
   - test
