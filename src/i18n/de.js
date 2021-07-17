@@ -57,9 +57,6 @@ export default
         {
           title: 'Soziale Profile',
           import: 'Daten aus sozialen Profilen importieren',
-          attach: 'Profil hinzufügen',
-          detach: 'Profil entfernen',
-          view: 'Profil ansehen',
         }
     },
   stepTwo:
@@ -103,7 +100,6 @@ export default
       address: 'Anschrift',
       canStart: 'frühester Eintrittstermin',
       expectedSalary: 'Gehaltsvorstellung',
-      acceptTerms: 'Ich habe die Datenschutzbestimmungen gelesen und akzeptiere sie.'
     },
   salary:
     {
