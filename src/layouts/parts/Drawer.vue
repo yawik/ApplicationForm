@@ -1,15 +1,15 @@
 <template>
-  <q-drawer :value="isDrawerOpen" side="right" overlay bordered @input="switchDrawerState">
+  <q-drawer :model-value="value" side="right" overlay bordered @update:modelValue="switchDrawerState">
     <div class="text-secondary q-pb-md">
       <q-btn
         flat
         color="primary"
         class="full-width"
-        :label="$t('login')"
+        :label="$t(GET_TOKEN ? 'logout' : 'login')"
         align="right"
-        icon-right="mdi-login"
+        :icon-right="GET_TOKEN ? 'mdi-logout' : 'mdi-login'"
         to="/"
-        @click="switchDrawerState(false)"
+        @click="showLogin"
       />
       <q-separator />
       <!--
@@ -53,37 +53,49 @@
   </q-drawer>
 </template>
 
-<script lang="javascript">
+<script>
+import { GET_TOKEN, SET_TOKEN } from 'src/store/names';
+import { mapGetters, mapMutations } from 'vuex';
+import eventBus from 'src/lib/eventBus';
 
-export default {
+export default
+{
   name: 'Drawer',
   props:
     {
       value:
         {
-          type: Object,
-          default: () => ({})
+          type: Boolean,
+          default: false
         },
     },
   emits: ['input'],
   data()
   {
     return {
-      isDrawerOpen: this.value
     };
   },
-  watch: {
-    value(value)
+  computed:
     {
-      this.switchDrawerState(value);
-    }
-  },
-  methods: {
-    switchDrawerState($event)
+      ...mapGetters([GET_TOKEN]),
+    },
+  methods:
+  {
+    ...mapMutations([SET_TOKEN]),
+    switchDrawerState(state)
     {
-      console.debug('SWITCH DRAWER STATE', $event);
-      this.isDrawerOpen = $event;
-      this.$emit('input', $event);
+      this.$emit('input', state);
+    },
+    showLogin()
+    {
+      if (this[GET_TOKEN])
+      {
+        this[SET_TOKEN](null);
+      }
+      else
+      {
+        eventBus.emit('SHOW_LOGIN');
+      }
     }
   }
 };

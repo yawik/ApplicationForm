@@ -16,6 +16,28 @@ body
   font-size: 1rem;
 }
 
+.q-field__bottom
+{
+  padding-top: 3px;
+  padding-bottom: 5px;
+}
+
+.q-form .q-card__actions .q-btn__wrapper
+{
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.q-textarea.resize .q-field__native
+{
+  resize: both;
+}
+
+.q-dialog__inner > *
+{
+  pointer-events: all; /* bug in Quasar */
+}
+
 .clear_float::after
 {
   content: "";

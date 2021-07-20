@@ -44,7 +44,9 @@ import {
   SET_FILES,
   SET_STEP,
   ADD_FILE,
-  REMOVE_FILE
+  REMOVE_FILE,
+  GET_TOKEN,
+  SET_TOKEN
 } from '../names';
 
 const emptyForm = {
@@ -98,6 +100,7 @@ export default
           carbonCopy: false,
           acceptTerms: false,
         },
+      token: null,
     };
   },
   getters:
@@ -189,6 +192,10 @@ export default
       [GET_STEP](state)
       {
         return state.form.step;
+      },
+      [GET_TOKEN](state)
+      {
+        return state.token;
       },
     },
   mutations:
@@ -291,6 +298,10 @@ export default
       {
         const idx = state.attachments.indexOf(file);
         if (idx !== -1) state.attachments.splice(idx, 1);
-      }
+      },
+      [SET_TOKEN](state, token)
+      {
+        state.token = token;
+      },
     }
 };

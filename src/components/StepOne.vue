@@ -5,7 +5,7 @@
     <div class="q-pt-lg q-pb-xs">{{ $t('preview.address') }}</div>
     <q-option-group v-model="salutation" :options="salutationTypes" :label="$t('stepOne.salutation')" color="primary" inline name="salutation" />
 
-    <div class="q-col-gutter-sm row">
+    <div class="q-col-gutter-md row">
       <div class="col-6 column">
         <q-input ref="fname" v-model.trim="firstName" name="fname" :label="$t('stepOne.firstName')" outlined dense lazy-rules :rules="[ruleRequired]" @keypress.enter="gotoNext" />
       </div>
@@ -14,7 +14,7 @@
       </div>
     </div>
 
-    <div class="q-col-gutter-sm row">
+    <div class="q-col-gutter-md row">
       <div class="col-xs-8">
         <q-input v-model.trim="street" name="street" :label="$t('stepOne.street')" outlined dense lazy-rules :rules="[ruleRequired]" @keypress.enter="gotoNext" />
       </div>
@@ -23,7 +23,7 @@
       </div>
     </div>
 
-    <div class="q-col-gutter-sm row">
+    <div class="q-col-gutter-md row">
       <div class="col-xs-3">
         <q-input v-model.trim="postalCode" name="zip" :label="$t('stepOne.zipCode')" outlined dense lazy-rules :rules="[ruleRequired]" style="min-width: 160px;" @keypress.enter="gotoNext" />
       </div>
@@ -37,7 +37,7 @@
 
     <hr>
     <div class="q-pt-lg q-pb-xs">{{ $t('preview.contact') }}</div>
-    <div class="q-col-gutter-sm row">
+    <div class="q-col-gutter-md row">
       <div class="col-xs-12 col-md-6">
         <q-input
           v-model.trim="phone"
