@@ -3,9 +3,9 @@
     <q-header v-if="showToolbar" reveal class="bg-white text-primary">
       <q-toolbar>
         <q-toolbar-title>
-          <logo v-if="showToolbar" :logo-url="orgLogo" :org-name="orgName" />
+          <LogoPanel v-if="showToolbar" :logo-url="orgLogo" :org-name="orgName" />
         </q-toolbar-title>
-        <q-separator dark vertical />
+        <q-separator spaced vertical />
         <SwitchLanguage class="q-mx-auto" />
 
         <q-separator spaced vertical />
@@ -25,7 +25,7 @@
     </q-header>
     <q-page-container style="overflow-x: hidden;">
       <div class="text-center text-h6 q-mt-md">
-        <logo v-if="showLogo && !showToolbar" :logo-url="orgLogo" class="text-center" />
+        <LogoPanel v-if="showLogo && !showToolbar" :logo-url="orgLogo" class="text-center" />
         <span class="text-center text-h6 q-mt-md">
           <a v-if="jobLink" :href="jobLink">{{ jobTitle }}</a>
           <span v-else>
@@ -52,9 +52,9 @@
 <script>
 import PageFooter from '../components/PageFooter';
 import SwitchLanguage from '../components/SwitchLanguage';
-import SidebarDrawer from './parts/Drawer.vue';
-import Logo from './parts/Logo';
-import DialogLogin from '../components/DialogLogin';
+import SidebarDrawer from '../components/Drawer.vue';
+import LogoPanel from '../components/Logo';
+import DialogLogin from '../components/dialogs/DialogLogin';
 import eventBus from 'src/lib/eventBus';
 import { GET_TOKEN, SET_TOKEN } from '../store/names';
 import { mapGetters, mapMutations } from 'vuex';
@@ -73,7 +73,7 @@ export default
   {
     PageFooter,
     SidebarDrawer,
-    Logo,
+    LogoPanel,
     SwitchLanguage,
     DialogLogin,
   },

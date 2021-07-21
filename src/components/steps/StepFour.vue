@@ -60,7 +60,7 @@
 <script>
 import DropZone from 'src/components/DropZone';
 import UserPhoto from 'src/components/UserPhoto';
-import { GET_PHOTO, SET_PHOTO, ADD_FILE, REMOVE_FILE } from '../store/names';
+import { GET_PHOTO, SET_PHOTO, ADD_FILE, REMOVE_FILE } from 'src/store/names';
 import { mapGetters, mapMutations } from 'vuex';
 
 export default

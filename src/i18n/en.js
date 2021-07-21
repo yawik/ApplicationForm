@@ -117,7 +117,8 @@ export default
   label: {
     username: 'Username',
     password: 'Password',
-    subject: 'Subject'
+    subject: 'Subject',
+    company: 'Organization name',
   },
   copyright: '\xA9 {year} YAWIK',
   login: 'Login',
@@ -125,4 +126,9 @@ export default
   speculativeApplication: 'Speculative Application',
   yourLogo: 'your logo could be here!',
   logout: 'Logout',
+  sidebar:
+    {
+      changeLogo: 'Change logo',
+      changeOrg: 'Change company'
+    },
 };

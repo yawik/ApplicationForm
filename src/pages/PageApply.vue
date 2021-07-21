@@ -59,13 +59,13 @@
 </template>
 
 <script>
-import StepOne from 'src/components/StepOne';
-import StepTwo from 'src/components/StepTwo';
-import StepThree from 'src/components/StepThree';
-import StepFour from 'src/components/StepFour';
-import StepFive from 'src/components/StepFive';
+import StepOne from 'src/components/steps/StepOne';
+import StepTwo from 'src/components/steps/StepTwo';
+import StepThree from 'src/components/steps/StepThree';
+import StepFour from 'src/components/steps/StepFour';
+import StepFive from 'src/components/steps/StepFive';
 import SwitchLanguage from 'src/components/SwitchLanguage';
-import DialogPreview from 'src/components/DialogPreview';
+import DialogPreview from 'src/components/dialogs/DialogPreview';
 import { QOverlay } from '@quasar/quasar-ui-qoverlay/dist/index.esm.js';
 import { GET_COVER_LETTER, GET_FILES, GET_PHOTO, GET_FORM, CLEAR_FORM, GET_STEP, SET_STEP } from '../store/names';
 import { mapGetters, mapMutations } from 'vuex';

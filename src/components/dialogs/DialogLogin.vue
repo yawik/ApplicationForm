@@ -42,7 +42,7 @@
 import validations from 'src/lib/validations';
 import errorAlert from 'src/lib/errorAlert';
 import eventBus from 'src/lib/eventBus';
-import { SET_TOKEN } from '../store/names';
+import { SET_TOKEN } from 'src/store/names';
 import { mapMutations } from 'vuex';
 
 export default
@@ -88,7 +88,7 @@ export default
         data.append('user', this.username);
         data.append('pass', this.password);
         this.sending = true;
-        this.$axios.post(process.env.YAWIK_LOGIN_URL, data).then(response =>
+        this.$axios.post(process.env.YAWIK_API_URL + '/login/extern?format=json', data).then(response =>
         {
           if (response.data.status === 'success')
           {
