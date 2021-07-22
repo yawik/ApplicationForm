@@ -79,7 +79,7 @@ function clearFileInput(ctrl)
   .drop_area
   {
     border-radius: 6px;
-    border: 5px dashed $secondary;
+    border: 2px dashed $secondary;
     background-color: rgba($secondary, 0.2);
     display: inline-block;
     padding: 16px 20px;
