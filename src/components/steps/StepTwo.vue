@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { GET_COVER_LETTER, SET_COVER_LETTER, GET_STEP } from '../store/names';
+import { GET_COVER_LETTER, SET_COVER_LETTER, GET_STEP } from '../../store/names';
 import { mapGetters, mapMutations } from 'vuex';
 
 export default

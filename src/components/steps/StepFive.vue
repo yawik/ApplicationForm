@@ -35,7 +35,7 @@
 
 <script>
 import validations from 'src/lib/validations';
-import { GET_COPY, GET_TERMS, SET_COPY, SET_TERMS } from '../store/names';
+import { GET_COPY, GET_TERMS, SET_COPY, SET_TERMS } from '../../store/names';
 import { mapGetters, mapMutations } from 'vuex';
 
 export default

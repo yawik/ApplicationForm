@@ -53,6 +53,8 @@ The form is .env-aware.
 | YAWIK_URL_IMPRINT            | Link to the Imprint of the operator |
 | YAWIK_URL_PRIVACY            | Link to the Privacy notes           |
 | YAWIK_ROUTER_BASE            | BASE of the pages                   |
+| YAWIK_APP_KEY                | Shared App Key                      |
+| YAWIK_API_URL                | Yawik API                           |
 
 If an **YAWIK_OAUTH_\*** variable is empty, the feature is not used within the form.
 

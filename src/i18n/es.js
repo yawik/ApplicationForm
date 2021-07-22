@@ -116,11 +116,18 @@ export default
   label: {
     username: 'Nombre de usuario',
     password: 'Contraseña',
-    subject: 'Asunto'
+    subject: 'Asunto',
+    company: 'Nombre de la empresa',
   },
   copyright: '\xA9 {year} YAWIK',
   login: 'Entrar en el sistema',
   pageTitleApplication: 'Applicazione a: {title}',
   speculativeApplication: 'Solicitud no solicitada',
-  yourLogo: '¡Su logotipo podría estar aquí!'
+  yourLogo: '¡Su logotipo podría estar aquí!',
+  logout: 'Cierre de sesión',
+  sidebar:
+    {
+      changeLogo: 'Cambiar el logo',
+      changeOrg: 'Cambiar el nombre de la empresa'
+    },
 };

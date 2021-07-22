@@ -28,6 +28,7 @@ export const GET_COPY = 'GET_COPY';
 export const GET_TERMS = 'GET_TERMS';
 export const GET_FILES = 'GET_FILES';
 export const GET_STEP = 'GET_STEP';
+export const GET_TOKEN = 'GET_TOKEN';
 
 // mutations
 export const CLEAR_FORM = 'CLEAR_FORM';
@@ -54,3 +55,4 @@ export const SET_FILES = 'SET_FILES';
 export const SET_STEP = 'SET_STEP';
 export const ADD_FILE = 'ADD_FILE';
 export const REMOVE_FILE = 'REMOVE_FILE';
+export const SET_TOKEN = 'SET_TOKEN';

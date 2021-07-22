@@ -21,8 +21,8 @@
 </template>
 
 <script>
-import DateInput from 'src/components/DateInput';
-import SalaryInput from 'src/components/SalaryInput';
+import DateInput from 'src/components/ui/DateInput';
+import SalaryInput from 'src/components/ui/SalaryInput';
 import validations from 'src/lib/validations';
 import {
   GET_START_DATE,
@@ -36,7 +36,7 @@ import {
   SET_START_DATE,
   SET_START_NOW,
   GET_STEP
-} from '../store/names';
+} from '../../store/names';
 import { mapGetters, mapMutations } from 'vuex';
 
 export default

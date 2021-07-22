@@ -126,7 +126,7 @@
 <script>
 import validations from 'src/lib/validations';
 import { mapGetters, mapMutations } from 'vuex';
-import { GET_FORM, GET_PHOTO, GET_FILES, GET_TERMS, SET_TERMS } from '../store/names';
+import { GET_FORM, GET_PHOTO, GET_FILES, GET_TERMS, SET_TERMS } from '../../store/names';
 
 export default
 {
