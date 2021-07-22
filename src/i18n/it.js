@@ -116,11 +116,18 @@ export default
   label: {
     username: 'Nome utente',
     password: 'Password',
-    subject: 'Oggetto'
+    subject: 'Oggetto',
+    company: 'Nome dell\'azienda'
   },
   copyright: '\xA9 {year} YAWIK',
   login: 'Anmelden',
   pageTitleApplication: 'Applicazione a: {title}',
   speculativeApplication: 'Applicazione non richiesta',
-  yourLogo: 'Il tuo logo potrebbe essere qui!'
+  yourLogo: 'Il tuo logo potrebbe essere qui!',
+  logout: 'Logout',
+  sidebar:
+  {
+    changeLogo: 'Cambia logo',
+    changeOrg: 'Cambia il nome dell\'azienda'
+  },
 };

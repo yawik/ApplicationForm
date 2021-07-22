@@ -1,6 +1,7 @@
 <template>
   <q-drawer v-model="value" side="right" overlay bordered no-swipe-open no-swipe-close no-swipe-backdrop>
     <div class="text-secondary q-pb-md">
+      <q-separator />
       <q-btn
         flat
         color="primary"
@@ -21,6 +22,7 @@
           icon-right="mdi-image-search"
           @click="value = false,dlgLogo = true"
         />
+        <q-separator />
         <q-btn
           flat
           color="primary"
