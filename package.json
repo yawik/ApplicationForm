@@ -12,8 +12,10 @@
     "lint-css": "node --preserve-symlinks --preserve-symlinks-main ./node_modules/stylelint/bin/stylelint src/**/*.{vue,css,scss}",
     "lintfix-css": "node --preserve-symlinks --preserve-symlinks-main ./node_modules/stylelint/bin/stylelint src/**/*.{vue,css,scss} --fix",
     "prepare": "custompatch",
-    "test": "npx cypress open",
-    "semantic-release": "semantic-release"
+    "test": "npx cypress run",
+    "semantic-release": "semantic-release",
+    "ci": "start-server-and-test 'yarn dev' :8080 'yarn test:ci'",
+    "test:ci": "npx cypress run"
   },
   "dependencies": {
     "@quasar/extras": "^1.10.8",
@@ -48,6 +50,7 @@
     "eslint-plugin-vue": "^7.8.0",
     "eslint-webpack-plugin": "^2.4.0",
     "semantic-release": "^17.3.0",
+    "start-server-and-test": "^1.13.1",
     "stylelint": "^13.9.0",
     "stylelint-config-standard": "^20.0.0",
     "stylelint-scss": "^3.18.0",

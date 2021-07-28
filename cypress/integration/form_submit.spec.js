@@ -25,6 +25,7 @@ describe('Filling and sending the form', () =>
     cy.get('[name="city"]').type('Sofia');
     cy.get('[name="country"]').type('Bulgaria');
     cy.get('[name="email"]').type('tmcdos@abv.bg');
+    cy.get('[name="email"]').should('have.value', 'tmcdos@abv.bg')
     cy.get('[name="next"]').click();
     // fill step 2
     cy.get('[name="letter"]').type('My cover letter');
