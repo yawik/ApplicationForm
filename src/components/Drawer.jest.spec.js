@@ -1,7 +1,8 @@
 import { describe, expect, it } from '@jest/globals';
 import { installQuasarPlugin } from '@quasar/quasar-app-extension-testing-unit-jest';
-import { mount } from '@vue/test-utils';
-import Logo from './Logo';
+import { shallowMount } from '@vue/test-utils';
+import Vuex from 'vuex';
+import Drawer from './Drawer';
 
 /*
  * You can provide a config object as param like such:
@@ -12,16 +13,27 @@ import Logo from './Logo';
  */
 installQuasarPlugin();
 
-describe('Logo', () =>
+describe('Drawer', () =>
 {
-  let cmp;
+  let getters,
+    store,
+    cmp;
 
   beforeEach(() =>
   {
-    cmp = mount(Logo, {
-      props: {
-        logoUrl: 'logo.png',
-        orgName: 'CROSS'
+    getters = {
+      GET_TOKEN: () => '1234'
+    };
+
+    store = new Vuex.Store({
+      getters
+    });
+
+    cmp = shallowMount(Drawer, {
+      global: {
+        mocks: {
+          $store: store,
+        }
       }
     });
   });
@@ -31,9 +43,7 @@ describe('Logo', () =>
     expect(cmp).toBeTruthy();
   });
 
-  it('check property', () =>
+  it('check enviroment properties', () =>
   {
-    expect(cmp.vm.logoUrl).toBe('logo.png');
-    expect(cmp.vm.orgName).toBe('CROSS');
   });
 });
