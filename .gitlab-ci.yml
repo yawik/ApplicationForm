@@ -23,9 +23,9 @@ cypress:
   image: cypress/browsers:node14.17.0-chrome91-ff89
   stage: test
   script:
-    - env | ( grep YAWIK || echo "ROUTER_BASE=/${CI_PAGES_URL#*://*/}/" )  > .env
-    - yarn 
-    - yarn ci
+    - env | ( grep YAWIK || echo "ROUTER_BASE=/${CI_PAGES_URL#*://*/}/" )  > .env.local
+    - yarn
+    - yarn "test:e2e:ci"
   only:
     variables:
       - $YAWIK_APPLICATION_FORM_ACTION == "https://form2mail.yawik.org/sendmail"
@@ -42,8 +42,8 @@ publish:
 pages:
   stage: deploy
   script:
-    - env | ( grep YAWIK_ROUTER_BASE || echo "ROUTER_BASE=/${CI_PAGES_URL#*://*/}/" )  > .env
-    - env | ( grep YAWIK || echo -n "" )  >> .env
+    - env | ( grep YAWIK_ROUTER_BASE || echo "ROUTER_BASE=/${CI_PAGES_URL#*://*/}/" )  > .env.local
+    - env | ( grep YAWIK || echo -n "" )  >> .env.local
     - yarn
     - yarn build
     - mkdir .public

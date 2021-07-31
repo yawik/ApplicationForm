@@ -7,7 +7,8 @@
 
 describe('Use Parameter tb=1 and check for menu icon', () =>
 {
-  before(() => {
+  before(() =>
+  {
     cy.intercept(Cypress.env('YAWIK_JOB_DETAIL_URL') + '*', { fixture: 'job_info.json' }).as('getJobDetails');
     cy.intercept(Cypress.env('YAWIK_APPLICATION_FORM_ACTION'), { body: { success: true } }).as('submitForm');
     cy.viewport(1024, 768);
@@ -22,7 +23,7 @@ describe('Use Parameter tb=1 and check for menu icon', () =>
     // check for menu-open icon
     cy.get('.mdi-menu-open').click();
     cy.get('.q-drawer__content').should('be.visible');
-     // check for menu icon
+    // check for menu icon
     cy.get('.mdi-menu').click();
     cy.get('.q-drawer__content').should('not.be.visible');
     cy.contains('CROSS Solution');
@@ -34,6 +35,4 @@ describe('Use Parameter tb=1 and check for menu icon', () =>
     // check for menu-open icon
     cy.contains('Speculative Application');
   });
-
-
 });
