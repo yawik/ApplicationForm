@@ -7,11 +7,14 @@
 // ** This file is an example of how to write Cypress tests, you can safely delete it **
 
 // This test will pass when run against a clean Quasar project
-describe('Landing', () => {
-  beforeEach(() => {
+describe('Landing', () =>
+{
+  beforeEach(() =>
+  {
     cy.visit('/');
   });
-  it('.should() - assert that <title> is correct', () => {
+  it('.should() - assert that <title> is correct', () =>
+  {
     cy.title().should('include', 'Yawik');
   });
 });

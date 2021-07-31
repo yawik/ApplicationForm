@@ -7,7 +7,8 @@
 
 describe('Filling and sending the form', () =>
 {
-  before(() => {
+  before(() =>
+  {
     cy.intercept(Cypress.env('YAWIK_JOB_DETAIL_URL') + '*', { fixture: 'job_info.json' }).as('getJobDetails');
     //cy.viewport(1024, 768);
     cy.visit('/en?job=sw-devel');
@@ -15,7 +16,8 @@ describe('Filling and sending the form', () =>
     cy.wait(['@getJobDetails']);
   });
 
-  it('Step 1. Fill personal Data', () => {
+  it('Step 1. Fill personal Data', () =>
+  {
     // fill step 1 (personal data)
     cy.get('[name="salutation"]').first().parents('[role="radio"]').click();
     cy.get('[name="fname"]').type('Ivaylo');
@@ -26,17 +28,19 @@ describe('Filling and sending the form', () =>
     cy.get('[name="city"]').type('Sofia');
     cy.get('[name="country"]').type('Bulgaria');
     cy.get('[name="email"]').type('tmcdos@abv.bg');
-    cy.get('[name="email"]').should('have.value', 'tmcdos@abv.bg')
+    cy.get('[name="email"]').should('have.value', 'tmcdos@abv.bg');
     cy.get('[name="next"]').click();
   });
 
-  it('Step 2. Fill cover letter', () => {
+  it('Step 2. Fill cover letter', () =>
+  {
     // fill step 2 (cover letter)
     cy.get('[name="letter"]').type('My cover letter');
     cy.get('[name="next"]').click();
   });
 
-  it('Step 3. Answer questions', () => {
+  it('Step 3. Answer questions', () =>
+  {
     // fill step 3 (questions)
     cy.get('[name="begin"]').type('15-05-2021');
 
@@ -50,12 +54,14 @@ describe('Filling and sending the form', () =>
     cy.get('[name="next"]').click();
   });
 
-  it('Step 4. Add attachments', () => {
+  it('Step 4. Add attachments', () =>
+  {
     // skip step 4 (attachments)
     cy.get('[name="next"]').click();
   });
 
-  it('Step 5. Accept Privacy', () => {
+  it('Step 5. Accept Privacy', () =>
+  {
     cy.intercept(Cypress.env('YAWIK_APPLICATION_FORM_ACTION'), { body: { success: true } }).as('submitForm');
     // fill step 5 (privacy)
     cy.get('[name="copy"]').parents('.q-checkbox').click();
