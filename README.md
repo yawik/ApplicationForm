@@ -36,7 +36,7 @@ yarn dev
 
 ## Configuration
 
-The form is .env-aware. 
+`.env` contains default values. They can be [overwritten](https://github.com/kerimdzhanov/dotenv-flow#variables-overwritingpriority) by a `.env.local` file. 
 
 | Name                         | Value                               | 
 |------------------------------|-------------------------------------|
@@ -55,6 +55,8 @@ The form is .env-aware.
 | YAWIK_ROUTER_BASE            | BASE of the pages                   |
 | YAWIK_APP_KEY                | Shared App Key                      |
 | YAWIK_API_URL                | Yawik API                           |
+| VUE_APP_CURRENCIES_AVAILABLE | EUR,USD                             |
+
 
 If an **YAWIK_OAUTH_\*** variable is empty, the feature is not used within the form.
 

@@ -7,6 +7,7 @@
       dense
       :mask="salary.period === 3 ? '#.##' : '###,###'"
       fill-mask
+      style="max-width: 110px;"
       reverse-fill-mask
       unmasked-value
       :label="$t('salary.amount')"
@@ -18,7 +19,7 @@
       :name="name ? name + '_currency' : null"
       outlined
       dense
-      style="min-width: 135px;"
+      style="min-width: 100px;"
       :options="currencyList"
       :label="$t('salary.currency')"
       :rules="[ruleRequired]"
@@ -26,7 +27,7 @@
     <q-select
       v-model="salary.period"
       :name="name ? name + '_period' : null"
-      style="min-width: 140px;"
+      style="min-width: 100px;"
       outlined
       dense
       map-options
@@ -74,7 +75,7 @@ export default
     {
       currencyList()
       {
-        return ['EUR', 'USD', 'CHF'];
+        return process.env.VUE_APP_CURRENCIES_AVAILABLE.split(',');
       },
       periodList()
       {

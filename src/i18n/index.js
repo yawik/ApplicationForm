@@ -4,11 +4,17 @@ import french from './fr';
 import italian from './it';
 import spanish from './es';
 
-export default
-{
+import numberFormats from './number-formats';
+
+const messages = {
   de: deutch,
   en: english,
   es: spanish,
   fr: french,
   it: italian
+};
+
+export {
+  messages,
+  numberFormats
 };

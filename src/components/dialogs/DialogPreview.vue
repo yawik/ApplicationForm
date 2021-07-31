@@ -53,7 +53,12 @@
                 </span>
               </div>
               <div v-if="GET_FORM.salaryAmount">
-                <strong>{{ $t('preview.expectedSalary') }}:</strong> &nbsp; {{ `${thousand(GET_FORM.salaryAmount,' ',GET_FORM.salaryPeriod === 3 ? 2 : 0)} ${GET_FORM.currency}/${salaryPeriodMap[GET_FORM.salaryPeriod]}` }}
+                <strong>
+                  {{ $t('preview.expectedSalary') }}:
+                </strong>
+                {{ $n(GET_FORM.salaryAmount, 'currency', GET_FORM.currency ) }}
+                /
+                {{ `${salaryPeriodMap[GET_FORM.salaryPeriod]}` }}
               </div>
             </div>
           </q-card-section>
@@ -244,10 +249,6 @@ export default
           month: 'short',
           day: 'numeric',
         });
-      },
-      thousand(value, separator = ',', decimal = 0, point = '.')
-      {
-        return Number(value).toFixed(decimal).replace(/([^-])(?=(\d{3})+(\.\d+)?$)/g, '$1' + separator).replace('.', point);
       }
     }
 };
