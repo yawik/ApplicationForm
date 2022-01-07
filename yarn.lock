@@ -1720,7 +1720,7 @@
     json5 "^2.2.0"
     start-server-and-test "^1.12.6"
 
-"@quasar/quasar-app-extension-testing-unit-jest@^3.0.0-alpha.6":
+"@quasar/quasar-app-extension-testing-unit-jest@3.0.0-alpha.6":
   version "3.0.0-alpha.6"
   resolved "https://registry.yarnpkg.com/@quasar/quasar-app-extension-testing-unit-jest/-/quasar-app-extension-testing-unit-jest-3.0.0-alpha.6.tgz#2656ad2592a4dad77f77e8343ca85f8473876ec8"
   integrity sha512-M4NCquQ/s79gqTA4jVxCHmzaW0LmyiYrsmPNcNmLYevi7OkrJimvEdzeW7DenX9CBnn+H/8kkLLliBEhRLbx0w==
