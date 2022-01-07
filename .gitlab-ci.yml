@@ -24,8 +24,8 @@ cypress:
   stage: test
   script:
     - env | ( grep YAWIK || echo "ROUTER_BASE=/${CI_PAGES_URL#*://*/}/" )  > .env.local
-    - yarn
-    - yarn "test:e2e:ci"
+    - CYPRESS_CACHE_FOLDER=./tmp/cypress yarn
+    - CYPRESS_CACHE_FOLDER=./tmp/cypress yarn "test:e2e:ci"
   only:
     variables:
       - $YAWIK_APPLICATION_FORM_ACTION == "https://form2mail.yawik.org/sendmail"
