@@ -41,7 +41,8 @@ yarn dev
 | Name                         | Value                               | 
 |------------------------------|-------------------------------------|
 | YAWIK_APPLICATION_FORM_ACTON | URL to which form data is sent      |
-| YAWIK_JOB_DETAIL_URL         | URL where we get title or company   |
+| YAWIK_STRAPI_URL             | get id, title or company of job     |
+| YAWIK_JOB_DETAIL_URL         | URL To job details (optional)       | 
 | YAWIK_ORGANIZATION           | Organizaion ID                      |
 | YAWIK_OAUTH_DROPBOX          | App Identifier                      |
 | YAWIK_OAUTH_FACEBOOK         | App Identifier                      |

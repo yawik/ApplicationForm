@@ -126,15 +126,15 @@ export default
       getJobDetails()
       {
         this.$q.loading.show({ delay: 100 });
-        this.$axios.get(process.env.YAWIK_JOB_DETAIL_URL + '?job=' + this.jobID).then(response =>
+        this.$axios.get(process.env.YAWIK_JOB_DETAIL_URL + '/api/jobs/' + this.jobID).then(response =>
         {
           this.$q.loading.hide();
           if (response.data && response.data.success)
           {
-            this.jobLink = response.data.payload.uri;
-            this.jobTitle = response.data.payload.title;
-            this.orgName = response.data.payload.organization.name;
-            this.orgLogo = response.data.payload.organization.logo;
+            this.jobLink = process.env.YAWIK_JOB_DETAIL_URL + '/jobs/' + response.data.success.job.id + '-titel/true';
+            this.jobTitle = response.data.success.job.jobTitle;
+            this.orgName = response.data.success.job.organization;
+            this.orgLogo = response.data.success.job.logo;
           }
         }).catch(err =>
         {
