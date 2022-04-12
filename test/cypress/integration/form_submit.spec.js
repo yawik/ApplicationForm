@@ -9,11 +9,9 @@ describe('Filling and sending the form', () =>
 {
   before(() =>
   {
-    cy.intercept(Cypress.env('YAWIK_JOB_DETAIL_URL') + '*', { fixture: 'job_info.json' }).as('getJobDetails');
     //cy.viewport(1024, 768);
-    cy.visit('/en?job=sw-devel');
+    cy.visit('/en');
     // load job details
-    cy.wait(['@getJobDetails']);
   });
 
   it('Step 1. Fill personal Data', () =>

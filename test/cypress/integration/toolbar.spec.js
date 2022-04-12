@@ -9,12 +9,12 @@ describe('Use Parameter tb=1 and check for menu icon', () =>
 {
   before(() =>
   {
-    cy.intercept(Cypress.env('YAWIK_JOB_DETAIL_URL') + '*', { fixture: 'job_info.json' }).as('getJobDetails');
-    cy.intercept(Cypress.env('YAWIK_APPLICATION_FORM_ACTION'), { body: { success: true } }).as('submitForm');
+    //cy.intercept(Cypress.env('YAWIK_JOB_DETAIL_URL') + '*', { fixture: 'job_info.json' }).as('getJobDetails');
+    //cy.intercept(Cypress.env('YAWIK_APPLICATION_FORM_ACTION'), { body: { success: true } }).as('submitForm');
     cy.viewport(1024, 768);
-    cy.visit('/en?job=sw-devel&tb=1');
+    cy.visit('/de?tb=1');
     // load job details
-    cy.wait(['@getJobDetails']);
+    //cy.wait(['@getJobDetails']);
   });
 
   it('open and close drawer', () =>
@@ -26,7 +26,7 @@ describe('Use Parameter tb=1 and check for menu icon', () =>
     // check for menu icon
     cy.get('.mdi-menu').click();
     cy.get('.q-drawer__content').should('not.be.visible');
-    cy.contains('CROSS Solution');
+    cy.contains('Initiativbewerbung');
   });
 
   it('check for Speculative Application', () =>
