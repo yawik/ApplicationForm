@@ -126,7 +126,7 @@ export default
       getJobDetails()
       {
         this.$q.loading.show({ delay: 100 });
-        this.$axios.get(process.env.YAWIK_JOB_DETAIL_URL + '/api/jobs/' + this.jobID).then(response =>
+        this.$axios.get(process.env.YAWIK_API_URL + '/api/jobs/' + this.jobID).then(response =>
         {
           this.$q.loading.hide();
           if (response.data && response.data.success)
