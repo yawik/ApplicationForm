@@ -25,7 +25,12 @@
     </q-header>
     <q-page-container style="overflow-x: hidden;">
       <div class="text-center text-h6 q-mt-md">
-        <LogoPanel v-if="showLogo && !showToolbar" :logo-url="orgLogo" class="text-center" />
+        <logo-panel
+          v-if="showLogo && !showToolbar"
+          :logo-url="orgLogo"
+          :org-name="orgName"
+          class="text-center"
+        />
         <span class="text-center text-h6 q-mt-md">
           <a v-if="jobLink" :href="jobLink">{{ jobTitle }}</a>
           <span v-else>
@@ -134,7 +139,7 @@ export default
             this.jobLink = process.env.YAWIK_JOB_DETAIL_URL + '/jobs/' + response.data.success.job.id + '-titel/true';
             this.jobTitle = response.data.success.job.jobTitle;
             this.orgName = response.data.success.job.organization;
-            this.orgLogo = response.data.success.job.logo;
+            this.orgLogo = response.data.success.job.logo ? process.env.YAWIK_API_URL + response.data.success.job.logo.url : '';
           }
         }).catch(err =>
         {
