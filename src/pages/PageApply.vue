@@ -141,19 +141,16 @@ export default
         return {
           job: this.jobID,
           org: process.env.YAWIK_ORGANIZATION,
-          user:
-            {
-              firstName: form.firstName,
-              lastName: form.lastName,
-              street: form.street,
-              houseNumber: form.houseNumber,
-              postalCode: form.postalCode,
-              city: form.city,
-              country: form.country,
-              phone: form.phone,
-              email: form.email,
-              gender: form.salutation === 1 ? 'male' : form.salutation === 2 ? 'female' : '',
-            },
+          firstname: form.firstName,
+          lastname: form.lastName,
+          street: form.street,
+          housenumber: form.houseNumber,
+          postalcode: form.postalCode,
+          city: form.city,
+          country: form.country,
+          phone: form.phone,
+          email: form.email,
+          gender: form.salutation === 1 ? 'male' : form.salutation === 2 ? 'female' : '',
           summary: form.coverLetter,
           extras:
             {
@@ -273,7 +270,7 @@ export default
       submitForm()
       {
         const data = new FormData();
-        data.append('application', JSON.stringify(this.jsonData));
+        data.append('data', JSON.stringify(this.jsonData));
         const photo = this[GET_PHOTO];
         if (photo) data.append('photo', photo);
         if (this[GET_FILES].length)
@@ -289,7 +286,11 @@ export default
           onUploadProgress: (event) =>
           {
             this.progress = event.loaded / event.total;
-          }
+          },
+          headers: {
+            accept: 'application/json',
+            'Content-Type': 'multipart/form-data'
+          },
         }).then(response =>
         {
           if (!response.data.success)

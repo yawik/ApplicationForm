@@ -3,10 +3,10 @@
     <q-header v-if="showToolbar" reveal class="bg-white text-primary">
       <q-toolbar>
         <q-toolbar-title>
-          <LogoPanel v-if="showToolbar" :logo-url="orgLogo" :org-name="orgName" />
+          <logo-panel v-if="showToolbar" :logo-url="orgLogo" :org-name="orgName" />
         </q-toolbar-title>
         <q-separator spaced vertical />
-        <SwitchLanguage class="q-mx-auto" />
+        <switch-language class="q-mx-auto" />
 
         <q-separator spaced vertical />
 
