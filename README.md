@@ -16,8 +16,8 @@ https://gitlab.cross-solution.de/CROSS/strategy/results/applicationform/-/issues
 currently works out of the box with our [Demo](https://yawik.org/demo/de)
 
 ```
-YAWIK_APPLICATION_FORM_ACTON=https://yawik.org/demo/sendmail
-YAWIK_JOB_DETAIL_URL=https://yawik.org/demo/details
+YAWIK_APPLICATION_FORM_ACTON=https://api.yawik.org/api/applications
+YAWIK_JOB_DETAIL_URL=https://api.yawik.org/
 ```
 
 ## Requirements
@@ -56,7 +56,6 @@ yarn dev
 | YAWIK_ROUTER_BASE            | BASE of the pages                   |
 | YAWIK_APP_KEY                | Shared App Key                      |
 | YAWIK_API_URL                | Yawik API                           |
-| VUE_APP_CURRENCIES_AVAILABLE | EUR,USD                             |
 
 
 If an **YAWIK_OAUTH_\*** variable is empty, the feature is not used within the form.
