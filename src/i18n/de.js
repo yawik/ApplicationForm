@@ -54,10 +54,10 @@ export default
       phone: 'Telefon',
       email: 'E-Mail',
       social:
-        {
-          title: 'Soziale Profile',
-          import: 'Daten aus sozialen Profilen importieren',
-        }
+      {
+        title: 'Soziale Profile',
+        import: 'Daten aus sozialen Profilen importieren',
+      }
     },
   stepTwo:
     {
